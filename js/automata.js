@@ -49,12 +49,27 @@ class GameOfLife {
     }
   }
 
-  // Locally perturb cells within mouse radius
+  // Locally perturb cells within mouse radius — only if at least one cell is alive in the radius
   perturb() {
     const { cur, W, H, mx, my } = this;
     const cr  = Math.ceil(RADIUS / CELL);
     const mcx = mx / CELL | 0;
     const mcy = my / CELL | 0;
+
+    // Check if at least one alive cell exists in the radius
+    let hasAlive = false;
+    outer: for (let dy = -cr; dy <= cr; dy++) {
+      const cy = mcy + dy;
+      if (cy < 0 || cy >= H) continue;
+      for (let dx = -cr; dx <= cr; dx++) {
+        const cx = mcx + dx;
+        if (cx < 0 || cx >= W) continue;
+        const d = Math.sqrt(dx * dx + dy * dy) * CELL;
+        if (d > RADIUS) continue;
+        if (cur[cy * W + cx]) { hasAlive = true; break outer; }
+      }
+    }
+    if (!hasAlive) return;
 
     for (let dy = -cr; dy <= cr; dy++) {
       const cy = mcy + dy;
@@ -98,23 +113,8 @@ class GameOfLife {
     const tmp = this.cur; this.cur = this.nxt; this.nxt = tmp;
   }
 
-  // Inject canonical patterns if density drops below threshold
-  checkRespawn(now) {
-    if (now - this.lastRespawn < RESPAWN_EVERY) return;
-    this.lastRespawn = now;
-
-    let alive = 0;
-    for (let i = 0; i < this.cur.length; i++) alive += this.cur[i];
-    if (alive / this.cur.length >= DENSITY_MIN) return;
-
-    for (let k = 0; k < 10; k++) {
-      const pat = PATTERNS[Math.floor(Math.random() * PATTERNS.length)];
-      const ox  = Math.floor(Math.random() * (this.W - 12));
-      const oy  = Math.floor(Math.random() * (this.H - 12));
-      for (const [dx, dy] of pat)
-        this.cur[((oy + dy) % this.H) * this.W + ((ox + dx) % this.W)] = 1;
-    }
-  }
+  // checkRespawn disabled — no auto-injection of patterns
+  // checkRespawn(now) { ... }
 
   render() {
     const { ctx, canvas, cur, age, W, H, mx, my } = this;
@@ -157,7 +157,6 @@ class GameOfLife {
   frame(t) {
     if (t - this.lastStep >= STEP_EVERY) {
       this.step();
-      this.checkRespawn(Date.now());
       this.lastStep = t;
     }
     this.render();
