@@ -209,11 +209,9 @@ html, body {
   max-width: 900px;
   text-align: left;
   padding: 2rem 2.5rem;
-  background: var(--surface-opaque);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .nb-title {
@@ -316,18 +314,7 @@ html, body {
 
 /* ─── TABLE OF CONTENTS ─── */
 .toc-section {
-  position: relative !important;
   width: 100%;
-  height: 100%;
-}
-
-.toc-inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 680px;
 }
 
 .toc-panel {
