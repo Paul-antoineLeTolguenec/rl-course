@@ -357,6 +357,14 @@
       }
     });
 
+    // Fullscreen on slides section (index 2)
+    Reveal.on('slidechanged', ({ indexh }) => {
+      if (indexh === 2 && !document.fullscreenElement)
+        document.documentElement.requestFullscreen().catch(() => {});
+      else if (indexh !== 2 && document.fullscreenElement)
+        document.exitFullscreen().catch(() => {});
+    });
+
     // Wheel: always navigate between major sections
     let wheelLocked = false;
     window.addEventListener('wheel', e => {
