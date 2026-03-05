@@ -2,13 +2,13 @@
 
 /* ─── Variables ─── */
 :root {
-  --bg:      #050510;
-  --surface: rgba(8, 8, 28, 0.72);
-  --border:  rgba(56, 189, 248, 0.18);
+  --bg:      #070b14;
+  --surface: rgba(13, 18, 32, 0.75);
+  --border:  rgba(0, 212, 255, 0.12);
   --text:    #e2e8f0;
-  --muted:   #64748b;
-  --accent:  #38bdf8;
-  --accent2: #818cf8;
+  --muted:   #7a8fa6;
+  --accent:  #00d4ff;
+  --accent2: #a78bfa;
 }
 
 /* ─── Base ─── */
@@ -170,7 +170,7 @@ html, body {
 }
 
 .reveal strong {
-  color: #bae6fd;
+  color: rgba(0, 212, 255, 0.85);
   font-weight: 600;
 }
 
