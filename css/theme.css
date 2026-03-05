@@ -1,13 +1,14 @@
 /* ─── Variables ─── */
 :root {
-  --bg:         #070b14;
-  --surface:    rgba(13, 18, 32, 0.75);
-  --border:     rgba(0, 212, 255, 0.12);
-  --accent-dim: rgba(0, 212, 255, 0.10);
-  --text:       #e2e8f0;
-  --muted:      #7a8fa6;
-  --accent:     #00d4ff;
-  --accent2:    #a78bfa;
+  --bg:             #070b14;
+  --surface:        rgba(13, 18, 32, 0.75);
+  --surface-opaque: rgba(7, 11, 20, 0.88);
+  --border:         rgba(0, 212, 255, 0.12);
+  --accent-dim:     rgba(0, 212, 255, 0.10);
+  --text:           #e2e8f0;
+  --muted:          #7a8fa6;
+  --accent:         #00d4ff;
+  --accent2:        #a78bfa;
 }
 
 /* ─── Base ─── */
@@ -66,7 +67,13 @@ html, body {
   align-items: center;
   gap: 1.2rem;
   text-align: center;
-  width: 100%;
+  width: fit-content;
+  padding: 2.5rem 3.5rem;
+  background: var(--surface-opaque);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .badge {
@@ -87,7 +94,7 @@ html, body {
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #f0f9ff 0%, var(--accent) 55%, var(--accent2) 100%);
+  background: linear-gradient(135deg, #1a3a6e 0%, var(--accent) 55%, var(--accent2) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -201,6 +208,12 @@ html, body {
   width: 100%;
   max-width: 900px;
   text-align: left;
+  padding: 2rem 2.5rem;
+  background: var(--surface-opaque);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .nb-title {

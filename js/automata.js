@@ -1,7 +1,7 @@
 // Game of Life — fixed grid, double-buffer Uint8Array, mouse perturbation, auto-respawn
 
 const CELL         = 8;     // px per cell
-const RADIUS       = 90;    // mouse influence radius (px)
+const RADIUS       = 55;    // mouse influence radius (px)
 const PERTURB_RATE = 0.12;  // max perturbation probability at center
 const DENSITY_MIN  = 0.02;  // respawn threshold (2% alive)
 const RESPAWN_EVERY = 4000; // ms between respawn checks
@@ -140,11 +140,11 @@ class GameOfLife {
         let b = Math.round(255 - t * 75);
         let a = 0.55 + 0.3 * (1 - t);
 
-        // Mouse proximity: blend toward bright mint-green
+        // Mouse proximity: blend toward violet (#a78bfa)
         if (mf > 0) {
-          r = Math.round(r + (110 - r) * mf * 0.88);
-          g = Math.round(g + (255 - g) * mf * 0.88);
-          b = Math.round(b + (150 - b) * mf * 0.65);
+          r = Math.round(r + (167 - r) * mf * 0.88);
+          g = Math.round(g + (139 - g) * mf * 0.88);
+          b = Math.round(b + (250 - b) * mf * 0.88);
           a = Math.min(1, a + mf * 0.4);
         }
 
