@@ -51,10 +51,11 @@ Add the plugin script tag before `Reveal.initialize()`:
 
 ## Slide Design Rules
 
-- Each slide = one focused idea; avoid bullet-point overload
-- Prefer short statements and key equations over long prose
+- Each slide = one focused idea; **minimal text**, no bullet-point overload
+- Short statements and key equations only — one figure max per slide
 - Use `<strong>` for key terms, display math for formulas
 - `.slide-nav` hint stays at the bottom of every slide
+- Full conventions (figures, SVG, math notation): see **`CONVENTIONS.md`**
 
 ## Adding Content
 

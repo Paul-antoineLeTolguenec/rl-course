@@ -29,30 +29,197 @@
       <!-- ─── SLIDES ─── -->
       <section>
 
-        <section>
-          <div class="slide-panel">
-            <h2>Introduction to RL</h2>
-            <p>What is Reinforcement Learning?</p>
-            <ul>
-              <li>An <strong>agent</strong> interacts with an <strong>environment</strong></li>
-              <li>It receives a <strong>reward</strong> signal and learns to maximize cumulative return</li>
-              <li>A paradigm distinct from supervised and self-supervised learning</li>
-            </ul>
+        <!-- ═══ CHAPTER 1 — Introduction ═══ -->
+        <section class="chapter-title">
+          <div class="slide-panel chapter-panel">
+            <div class="chapter-num">Chapter 1</div>
+            <h2>Introduction to Reinforcement Learning</h2>
+            <p class="chapter-sub">History · Core concepts · Exploration vs exploitation</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
+        <!-- placeholder: history of RL -->
+        <section>
+          <div class="slide-panel">
+            <h2>A Brief History of RL</h2>
+            <p class="slide-placeholder">TODO — from early foundations to modern achievements</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: core concepts -->
+        <section>
+          <div class="slide-panel">
+            <h2>Core Concepts</h2>
+            <p class="slide-placeholder">TODO — agent, environment, state, action, reward, return</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: exploration vs exploitation -->
+        <section>
+          <div class="slide-panel">
+            <h2>Exploration vs Exploitation</h2>
+            <p class="slide-placeholder">TODO — the fundamental trade-off</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- summary ch1 -->
+        <section class="chapter-summary">
+          <div class="slide-panel">
+            <div class="chapter-num">Summary — Chapter 1</div>
+            <p class="slide-placeholder">TODO — key takeaways</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- ═══ CHAPTER 2 — Bandits ═══ -->
+        <section class="chapter-title">
+          <div class="slide-panel chapter-panel">
+            <div class="chapter-num">Chapter 2</div>
+            <h2>Bandit Algorithms</h2>
+            <p class="chapter-sub">Formalism · ε-greedy · UCB · Thompson Sampling</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: bandits formalism -->
+        <section>
+          <div class="slide-panel">
+            <h2>The Bandit Problem</h2>
+            <p class="slide-placeholder">TODO — history, formalism, objective</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: algorithms -->
+        <section>
+          <div class="slide-panel">
+            <h2>Bandit Algorithms</h2>
+            <p class="slide-placeholder">TODO — ε-greedy, UCB, Thompson Sampling</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- transition: bandits → MDP -->
+        <section class="chapter-transition">
+          <div class="slide-panel">
+            <div class="chapter-num">Bridge</div>
+            <h2>From Bandits to MDPs</h2>
+            <p class="slide-placeholder">TODO — contextual bandits, why states matter</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- summary ch2 -->
+        <section class="chapter-summary">
+          <div class="slide-panel">
+            <div class="chapter-num">Summary — Chapter 2</div>
+            <p class="slide-placeholder">TODO — key takeaways · Notebook 01</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- ═══ CHAPTER 3 — MDP & DP ═══ -->
+        <section class="chapter-title">
+          <div class="slide-panel chapter-panel">
+            <div class="chapter-num">Chapter 3</div>
+            <h2>MDPs &amp; Dynamic Programming</h2>
+            <p class="chapter-sub">Bellman · Policy iteration · Value iteration · Model-free</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: MDP formalism -->
         <section>
           <div class="slide-panel">
             <h2>Markov Decision Processes</h2>
-            <p>The fundamental formalism of RL</p>
-            <ul>
-              <li><strong>State</strong> $s \in \mathcal{S}$ — representation of the environment</li>
-              <li><strong>Action</strong> $a \in \mathcal{A}$ — agent's decision</li>
-              <li><strong>Transition</strong> $\mathcal{P}(s' \mid s, a)$ — environment dynamics</li>
-              <li><strong>Reward</strong> $\mathcal{R}(s, a)$ — feedback signal</li>
-              <li><strong>Policy</strong> $\pi(a \mid s)$ — agent's strategy</li>
-            </ul>
+            <p class="slide-placeholder">TODO — formalism, Bellman equations</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: dynamic programming -->
+        <section>
+          <div class="slide-panel">
+            <h2>Dynamic Programming</h2>
+            <p class="slide-placeholder">TODO — policy evaluation, improvement, iteration, value iteration</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: model-free -->
+        <section>
+          <div class="slide-panel">
+            <h2>Model-Free Methods</h2>
+            <p class="slide-placeholder">TODO — Monte Carlo, TD, Q-learning, SARSA</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- summary ch3 -->
+        <section class="chapter-summary">
+          <div class="slide-panel">
+            <div class="chapter-num">Summary — Chapter 3</div>
+            <p class="slide-placeholder">TODO — key takeaways · Notebooks 02, 03</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- ═══ CHAPTER 4 — Policy Search ═══ -->
+        <section class="chapter-title">
+          <div class="slide-panel chapter-panel">
+            <div class="chapter-num">Chapter 4</div>
+            <h2>Policy Search</h2>
+            <p class="chapter-sub">REINFORCE · CEM · Evolution Strategies</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: policy search -->
+        <section>
+          <div class="slide-panel">
+            <h2>Policy Search Methods</h2>
+            <p class="slide-placeholder">TODO — REINFORCE, gradient-free methods (CEM, ES)</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- summary ch4 -->
+        <section class="chapter-summary">
+          <div class="slide-panel">
+            <div class="chapter-num">Summary — Chapter 4</div>
+            <p class="slide-placeholder">TODO — key takeaways · Notebook 04</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- ═══ CHAPTER 5 — Deep RL ═══ -->
+        <section class="chapter-title">
+          <div class="slide-panel chapter-panel">
+            <div class="chapter-num">Chapter 5</div>
+            <h2>Approximate DP &amp; Deep RL</h2>
+            <p class="chapter-sub">Function approximation · DQN</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- placeholder: deep rl -->
+        <section>
+          <div class="slide-panel">
+            <h2>Deep Reinforcement Learning</h2>
+            <p class="slide-placeholder">TODO — function approximation, DQN</p>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- summary ch5 -->
+        <section class="chapter-summary">
+          <div class="slide-panel">
+            <div class="chapter-num">Summary — Chapter 5</div>
+            <p class="slide-placeholder">TODO — key takeaways · Notebook 05</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
@@ -72,12 +239,58 @@
               <h3>Bandit Algorithms</h3>
               <p>Exploration vs exploitation, ε-greedy, UCB, Thompson Sampling</p>
               <div class="nb-actions">
-                <a class="nb-btn nb-download" href="notebooks/01_bandits.ipynb" download>
-                  Download
-                </a>
-                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/01_bandits.ipynb" target="_blank" rel="noopener">
-                  Open in Colab
-                </a>
+                <a class="nb-btn nb-download" href="notebooks/01_bandits.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/01_bandits.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card">
+              <span class="nb-num">02</span>
+              <h3>Markov Chains</h3>
+              <p>Stationary distributions, occupation measures</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/02_markov_chains.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/02_markov_chains.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card">
+              <span class="nb-num">03</span>
+              <h3>Dynamic Programming</h3>
+              <p>Policy evaluation, policy iteration, value iteration</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/03_dynamic_programming.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03_dynamic_programming.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card nb-optional">
+              <span class="nb-num">03b</span>
+              <h3>Model-Free Methods <span class="nb-tag">optional</span></h3>
+              <p>Monte Carlo, TD learning, Q-learning, SARSA</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/03b_model_free.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03b_model_free.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card">
+              <span class="nb-num">04</span>
+              <h3>Policy Search</h3>
+              <p>REINFORCE, CEM, Evolution Strategies</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/04_policy_search.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/04_policy_search.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card">
+              <span class="nb-num">05</span>
+              <h3>Deep Reinforcement Learning</h3>
+              <p>Approximate DP, function approximation, DQN</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/05_deep_rl.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/05_deep_rl.ipynb" target="_blank" rel="noopener">Open in Colab</a>
               </div>
             </div>
 
