@@ -31,6 +31,10 @@ html, body {
 }
 
 /* ─── Reveal overrides ─── */
+.reveal-viewport {
+  background-color: var(--bg);
+}
+
 .reveal {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--text);
