@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reinforcement Learning — Paul-Antoine LE TOLGUENEC</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ─── LANDING ─── -->
+      <section class="landing-section">
+        <div class="landing-inner">
+          <div class="badge">Course</div>
+          <h1 class="course-title">Reinforcement<br>Learning</h1>
+          <p class="author-name">Paul-Antoine LE TOLGUENEC</p>
+        </div>
+        <div class="scroll-hint">↓</div>
+      </section>
+
+      <!-- ─── SLIDES ─── -->
+      <section>
+
+        <section>
+          <div class="slide-panel">
+            <h2>Introduction to RL</h2>
+            <p>What is Reinforcement Learning?</p>
+            <ul>
+              <li>An <strong>agent</strong> interacts with an <strong>environment</strong></li>
+              <li>It receives a <strong>reward</strong> signal and learns to maximize cumulative return</li>
+              <li>A paradigm distinct from supervised and self-supervised learning</li>
+            </ul>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <section>
+          <div class="slide-panel">
+            <h2>Markov Decision Processes</h2>
+            <p>The fundamental formalism of RL</p>
+            <ul>
+              <li><strong>State</strong> $s \in \mathcal{S}$ — representation of the environment</li>
+              <li><strong>Action</strong> $a \in \mathcal{A}$ — agent's decision</li>
+              <li><strong>Transition</strong> $\mathcal{P}(s' \mid s, a)$ — environment dynamics</li>
+              <li><strong>Reward</strong> $\mathcal{R}(s, a)$ — feedback signal</li>
+              <li><strong>Policy</strong> $\pi(a \mid s)$ — agent's strategy</li>
+            </ul>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+      </section>
+      <!-- ─── END SLIDES ─── -->
+
+      <!-- ─── NOTEBOOKS ─── -->
+      <section class="notebooks-section">
+        <div class="notebooks-inner">
+          <h2 class="nb-title">Resources &amp; Notebooks</h2>
+          <p class="nb-sub">Practical assignments</p>
+          <div class="notebook-grid">
+
+            <div class="notebook-card">
+              <span class="nb-num">01</span>
+              <h3>Bandit Algorithms</h3>
+              <p>Exploration vs exploitation, ε-greedy, UCB, Thompson Sampling</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/01_bandits.ipynb" download>
+                  Download
+                </a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/01_bandits.ipynb" target="_blank" rel="noopener">
+                  Open in Colab
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script src="js/automata.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: false,
+      transition: 'fade',
+      transitionSpeed: 'slow',
+      controls: false,
+      progress: false,
+      center: true,
+      mouseWheel: false,
+      plugins: [ RevealMath.KaTeX ],
+      keyboard: {
+        37: () => Reveal.up(),    // ← prev slide
+        38: () => Reveal.left(),  // ↑ prev section
+        39: () => Reveal.down(),  // → next slide
+        40: () => Reveal.right(), // ↓ next section
+      }
+    });
+
+    // Wheel: always navigate between major sections
+    let wheelLocked = false;
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (wheelLocked) return;
+      wheelLocked = true;
+      setTimeout(() => { wheelLocked = false; }, 800);
+      e.deltaY > 0 ? Reveal.right() : Reveal.left();
+    }, { passive: false });
+  </script>
+</body>
+</html>
