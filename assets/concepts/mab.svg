@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+
+  <!-- ===== ARM 1 (purple #a78bfa) centered at x=80 ===== -->
+  <!-- Machine body -->
+  <rect x="55" y="30" width="50" height="70" rx="6" ry="6"
+        fill="rgba(13,18,32,0.9)" stroke="#a78bfa" stroke-opacity="0.3" stroke-width="1.5"/>
+  <!-- Window -->
+  <rect x="67" y="52" width="15" height="15" rx="2"
+        fill="#a78bfa" fill-opacity="0.2" stroke="#a78bfa" stroke-width="1"/>
+  <text x="74.5" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#a78bfa">?</text>
+  <!-- Lever (not pulled — angled up-right) -->
+  <line x1="105" y1="62" x2="117" y2="50" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="117" cy="50" r="3" fill="#a78bfa" fill-opacity="0.7"/>
+  <!-- Arm label -->
+  <text x="80" y="115" text-anchor="middle" font-family="monospace" font-size="10" fill="#a78bfa">arm 1</text>
+
+  <!-- ===== ARM 2 (blue #60a5fa) centered at x=200 ===== -->
+  <!-- Machine body -->
+  <rect x="175" y="30" width="50" height="70" rx="6" ry="6"
+        fill="rgba(13,18,32,0.9)" stroke="#60a5fa" stroke-opacity="0.3" stroke-width="1.5"/>
+  <!-- Window -->
+  <rect x="187" y="52" width="15" height="15" rx="2"
+        fill="#60a5fa" fill-opacity="0.2" stroke="#60a5fa" stroke-width="1"/>
+  <text x="194.5" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#60a5fa">?</text>
+  <!-- Lever (not pulled — angled up-right) -->
+  <line x1="225" y1="62" x2="237" y2="50" stroke="#60a5fa" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="237" cy="50" r="3" fill="#60a5fa" fill-opacity="0.7"/>
+  <!-- Arm label -->
+  <text x="200" y="115" text-anchor="middle" font-family="monospace" font-size="10" fill="#60a5fa">arm 2</text>
+
+  <!-- ===== ARM 3 (cyan #00d4ff) centered at x=320 — SELECTED ===== -->
+  <!-- Machine body (brighter fill, full stroke opacity) -->
+  <rect x="295" y="30" width="50" height="70" rx="6" ry="6"
+        fill="rgba(0,212,255,0.08)" stroke="#00d4ff" stroke-width="1.8"/>
+  <!-- Window -->
+  <rect x="307" y="52" width="15" height="15" rx="2"
+        fill="#00d4ff" fill-opacity="0.25" stroke="#00d4ff" stroke-width="1"/>
+  <text x="314.5" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#00d4ff">★</text>
+  <!-- Lever (pulled — pointing straight down) -->
+  <line x1="345" y1="62" x2="345" y2="83" stroke="#00d4ff" stroke-width="1.8"/>
+  <circle cx="345" cy="86" r="3.5" fill="#00d4ff"/>
+  <!-- Arm label -->
+  <text x="320" y="115" text-anchor="middle" font-family="monospace" font-size="10" fill="#00d4ff">arm 3</text>
+
+  <!-- ===== DASHED VERTICAL CONNECTIONS (machine bottom to axis tick) ===== -->
+  <!-- Arm 1: machine bottom center (80,100) → axis tick at (110,225) -->
+  <line x1="80" y1="100" x2="110" y2="225"
+        stroke="#a78bfa" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="3,3"/>
+  <!-- Arm 2: machine bottom center (200,100) → axis tick at (180,225) -->
+  <line x1="200" y1="100" x2="180" y2="225"
+        stroke="#60a5fa" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="3,3"/>
+  <!-- Arm 3: machine bottom center (320,100) → axis tick at (290,225) -->
+  <line x1="320" y1="100" x2="290" y2="225"
+        stroke="#00d4ff" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="3,3"/>
+
+  <!-- ===== REWARD AXIS ===== -->
+  <line x1="30" y1="225" x2="370" y2="225" stroke="#7a8fa6" stroke-width="1"/>
+  <text x="374" y="229" font-family="monospace" font-size="9" fill="#7a8fa6">reward</text>
+
+  <!-- ===== GAUSSIAN CURVES (peaks pointing upward, baseline y=225) ===== -->
+
+  <!-- Arm 1 (purple): cx=110, h=35, σ=25 -->
+  <!-- M(cx-3σ=35) C(cx-σ=85) ... peak(cx=110,y=190) ... S(cx+σ=135) (cx+3σ=185) Z -->
+  <path d="M 35 225  C 85 225 85 190 110 190  S 135 225 185 225 Z"
+        fill="#a78bfa" fill-opacity="0.15" stroke="#a78bfa" stroke-opacity="0.8" stroke-width="1.5"/>
+  <!-- Axis tick arm 1 -->
+  <circle cx="110" cy="225" r="2.5" fill="#a78bfa"/>
+
+  <!-- Arm 2 (blue): cx=180, h=28, σ=20 -->
+  <!-- M(cx-3σ=120) C(cx-σ=160) ... peak(cx=180,y=197) ... S(cx+σ=200) (cx+3σ=240) Z -->
+  <path d="M 120 225  C 160 225 160 197 180 197  S 200 225 240 225 Z"
+        fill="#60a5fa" fill-opacity="0.15" stroke="#60a5fa" stroke-opacity="0.8" stroke-width="1.5"/>
+  <!-- Axis tick arm 2 -->
+  <circle cx="180" cy="225" r="2.5" fill="#60a5fa"/>
+
+  <!-- Arm 3 (cyan): cx=290, h=50, σ=22 — highest reward, clearly rightmost -->
+  <!-- M(cx-3σ=224) C(cx-σ=268) ... peak(cx=290,y=175) ... S(cx+σ=312) (cx+3σ=356) Z -->
+  <path d="M 224 225  C 268 225 268 175 290 175  S 312 225 356 225 Z"
+        fill="#00d4ff" fill-opacity="0.15" stroke="#00d4ff" stroke-opacity="0.8" stroke-width="1.5"/>
+  <!-- Axis tick arm 3 -->
+  <circle cx="290" cy="225" r="2.5" fill="#00d4ff"/>
+
+</svg>

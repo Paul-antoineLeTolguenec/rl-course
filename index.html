@@ -33,28 +33,18 @@
             <nav class="toc-list">
               <button class="toc-item" onclick="Reveal.slide(2,0)">
                 <span class="toc-num">01</span>
-                <span class="toc-label">Introduction to Reinforcement Learning</span>
-                <span class="toc-sub">History · Core concepts · Exploration vs exploitation</span>
+                <span class="toc-label">Introduction to Reinforcement Learning &amp; Bandit Algorithms</span>
+                <span class="toc-sub">History · Core concepts · Bandits</span>
               </button>
-              <button class="toc-item" onclick="Reveal.slide(2,5)">
+              <button class="toc-item" onclick="Reveal.slide(2,13)">
                 <span class="toc-num">02</span>
-                <span class="toc-label">Bandit Algorithms</span>
-                <span class="toc-sub">Formalism · ε-greedy · UCB · Thompson Sampling</span>
-              </button>
-              <button class="toc-item" onclick="Reveal.slide(2,10)">
-                <span class="toc-num">03</span>
-                <span class="toc-label">MDPs &amp; Dynamic Programming</span>
-                <span class="toc-sub">Bellman · Policy iteration · Value iteration · Model-free</span>
-              </button>
-              <button class="toc-item" onclick="Reveal.slide(2,15)">
-                <span class="toc-num">04</span>
-                <span class="toc-label">Policy Search</span>
-                <span class="toc-sub">REINFORCE · CEM · Evolution Strategies</span>
+                <span class="toc-label">Markov Decision Processes &amp; Dynamic Programming</span>
+                <span class="toc-sub">Bellman equation · Policy evaluation · Policy improvement · Value iteration · Model-free</span>
               </button>
               <button class="toc-item" onclick="Reveal.slide(2,18)">
-                <span class="toc-num">05</span>
-                <span class="toc-label">Approximate DP &amp; Deep RL</span>
-                <span class="toc-sub">Function approximation · DQN</span>
+                <span class="toc-num">03</span>
+                <span class="toc-label">Policy Search &amp; Deep Reinforcement Learning</span>
+                <span class="toc-sub">Policy Gradient · Evolutionary Methods · Deep Q-Network</span>
               </button>
             </nav>
         </div>
@@ -64,110 +54,291 @@
       <!-- ─── SLIDES ─── -->
       <section>
 
-        <!-- ═══ CHAPTER 1 — Introduction ═══ -->
+        <!-- ═══ CHAPTER 1 — Introduction & Bandits ═══ -->
+        <!-- slide 0 -->
         <section class="chapter-title">
           <div class="slide-panel chapter-panel">
             <div class="chapter-num">Chapter 1</div>
-            <h2>Introduction to Reinforcement Learning</h2>
-            <p class="chapter-sub">History · Core concepts · Exploration vs exploitation</p>
+            <h2>Introduction to Reinforcement Learning &amp; Bandit Algorithms</h2>
+            <p class="chapter-sub">History · Core concepts · Bandits</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: history of RL -->
+        <!-- slide 1: history of RL — horizontal timeline overview -->
         <section>
           <div class="slide-panel">
             <h2>A Brief History of RL</h2>
-            <p class="slide-placeholder">TODO — from early foundations to modern achievements</p>
+            <div class="timeline-h">
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">1957</span>
+                <span class="tl-h-label">Bellman</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">1988</span>
+                <span class="tl-h-label">Sutton</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">2013</span>
+                <span class="tl-h-label">DQN</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">2016</span>
+                <span class="tl-h-label">AlphaGo</span>
+              </div>
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: core concepts -->
+        <!-- slide 1a: Bellman -->
         <section>
-          <div class="slide-panel">
+          <div class="slide-panel person-slide">
+            <div>
+              <h2>Richard Bellman</h2>
+              <p class="person-bio">Introduced Dynamic Programming — the mathematical foundation for solving sequential decision problems optimally.</p>
+            </div>
+            <div class="person-images">
+              <img class="person-img" src="assets/history/bellman.webp" alt="Richard Bellman" />
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 1b: Sutton -->
+        <section>
+          <div class="slide-panel person-slide">
+            <div>
+              <h2>Richard Sutton</h2>
+              <p class="person-bio">Formalized Temporal Difference learning and co-authored the definitive textbook on Reinforcement Learning.</p>
+            </div>
+            <div class="person-images">
+              <img class="person-img" src="assets/history/sutton.jpg" alt="Richard Sutton" />
+              <img class="person-img" src="assets/history/rl_intro.jpg" alt="Sutton & Barto textbook" />
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 1c: DQN -->
+        <section>
+          <div class="slide-panel person-slide">
+            <div>
+              <h2>Deep Q-Network — Nature 2015</h2>
+              <p class="person-bio">DeepMind demonstrated that a single agent could master Atari games from raw pixels using deep neural networks.</p>
+            </div>
+            <div class="person-images">
+              <img class="person-img" src="assets/history/dqn_nature.jpg" alt="DQN Nature paper" />
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 1d: AlphaGo -->
+        <section>
+          <div class="slide-panel person-slide">
+            <div>
+              <h2>AlphaGo — Nature 2016</h2>
+              <p class="person-bio">DeepMind's AlphaGo defeated the world champion at Go, a game long considered intractable for computers.</p>
+            </div>
+            <div class="person-images">
+              <img class="person-img" src="assets/history/alpha_go_nature.jpeg" alt="AlphaGo Nature paper" />
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 2: core concepts -->
+        <section>
+          <div class="slide-panel" style="max-width:900px;">
             <h2>Core Concepts</h2>
-            <p class="slide-placeholder">TODO — agent, environment, state, action, reward, return</p>
+            <div style="display:flex;gap:2rem;align-items:center;margin-top:1.2rem;">
+              <figure style="flex:1;text-align:center;margin:0;">
+                <img src="assets/concepts/rl_loop.svg" alt="RL loop" style="width:100%;max-width:420px;">
+                <figcaption style="font-size:0.7rem;color:var(--muted);margin-top:0.4rem;">The agent–environment loop</figcaption>
+              </figure>
+              <figure style="flex:1;text-align:center;margin:0;">
+                <img src="assets/concepts/explore_exploit.svg" alt="Exploration vs exploitation" style="width:100%;max-width:420px;">
+                <figcaption style="font-size:0.7rem;color:var(--muted);margin-top:0.4rem;">The fundamental trade-off</figcaption>
+              </figure>
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: exploration vs exploitation -->
+        <!-- slide 3: bandit history -->
         <section>
           <div class="slide-panel">
-            <h2>Exploration vs Exploitation</h2>
-            <p class="slide-placeholder">TODO — the fundamental trade-off</p>
+            <h2>A Brief History of Bandits</h2>
+            <div class="timeline-h">
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">1933</span>
+                <span class="tl-h-label">Thompson</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">1952</span>
+                <span class="tl-h-label">Robbins</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">1985</span>
+                <span class="tl-h-label">Lai &amp; Robbins</span>
+              </div>
+              <div class="tl-h-item">
+                <div class="tl-h-dot"></div>
+                <span class="tl-h-year">2002</span>
+                <span class="tl-h-label">Auer et al.</span>
+              </div>
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- summary ch1 -->
+        <!-- slide 4: multi-armed bandit formalism -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>Multi-Armed Bandit</h2>
+            <div style="display:flex;gap:2rem;align-items:flex-start;margin-top:1.2rem;">
+
+              <!-- left: figure (smaller) + notation block -->
+              <div style="flex:0 0 42%;display:flex;flex-direction:column;gap:0.8rem;">
+                <figure style="margin:0;text-align:center;">
+                  <img src="assets/concepts/mab.svg" alt="Multi-armed bandit" style="width:100%;max-width:220px;">
+                </figure>
+                <!-- notation block -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.7rem 0.9rem;font-size:0.7rem;color:var(--muted);line-height:2;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Notation</div>
+                  $K$ arms &nbsp;·&nbsp; $\mathcal{A} = \{1,\ldots,K\}$<br>
+                  $\mu_a = \mathbb{E}[R_t \mid A_t = a]$ &nbsp;·&nbsp; $\mu^* = \max_{a \in \mathcal{A}} \mu_a$<br>
+                  $h_t = (a_1,r_1,\ldots,a_{t-1},r_{t-1}) \in \mathcal{H}_t$<br>
+                  $\pi(\cdot \mid h_t) \in \Delta(\mathcal{A})$<br>
+                </div>
+              </div>
+
+              <!-- right: equations -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:1rem;justify-content:center;">
+
+                <!-- objective -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.8rem 1rem;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Objective</div>
+                  $$\pi^* = \arg\max_{\pi}\; \underset{\substack{A_t \sim \pi(\cdot \mid H_t) \\ R_t \sim \nu_{A_t}}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} R_t\right]$$
+                </div>
+
+                <!-- regret -->
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.8rem 1rem;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Regret</div>
+                  $$\text{Reg}_T = T\mu^* - \underset{\substack{A_t \sim \pi(\cdot \mid H_t) \\ R_t \sim \nu_{A_t}}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} R_t\right]$$
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 5a: epsilon-greedy -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>&epsilon;-Greedy</h2>
+            <!-- inline decision tree: SVG for arrows only, HTML boxes for KaTeX math -->
+            <div style="margin-top:1.1rem;">
+              <!-- root node -->
+              <div style="text-align:center;">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(226,232,240,0.3);background:rgba(13,18,32,0.9);">$A_t$</span>
+              </div>
+              <!-- fork arrows (SVG, no math — just ε and 1−ε as unicode) -->
+              <svg display="block" style="display:block;margin:0 auto;" viewBox="0 0 280 52" width="280" height="52">
+                <defs>
+                  <marker id="ae-l" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L7,3 z" fill="#a78bfa"/>
+                  </marker>
+                  <marker id="ae-r" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L7,3 z" fill="#00d4ff"/>
+                  </marker>
+                </defs>
+                <line x1="140" y1="2" x2="66" y2="48" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ae-l)"/>
+                <line x1="140" y1="2" x2="214" y2="48" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#ae-r)"/>
+                <text x="88" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#a78bfa" font-style="italic">&#949;</text>
+                <text x="192" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#00d4ff">1&#x2212;&#949;</text>
+              </svg>
+              <!-- math boxes aligned with arrow endpoints -->
+              <div style="display:flex;justify-content:space-between;width:280px;margin:0 auto;">
+                <div style="width:122px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+                  <div style="border:1.5px solid rgba(167,139,250,0.4);border-radius:8px;background:rgba(167,139,250,0.08);padding:0.4rem 0.5rem;color:#a78bfa;font-size:0.85rem;text-align:center;width:100%;">$\text{Uniform}(\mathcal{A})$</div>
+                  <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">explore</span>
+                </div>
+                <div style="width:122px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+                  <div style="border:1.5px solid rgba(0,212,255,0.4);border-radius:8px;background:rgba(0,212,255,0.08);padding:0.4rem 0.5rem;color:var(--accent);font-size:0.85rem;text-align:center;width:100%;">$\arg\max_{a}\,\hat{\mu}_a$</div>
+                  <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">exploit</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:1.1rem;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.8rem 1.2rem;">
+              <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Regret bound</div>
+              $$\text{Reg}_T = \tilde{O}\!\left((KT)^{2/3}\right)$$
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 5b: UCB -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Upper Confidence Bound</h2>
+            <figure style="margin:1.2rem auto 0;">
+              <img src="assets/concepts/ucb.svg" alt="UCB confidence intervals" style="height:150px;width:auto;">
+            </figure>
+            <div style="margin-top:1.2rem;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.8rem 1.2rem;">
+              <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Regret bound</div>
+              $$\text{Reg}_T = O\!\left(\sqrt{KT\ln T}\right)$$
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 5c: Thompson Sampling -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Thompson Sampling</h2>
+            <figure style="margin:1.2rem auto 0;">
+              <img src="assets/concepts/thompson.svg" alt="Thompson Sampling posteriors" style="height:150px;width:auto;">
+            </figure>
+            <div style="margin-top:1.2rem;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.8rem 1.2rem;">
+              <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Regret bound</div>
+              $$\text{Reg}_T = O\!\left(\sqrt{KT\ln T}\right)$$
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 6: summary ch1 -->
         <section class="chapter-summary">
           <div class="slide-panel">
             <div class="chapter-num">Summary — Chapter 1</div>
-            <p class="slide-placeholder">TODO — key takeaways</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- ═══ CHAPTER 2 — Bandits ═══ -->
-        <section class="chapter-title">
-          <div class="slide-panel chapter-panel">
-            <div class="chapter-num">Chapter 2</div>
-            <h2>Bandit Algorithms</h2>
-            <p class="chapter-sub">Formalism · ε-greedy · UCB · Thompson Sampling</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- placeholder: bandits formalism -->
-        <section>
-          <div class="slide-panel">
-            <h2>The Bandit Problem</h2>
-            <p class="slide-placeholder">TODO — history, formalism, objective</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- placeholder: algorithms -->
-        <section>
-          <div class="slide-panel">
-            <h2>Bandit Algorithms</h2>
-            <p class="slide-placeholder">TODO — ε-greedy, UCB, Thompson Sampling</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- transition: bandits → MDP -->
-        <section class="chapter-transition">
-          <div class="slide-panel">
-            <div class="chapter-num">Bridge</div>
-            <h2>From Bandits to MDPs</h2>
-            <p class="slide-placeholder">TODO — contextual bandits, why states matter</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- summary ch2 -->
-        <section class="chapter-summary">
-          <div class="slide-panel">
-            <div class="chapter-num">Summary — Chapter 2</div>
             <p class="slide-placeholder">TODO — key takeaways · Notebook 01</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- ═══ CHAPTER 3 — MDP & DP ═══ -->
+        <!-- ═══ CHAPTER 2 — MDP & DP ═══ -->
+        <!-- slide 5 -->
         <section class="chapter-title">
           <div class="slide-panel chapter-panel">
-            <div class="chapter-num">Chapter 3</div>
-            <h2>MDPs &amp; Dynamic Programming</h2>
-            <p class="chapter-sub">Bellman · Policy iteration · Value iteration · Model-free</p>
+            <div class="chapter-num">Chapter 2</div>
+            <h2>Markov Decision Processes &amp; Dynamic Programming</h2>
+            <p class="chapter-sub">Bellman equation · Policy evaluation · Policy improvement · Value iteration · Model-free</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: MDP formalism -->
+        <!-- slide 6: MDP formalism -->
         <section>
           <div class="slide-panel">
             <h2>Markov Decision Processes</h2>
@@ -176,7 +347,7 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: dynamic programming -->
+        <!-- slide 7: dynamic programming -->
         <section>
           <div class="slide-panel">
             <h2>Dynamic Programming</h2>
@@ -185,7 +356,7 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: model-free -->
+        <!-- slide 8: model-free -->
         <section>
           <div class="slide-panel">
             <h2>Model-Free Methods</h2>
@@ -194,67 +365,49 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- summary ch3 -->
+        <!-- slide 9: summary ch2 -->
         <section class="chapter-summary">
           <div class="slide-panel">
-            <div class="chapter-num">Summary — Chapter 3</div>
+            <div class="chapter-num">Summary — Chapter 2</div>
             <p class="slide-placeholder">TODO — key takeaways · Notebooks 02, 03</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- ═══ CHAPTER 4 — Policy Search ═══ -->
+        <!-- ═══ CHAPTER 3 — Policy Search & Deep RL ═══ -->
+        <!-- slide 10 -->
         <section class="chapter-title">
           <div class="slide-panel chapter-panel">
-            <div class="chapter-num">Chapter 4</div>
-            <h2>Policy Search</h2>
-            <p class="chapter-sub">REINFORCE · CEM · Evolution Strategies</p>
+            <div class="chapter-num">Chapter 3</div>
+            <h2>Policy Search &amp; Deep Reinforcement Learning</h2>
+            <p class="chapter-sub">Policy Gradient · Evolutionary Methods · Deep Q-Network</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- placeholder: policy search -->
+        <!-- slide 11: policy search -->
         <section>
           <div class="slide-panel">
-            <h2>Policy Search Methods</h2>
-            <p class="slide-placeholder">TODO — REINFORCE, gradient-free methods (CEM, ES)</p>
+            <h2>Policy Search</h2>
+            <p class="slide-placeholder">TODO — Reinforce, Cross-Entropy Method, Evolution Strategies</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- summary ch4 -->
-        <section class="chapter-summary">
-          <div class="slide-panel">
-            <div class="chapter-num">Summary — Chapter 4</div>
-            <p class="slide-placeholder">TODO — key takeaways · Notebook 04</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- ═══ CHAPTER 5 — Deep RL ═══ -->
-        <section class="chapter-title">
-          <div class="slide-panel chapter-panel">
-            <div class="chapter-num">Chapter 5</div>
-            <h2>Approximate DP &amp; Deep RL</h2>
-            <p class="chapter-sub">Function approximation · DQN</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- placeholder: deep rl -->
+        <!-- slide 12: deep rl -->
         <section>
           <div class="slide-panel">
             <h2>Deep Reinforcement Learning</h2>
-            <p class="slide-placeholder">TODO — function approximation, DQN</p>
+            <p class="slide-placeholder">TODO — function approximation, Deep Q-Network</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- summary ch5 -->
+        <!-- slide 13: summary ch3 -->
         <section class="chapter-summary">
           <div class="slide-panel">
-            <div class="chapter-num">Summary — Chapter 5</div>
-            <p class="slide-placeholder">TODO — key takeaways · Notebook 05</p>
+            <div class="chapter-num">Summary — Chapter 3</div>
+            <p class="slide-placeholder">TODO — key takeaways · Notebooks 04, 05</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>

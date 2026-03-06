@@ -452,6 +452,94 @@ html, body {
   margin-left: 0.4em;
 }
 
+/* ─── Horizontal timeline ─── */
+.timeline-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 2rem;
+  position: relative;
+}
+
+/* connecting line */
+.timeline-h::before {
+  content: '';
+  position: absolute;
+  top: 10px; /* vertically centered on dot */
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+
+.tl-h-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.tl-h-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+.tl-h-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent2);
+}
+
+.tl-h-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ─── Person / event slides ─── */
+.reveal .slide-panel.person-slide {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  max-width: 860px;
+}
+
+.person-slide > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.person-bio {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.65;
+  margin-top: 0.8rem;
+  font-style: normal !important;
+  opacity: 1 !important;
+}
+
+.person-images {
+  display: flex;
+  gap: 0.9rem;
+  flex-shrink: 0;
+}
+
+.person-img {
+  max-height: 220px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
 /* ─── Code ─── */
 .reveal code {
   font-family: 'JetBrains Mono', monospace;

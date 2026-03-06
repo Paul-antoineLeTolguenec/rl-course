@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 150">
+  <defs>
+    <marker id="arr-eg" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#7a8fa6"/>
+    </marker>
+  </defs>
+
+  <!-- Decision node -->
+  <circle cx="170" cy="28" r="20" fill="rgba(13,18,32,0.9)"
+          stroke="rgba(226,232,240,0.3)" stroke-width="1.5"/>
+  <text x="170" y="33" text-anchor="middle"
+        font-family="sans-serif" font-size="11" fill="#e2e8f0">A_t</text>
+
+  <!-- Left branch: ε, explore -->
+  <line x1="153" y1="43" x2="85" y2="82"
+        stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,3"
+        marker-end="url(#arr-eg)"/>
+  <text x="108" y="67" text-anchor="middle"
+        font-family="Georgia, serif" font-size="14" fill="#a78bfa"
+        font-style="italic">ε</text>
+
+  <!-- Explore box -->
+  <rect x="20" y="84" width="130" height="38" rx="8"
+        fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
+  <!-- Uniform(𝒜) -->
+  <text x="85" y="104" text-anchor="middle"
+        font-family="Georgia, serif" font-size="11" fill="#a78bfa">Uniform(</text>
+  <text x="127" y="104" text-anchor="middle"
+        font-family="Georgia, serif" font-size="11" fill="#a78bfa" font-style="italic">A</text>
+  <text x="139" y="104" text-anchor="middle"
+        font-family="Georgia, serif" font-size="11" fill="#a78bfa">)</text>
+
+  <!-- Right branch: 1−ε, exploit -->
+  <line x1="187" y1="43" x2="255" y2="82"
+        stroke="#00d4ff" stroke-width="1.5"
+        marker-end="url(#arr-eg)"/>
+  <text x="234" y="67" text-anchor="middle"
+        font-family="Georgia, serif" font-size="12" fill="#00d4ff"
+        font-style="italic">1&#x2212;ε</text>
+
+  <!-- Exploit box -->
+  <rect x="190" y="84" width="130" height="38" rx="8"
+        fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+  <!-- argmax μ̂_a using tspan for hat -->
+  <text x="255" y="101" text-anchor="middle"
+        font-family="Georgia, serif" font-size="11" fill="#00d4ff">argmax</text>
+  <text x="255" y="115" text-anchor="middle"
+        font-family="Georgia, serif" font-size="11" fill="#00d4ff">μ<tspan dy="-4" font-size="8">ˆ</tspan><tspan dy="4">_a</tspan></text>
+
+  <!-- Bottom labels -->
+  <text x="85" y="140" text-anchor="middle"
+        font-family="sans-serif" font-size="9" fill="#7a8fa6" font-style="italic">explore</text>
+  <text x="255" y="140" text-anchor="middle"
+        font-family="sans-serif" font-size="9" fill="#7a8fa6" font-style="italic">exploit</text>
+</svg>

@@ -8,29 +8,29 @@ Interactive course site — [live](https://paul-antoineletolguenec.github.io/rl-
 
 ## Course Layout — 3 hours
 
-### Hour 1 — Introduction & Bandits
+### Hour 1 — Introduction to Reinforcement Learning & Bandit Algorithms
 - History of RL: from early foundations to modern achievements
-- Core concepts: agent, environment, state, action, reward, return
+- Core concepts: agent, environment, state, action, reward
 - Exploration vs exploitation
-- **Bandits**: formalism, objective, ε-greedy, UCB, Thompson Sampling
-- Bridge: contextual bandits → motivation for MDPs
-- `01_bandits.ipynb` — illustrative notebook
+- Bandits: history, formalism, objective, ε-greedy, UCB, Thompson Sampling
+- Bridge: contextual bandits → motivation for Markov Decision Processes
+- `01_bandits.ipynb`
 
 *5 min break*
 
-### Hour 2 — MDPs, Dynamic Programming & Model-Free Methods
+### Hour 2 — Markov Decision Processes & Dynamic Programming
 - Markov Decision Processes: formalism, Bellman equations
 - Dynamic Programming: policy evaluation, policy improvement, policy iteration, value iteration
 - Model-Free: Monte Carlo, TD learning, Q-learning, SARSA
-- `02_markov_chains.ipynb` — stationary distributions, occupation measures
-- `03_dynamic_programming.ipynb` — DP algorithms
-- `03b_model_free.ipynb` — bonus / optional
+- `02_markov_chains.ipynb`
+- `03_dynamic_programming.ipynb`
+- `03b_model_free.ipynb` — optional
 
 *5 min break*
 
-### Hour 3 — Policy Search & Deep RL
-- Policy Search: REINFORCE, gradient-free methods (CEM, ES)
-- Approximate Dynamic Programming & Deep RL: function approximation, DQN
+### Hour 3 — Policy Search & Deep Reinforcement Learning
+- Policy Search: Reinforce, Cross-Entropy Method, Evolution Strategies
+- Approximate Dynamic Programming & Deep Reinforcement Learning: function approximation, Deep Q-Network
 - `04_policy_search.ipynb`
 - `05_deep_rl.ipynb`
 

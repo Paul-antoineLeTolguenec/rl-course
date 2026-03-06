@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150">
+  <!-- scale: x = 50 + val * 255  (val in [0,1]) -->
+
+  <!-- Background tracks -->
+  <rect x="50" y="32" width="255" height="14" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="50" y="72" width="255" height="14" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="50" y="112" width="255" height="14" rx="3" fill="rgba(0,212,255,0.04)"/>
+
+  <!-- === Arm 1 (purple): mean=0.50, bonus=0.13, UCB=0.63 === -->
+  <!-- mean bar: width = 0.50*255 = 128 -->
+  <rect x="50" y="32" width="128" height="14" rx="3" fill="#a78bfa" opacity="0.45"/>
+  <!-- bonus dash: from x=178 to x=211 (0.63*255+50) -->
+  <line x1="178" y1="39" x2="211" y2="39" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="4,2.5"/>
+  <!-- UCB tick -->
+  <line x1="211" y1="25" x2="211" y2="52" stroke="#a78bfa" stroke-width="1.5"/>
+  <!-- arm label -->
+  <text x="44" y="43" text-anchor="end" font-family="sans-serif" font-size="9" fill="#a78bfa">arm 1</text>
+
+  <!-- === Arm 2 (blue): mean=0.55, bonus=0.09, UCB=0.64 === -->
+  <!-- mean: 0.55*255=140 → x=190, UCB: 0.64*255=163 → x=213 -->
+  <rect x="50" y="72" width="140" height="14" rx="3" fill="#60a5fa" opacity="0.45"/>
+  <line x1="190" y1="79" x2="213" y2="79" stroke="#60a5fa" stroke-width="2.5" stroke-dasharray="4,2.5"/>
+  <line x1="213" y1="65" x2="213" y2="92" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="44" y="83" text-anchor="end" font-family="sans-serif" font-size="9" fill="#60a5fa">arm 2</text>
+
+  <!-- === Arm 3 (cyan): mean=0.22, bonus=0.55, UCB=0.77 — SELECTED === -->
+  <!-- mean: 0.22*255=56 → x=106, UCB: 0.77*255=196 → x=246 -->
+  <rect x="50" y="112" width="56" height="14" rx="3" fill="#00d4ff" opacity="0.45"/>
+  <!-- large bonus: arm rarely explored -->
+  <line x1="106" y1="119" x2="246" y2="119" stroke="#00d4ff" stroke-width="2.5" stroke-dasharray="4,2.5"/>
+  <!-- UCB tick highlighted -->
+  <line x1="246" y1="104" x2="246" y2="132" stroke="#00d4ff" stroke-width="2.5"/>
+  <circle cx="246" cy="119" r="6" fill="rgba(0,212,255,0.2)"/>
+  <!-- star above -->
+  <text x="246" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#00d4ff">&#9733;</text>
+  <text x="44" y="123" text-anchor="end" font-family="sans-serif" font-size="9" fill="#00d4ff">arm 3</text>
+
+  <!-- vertical reference line at max UCB (arm 3) -->
+  <line x1="246" y1="15" x2="246" y2="136" stroke="rgba(0,212,255,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="246" y="12" text-anchor="middle" font-family="sans-serif" font-size="8" fill="rgba(0,212,255,0.8)">max UCB</text>
+
+  <!-- x-axis -->
+  <line x1="50" y1="138" x2="305" y2="138" stroke="rgba(226,232,240,0.15)" stroke-width="1"/>
+  <text x="50" y="148" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a8fa6">0</text>
+  <text x="305" y="148" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a8fa6">1</text>
+
+  <!-- Legend (top left) -->
+  <rect x="52" y="10" width="10" height="6" rx="1" fill="#7a8fa6" opacity="0.45"/>
+  <text x="66" y="16" font-family="sans-serif" font-size="8" fill="#7a8fa6">mean estimate</text>
+  <line x1="130" y1="13" x2="143" y2="13" stroke="#7a8fa6" stroke-width="2" stroke-dasharray="4,2.5"/>
+  <text x="148" y="16" font-family="sans-serif" font-size="8" fill="#7a8fa6">confidence bonus</text>
+</svg>
