@@ -149,6 +149,14 @@ html, body {
   border-bottom: 1px solid var(--border);
 }
 
+/* sub-block inside a slide-panel */
+.reveal .slide-block {
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
 .reveal .slide-panel > p {
   font-size: 0.95rem;
   color: var(--muted);

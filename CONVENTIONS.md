@@ -60,7 +60,22 @@ Before writing any new symbol or equation, always:
 | $G_t$ | cumulative return from step $t$ | Ch1 |
 | $k$ | arm index (bandit) | Ch2 |
 | $K$ | number of arms | Ch2 |
-| $\mu_k$ | expected reward of arm $k$ | Ch2 |
+| $\mu_k$ | expected reward of arm $k$ — **scalar, bandit context only** | Ch2 |
 | $\hat{\mu}_k$ | empirical estimate of $\mu_k$ | Ch2 |
 | $n_k$ | number of pulls of arm $k$ | Ch2 |
 | $R$ | cumulative regret | Ch2 |
+| $\mathcal{S}$ | state space | Ch2 |
+| $\mathcal{A}$ | action space | Ch2 |
+| $S_t$ | state random variable at step $t$ | Ch2 |
+| $A_t$ | action random variable at step $t$ | Ch2 |
+| $\pi$ | policy $\mathcal{S} \to \Delta(\mathcal{A})$ | Ch2 |
+| $P$ | controlled kernel $\mathcal{S} \times \mathcal{A} \to \Delta(\mathcal{S})$ | Ch2 |
+| $P^\pi$ | induced kernel $P^\pi(s'\mid s) = \sum_a \pi(a\mid s) P(s'\mid s,a)$ | Ch2 |
+| $\mu_t$ | instantaneous distribution $\mu_t \in \Delta(\mathcal{S})$, $[\mu_t]_s = \mathbb{P}(S_t=s)$ — **vector, MDP context** | Ch2 |
+| $\mu_t^\pi$ | instantaneous distribution under policy $\pi$, $\mu_{t+1}^\pi = \mu_t^\pi P^\pi$ | Ch2 |
+| $\mu_\infty$ | stationary distribution $\mu_\infty = \lim_{t\to\infty} \delta_{s_0} (P^\pi)^t$ | Ch2 |
+| $\rho$ | (undiscounted) occupation measure $\rho = \lim_{T\to\infty} \frac{1}{T}\sum_{t=0}^{T-1} \mu_t$ | Ch2 |
+| $d^\pi_\gamma$ | discounted occupation measure $(1-\gamma)\sum_{t=0}^\infty \gamma^t \mu_t^\pi$ | Ch2 |
+| $r$ | reward function $\mathcal{S} \times \mathcal{A} \to \mathbb{R}$ | Ch2 |
+| $\gamma$ | discount factor | Ch2 |
+| $\mathcal{M}$ | MDP tuple $(\mathcal{S}, \mathcal{A}, P, r, \gamma)$ | Ch2 |
