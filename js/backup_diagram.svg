@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="240" viewBox="0 0 600 240">
+  <style>
+    /* ── base styles ── */
+    .node-l0  { fill: rgba(13,18,32,0.85); stroke: #00d4ff;              stroke-width: 2; }
+    .node-l1  { fill: rgba(13,18,32,0.85); stroke: #a78bfa;              stroke-width: 2; }
+    .node-l2  { fill: rgba(13,18,32,0.85); stroke: rgba(167,139,250,0.5); stroke-width: 1.5; }
+    .lbl-l0   { fill: #00d4ff;              font-family: Inter, system-ui, sans-serif; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-l1   { fill: #a78bfa;              font-family: Inter, system-ui, sans-serif; font-size: 11px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-l2   { fill: rgba(167,139,250,0.6); font-family: Inter, system-ui, sans-serif; font-size: 10px; text-anchor: middle; dominant-baseline: middle; }
+    .arrow    { stroke: rgba(0,212,255,0.35); stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+
+    /* ── Phase 1: level-2 nodes pulse ── */
+    @keyframes pulse-l2a {
+      0%,100%     { opacity: 0.45; }
+      8%, 18%     { opacity: 1; filter: drop-shadow(0 0 5px rgba(167,139,250,0.7)); }
+    }
+    @keyframes pulse-l2b {
+      0%,100%     { opacity: 0.45; }
+      14%, 24%    { opacity: 1; filter: drop-shadow(0 0 5px rgba(167,139,250,0.7)); }
+    }
+
+    /* ── Phase 2: signals travel level-2 → level-1 ── */
+    @keyframes travel-l2a {
+      0%, 20%     { opacity: 0; offset-distance: 100%; }
+      22%         { opacity: 1; }
+      36%         { opacity: 0; offset-distance: 0%; }
+      100%        { opacity: 0; offset-distance: 0%; }
+    }
+    @keyframes travel-l2b {
+      0%, 26%     { opacity: 0; offset-distance: 100%; }
+      28%         { opacity: 1; }
+      42%         { opacity: 0; offset-distance: 0%; }
+      100%        { opacity: 0; offset-distance: 0%; }
+    }
+
+    /* ── Phase 3: level-1 nodes pulse (staggered) ── */
+    @keyframes pulse-l1a {
+      0%,100%     { opacity: 0.5; }
+      38%, 48%    { opacity: 1; filter: drop-shadow(0 0 6px #a78bfa); }
+    }
+    @keyframes pulse-l1b {
+      0%,100%     { opacity: 0.5; }
+      42%, 52%    { opacity: 1; filter: drop-shadow(0 0 6px #a78bfa); }
+    }
+    @keyframes pulse-l1c {
+      0%,100%     { opacity: 0.5; }
+      46%, 56%    { opacity: 1; filter: drop-shadow(0 0 6px #a78bfa); }
+    }
+
+    /* ── Phase 4: signals travel level-1 → level-0 ── */
+    @keyframes travel-l1a {
+      0%, 50%     { opacity: 0; offset-distance: 100%; }
+      52%         { opacity: 1; }
+      65%         { opacity: 0; offset-distance: 0%; }
+      100%        { opacity: 0; offset-distance: 0%; }
+    }
+    @keyframes travel-l1b {
+      0%, 54%     { opacity: 0; offset-distance: 100%; }
+      56%         { opacity: 1; }
+      69%         { opacity: 0; offset-distance: 0%; }
+      100%        { opacity: 0; offset-distance: 0%; }
+    }
+    @keyframes travel-l1c {
+      0%, 58%     { opacity: 0; offset-distance: 100%; }
+      60%         { opacity: 1; }
+      73%         { opacity: 0; offset-distance: 0%; }
+      100%        { opacity: 0; offset-distance: 0%; }
+    }
+
+    /* ── Phase 5: level-0 node glows ── */
+    @keyframes glow-l0 {
+      0%, 72%     { filter: drop-shadow(0 0 0px #00d4ff); }
+      78%, 90%    { filter: drop-shadow(0 0 12px #00d4ff); }
+      97%,100%    { filter: drop-shadow(0 0 0px #00d4ff); }
+    }
+
+    /* animation bindings — total cycle 8s */
+    .grp-l2a  { animation: pulse-l2a 8s ease-in-out infinite; }
+    .grp-l2b  { animation: pulse-l2b 8s ease-in-out infinite; }
+    .grp-l1a  { animation: pulse-l1a 8s ease-in-out infinite; }
+    .grp-l1b  { animation: pulse-l1b 8s ease-in-out infinite; }
+    .grp-l1c  { animation: pulse-l1c 8s ease-in-out infinite; }
+    .grp-l0   { animation: glow-l0   8s ease-in-out infinite; }
+
+    /* signal dots — level 2 → level 1 */
+    /* arrow from s''1 (cx=255,cy=205) to s'2 (cx=300,cy=140): path reversed for upward travel */
+    .dot-l2a {
+      offset-path: path("M 255,205 L 285,140");
+      animation: travel-l2a 8s ease-in-out infinite;
+      opacity: 0;
+    }
+    .dot-l2b {
+      offset-path: path("M 345,205 L 315,140");
+      animation: travel-l2b 8s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    /* signal dots — level 1 → level 0 */
+    .dot-l1a {
+      offset-path: path("M 145,140 L 280,50");
+      animation: travel-l1a 8s ease-in-out infinite;
+      opacity: 0;
+    }
+    .dot-l1b {
+      offset-path: path("M 300,140 L 300,50");
+      animation: travel-l1b 8s ease-in-out infinite;
+      opacity: 0;
+    }
+    .dot-l1c {
+      offset-path: path("M 455,140 L 320,50");
+      animation: travel-l1c 8s ease-in-out infinite;
+      opacity: 0;
+    }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" fill="rgba(0,212,255,0.5)" />
+    </marker>
+  </defs>
+
+  <!-- ── Arrows level-0 → level-1 ── -->
+  <line class="arrow" x1="286" y1="50"  x2="157" y2="128" />
+  <line class="arrow" x1="300" y1="50"  x2="300" y2="128" />
+  <line class="arrow" x1="314" y1="50"  x2="443" y2="128" />
+
+  <!-- ── Arrows level-1 → level-2 (only from s'₂) ── -->
+  <line class="arrow" x1="286" y1="152" x2="262" y2="193" />
+  <line class="arrow" x1="314" y1="152" x2="338" y2="193" />
+
+  <!-- ── Level-2 nodes ── -->
+  <g class="grp-l2a">
+    <circle class="node-l2" cx="255" cy="210" r="22" />
+    <text class="lbl-l2" x="255" y="210">
+      v<tspan dy="-5" font-size="8">π</tspan><tspan dy="5">(s</tspan><tspan dy="-3" font-size="8">′′</tspan><tspan dy="3" font-size="10">₁)</tspan>
+    </text>
+  </g>
+  <g class="grp-l2b">
+    <circle class="node-l2" cx="345" cy="210" r="22" />
+    <text class="lbl-l2" x="345" y="210">
+      v<tspan dy="-5" font-size="8">π</tspan><tspan dy="5">(s</tspan><tspan dy="-3" font-size="8">′′</tspan><tspan dy="3" font-size="10">₂)</tspan>
+    </text>
+  </g>
+
+  <!-- ── Level-1 nodes ── -->
+  <g class="grp-l1a">
+    <circle class="node-l1" cx="145" cy="145" r="26" />
+    <text class="lbl-l1" x="145" y="145">
+      v<tspan dy="-5" font-size="8">π</tspan><tspan dy="5">(s</tspan><tspan dy="-3" font-size="8">′</tspan><tspan dy="3" font-size="11">₁)</tspan>
+    </text>
+  </g>
+  <g class="grp-l1b">
+    <circle class="node-l1" cx="300" cy="145" r="26" />
+    <text class="lbl-l1" x="300" y="145">
+      v<tspan dy="-5" font-size="8">π</tspan><tspan dy="5">(s</tspan><tspan dy="-3" font-size="8">′</tspan><tspan dy="3" font-size="11">₂)</tspan>
+    </text>
+  </g>
+  <g class="grp-l1c">
+    <circle class="node-l1" cx="455" cy="145" r="26" />
+    <text class="lbl-l1" x="455" y="145">
+      v<tspan dy="-5" font-size="8">π</tspan><tspan dy="5">(s</tspan><tspan dy="-3" font-size="8">′</tspan><tspan dy="3" font-size="11">₃)</tspan>
+    </text>
+  </g>
+
+  <!-- ── Signal dots level-2 → level-1 ── -->
+  <circle class="dot-l2a" r="4" fill="#a78bfa" />
+  <circle class="dot-l2b" r="4" fill="#a78bfa" />
+
+  <!-- ── Signal dots level-1 → level-0 ── -->
+  <circle class="dot-l1a" r="4" fill="#00d4ff" />
+  <circle class="dot-l1b" r="4" fill="#00d4ff" />
+  <circle class="dot-l1c" r="4" fill="#00d4ff" />
+
+  <!-- ── Level-0 node ── -->
+  <g class="grp-l0">
+    <circle class="node-l0" cx="300" cy="30" r="26" />
+    <text class="lbl-l0" x="300" y="30">
+      v<tspan dy="-5" font-size="9">π</tspan><tspan dy="5">(s)</tspan>
+    </text>
+  </g>
+</svg>
