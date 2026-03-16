@@ -245,39 +245,46 @@
 
         <!-- slide 5a: epsilon-greedy -->
         <section>
-          <div class="slide-panel" style="max-width:620px;text-align:center;">
+          <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>&epsilon;-Greedy</h2>
-            <!-- inline decision tree: SVG for arrows only, HTML boxes for KaTeX math -->
-            <div style="margin-top:1.1rem;">
-              <!-- root node -->
-              <div style="text-align:center;">
-                <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(226,232,240,0.3);background:rgba(13,18,32,0.9);">$A_t$</span>
+            <!-- top row: decision tree (left) + gif (right) -->
+            <div style="display:flex;align-items:flex-start;justify-content:center;gap:1.4rem;margin-top:1rem;">
+              <!-- left: decision tree -->
+              <div style="flex:0 0 auto;">
+                <!-- root node -->
+                <div style="text-align:center;">
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(226,232,240,0.3);background:rgba(13,18,32,0.9);">$A_t$</span>
+                </div>
+                <!-- fork arrows -->
+                <svg display="block" style="display:block;margin:0 auto;" viewBox="0 0 280 52" width="260" height="48">
+                  <defs>
+                    <marker id="ae-l" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L7,3 z" fill="#a78bfa"/>
+                    </marker>
+                    <marker id="ae-r" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L7,3 z" fill="#00d4ff"/>
+                    </marker>
+                  </defs>
+                  <line x1="140" y1="2" x2="66" y2="48" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ae-l)"/>
+                  <line x1="140" y1="2" x2="214" y2="48" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#ae-r)"/>
+                  <text x="88" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#a78bfa" font-style="italic">&#949;</text>
+                  <text x="192" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#00d4ff">1&#x2212;&#949;</text>
+                </svg>
+                <!-- math boxes -->
+                <div style="display:flex;justify-content:space-between;width:260px;margin:0 auto;">
+                  <div style="width:114px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+                    <div style="border:1.5px solid rgba(167,139,250,0.4);border-radius:8px;background:rgba(167,139,250,0.08);padding:0.4rem 0.5rem;color:#a78bfa;font-size:0.82rem;text-align:center;width:100%;">$\text{Uniform}(\mathcal{A})$</div>
+                    <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">explore</span>
+                  </div>
+                  <div style="width:114px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+                    <div style="border:1.5px solid rgba(0,212,255,0.4);border-radius:8px;background:rgba(0,212,255,0.08);padding:0.4rem 0.5rem;color:var(--accent);font-size:0.82rem;text-align:center;width:100%;">$\arg\max_{a}\,\hat{\mu}_a$</div>
+                    <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">exploit</span>
+                  </div>
+                </div>
               </div>
-              <!-- fork arrows (SVG, no math — just ε and 1−ε as unicode) -->
-              <svg display="block" style="display:block;margin:0 auto;" viewBox="0 0 280 52" width="280" height="52">
-                <defs>
-                  <marker id="ae-l" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L7,3 z" fill="#a78bfa"/>
-                  </marker>
-                  <marker id="ae-r" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L7,3 z" fill="#00d4ff"/>
-                  </marker>
-                </defs>
-                <line x1="140" y1="2" x2="66" y2="48" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ae-l)"/>
-                <line x1="140" y1="2" x2="214" y2="48" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#ae-r)"/>
-                <text x="88" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#a78bfa" font-style="italic">&#949;</text>
-                <text x="192" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#00d4ff">1&#x2212;&#949;</text>
-              </svg>
-              <!-- math boxes aligned with arrow endpoints -->
-              <div style="display:flex;justify-content:space-between;width:280px;margin:0 auto;">
-                <div style="width:122px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-                  <div style="border:1.5px solid rgba(167,139,250,0.4);border-radius:8px;background:rgba(167,139,250,0.08);padding:0.4rem 0.5rem;color:#a78bfa;font-size:0.85rem;text-align:center;width:100%;">$\text{Uniform}(\mathcal{A})$</div>
-                  <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">explore</span>
-                </div>
-                <div style="width:122px;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-                  <div style="border:1.5px solid rgba(0,212,255,0.4);border-radius:8px;background:rgba(0,212,255,0.08);padding:0.4rem 0.5rem;color:var(--accent);font-size:0.85rem;text-align:center;width:100%;">$\arg\max_{a}\,\hat{\mu}_a$</div>
-                  <span style="font-size:0.68rem;color:var(--muted);font-style:italic;">exploit</span>
-                </div>
+              <!-- right: animation -->
+              <div style="flex:0 0 auto;">
+                <img id="gif-egreedy" src="assets/bandit_egreedy.gif" alt="ε-Greedy evolution" style="height:160px;width:auto;border-radius:6px;border:1px solid var(--border);">
               </div>
             </div>
             <!-- pseudocode -->
@@ -303,11 +310,17 @@
 
         <!-- slide 5b: UCB -->
         <section>
-          <div class="slide-panel" style="max-width:620px;text-align:center;">
+          <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>Upper Confidence Bound</h2>
-            <figure style="margin:1.2rem auto 0;">
-              <img src="assets/concepts/ucb.svg" alt="UCB confidence intervals" style="height:120px;width:auto;">
-            </figure>
+            <!-- top row: figure left + gif right -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:1rem;margin-bottom:0.6rem;">
+              <figure style="margin:0;flex:0 0 auto;">
+                <img src="assets/concepts/ucb.svg" alt="UCB confidence intervals" style="height:140px;width:auto;">
+              </figure>
+              <div style="flex:0 0 auto;">
+                <img src="assets/bandit_ucb.gif" alt="UCB evolution" style="height:160px;width:auto;border-radius:6px;border:1px solid var(--border);">
+              </div>
+            </div>
             <!-- pseudocode -->
             <div style="margin-top:0.9rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:1.9;">
               <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Pseudocode</div>
@@ -329,11 +342,17 @@
 
         <!-- slide 5c: Thompson Sampling -->
         <section>
-          <div class="slide-panel" style="max-width:620px;text-align:center;">
+          <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>Thompson Sampling</h2>
-            <figure style="margin:1.2rem auto 0;">
-              <img src="assets/concepts/thompson.svg" alt="Thompson Sampling posteriors" style="height:120px;width:auto;">
-            </figure>
+            <!-- top row: figure left + gif right -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:1rem;margin-bottom:0.6rem;">
+              <figure style="margin:0;flex:0 0 auto;">
+                <img src="assets/concepts/thompson.svg" alt="Thompson Sampling posteriors" style="height:140px;width:auto;">
+              </figure>
+              <div style="flex:0 0 auto;">
+                <img src="assets/bandit_ts.gif" alt="Thompson Sampling evolution" style="height:160px;width:auto;border-radius:6px;border:1px solid var(--border);">
+              </div>
+            </div>
             <!-- pseudocode -->
             <div style="margin-top:0.9rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:1.9;">
               <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Pseudocode</div>
@@ -820,7 +839,7 @@
         <!-- slide: policy evaluation -->
         <section>
           <div class="slide-panel" style="max-width:860px;">
-            <h2>Policy Evaluation</h2>
+            <h2>Policy Evaluation <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
 
             <!-- Top row: objective + J definition -->
             <div style="display:flex;gap:0.7rem;margin-bottom:0.7rem;">
@@ -923,7 +942,7 @@
         <!-- slide: policy evaluation simulation -->
         <section>
           <div class="slide-panel" style="max-width:900px;">
-            <h2>Policy Evaluation Algorithm</h2>
+            <h2>Policy Evaluation Algorithm <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
 
             <!-- Pseudocode -->
             <div style="background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1.2rem;margin-bottom:0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text);line-height:1.7;">
@@ -956,11 +975,762 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- slide 8: model-free -->
+        <!-- slide: policy improvement -->
         <section>
-          <div class="slide-panel">
-            <h2>Model-Free Methods</h2>
-            <p class="slide-placeholder">TODO — Monte Carlo, TD, Q-learning, SARSA</p>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Policy Improvement <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+
+            <div style="display:flex;gap:0.7rem;margin-bottom:0.7rem;">
+
+              <!-- Greedy policy -->
+              <div style="flex:2;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Greedy Policy</div>
+                $$\pi'(s) = \arg\max_a \underset{S' \sim P(\cdot \mid s,a)}{\mathbb{E}}\!\left[v^\pi(S')\right]$$
+              </div>
+
+              <!-- Requires model -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:0.3rem;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Requires</div>
+                <div style="font-size:0.75rem;">$P(\cdot \mid s, a)$</div>
+                <div style="font-size:0.65rem;color:var(--muted);">transition model</div>
+              </div>
+
+            </div>
+
+            <div style="display:flex;gap:0.7rem;">
+
+              <!-- Improvement theorem -->
+              <div style="flex:2;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Improvement Theorem</div>
+                $$v^{\pi'}(s) \geq v^{\pi}(s) \quad \forall s \in \mathcal{S}$$
+              </div>
+
+              <!-- Optimality condition -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Optimality</div>
+                <div style="font-size:0.75rem;">$v^{\pi'} = v^\pi \Rightarrow \pi = \pi^*$</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: policy improvement illustration -->
+        <section>
+          <div class="slide-panel" style="max-width:960px;">
+            <h2>Policy Improvement <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+            <img src="assets/policy_improvement.png" style="width:100%;border-radius:8px;border:1px solid rgba(0,212,255,0.15);" />
+            <div style="display:flex;justify-content:space-around;margin-top:0.5rem;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;color:var(--muted);">
+              <span>$\pi$ — Rightward &nbsp;·&nbsp; heatmap $v^\pi$</span>
+              <span>$\pi'$ — Greedy w.r.t. $v^\pi$</span>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: policy iteration -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Policy Iteration <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+
+            <div style="background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1.2rem;margin-bottom:0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text);line-height:1.9;">
+              <span style="color:var(--muted);">input</span> &nbsp;$P \in \mathbb{R}^{|\mathcal{S}|\times|\mathcal{S}|\times|\mathcal{A}|},\; R \in \mathbb{R}^{|\mathcal{S}|},\; \gamma,\; \varepsilon$<br>
+              <span style="color:var(--muted);">init</span> &nbsp;&nbsp;$\pi_0$ arbitrary, $V_0 \in \mathbb{R}^{|\mathcal{S}|}$<br>
+              <span style="color:var(--accent);">repeat</span><br>
+              <span style="color:var(--muted);">&nbsp;&nbsp;&nbsp;&nbsp;// Policy Evaluation</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--accent);">repeat</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$V_{k+1} \leftarrow R + \gamma\, P^{\pi_i} V_k$<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--accent);">until</span> &nbsp;$\|V_{k+1} - V_k\|_\infty < \varepsilon$<br>
+              <span style="color:var(--muted);">&nbsp;&nbsp;&nbsp;&nbsp;// Policy Improvement</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;$\pi_{i+1} \leftarrow \arg\max_{a}\; \underset{S' \sim P(\cdot \mid s, a)}{\mathbb{E}}\!\left[V_k(S')\right]$<br>
+              <span style="color:var(--accent);">until</span> &nbsp;$\pi_{i+1} = \pi_i$<br>
+              <span style="color:var(--muted);">return</span> &nbsp;$\pi_i = \pi^*,\quad V_k = V^*$
+            </div>
+
+            <div style="display:flex;gap:0.7rem;">
+              <div style="flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Convergence</div>
+                <div style="font-size:0.75rem;">finite number of iterations</div>
+                <div style="font-size:0.65rem;color:var(--muted);margin-top:0.2rem;">at most $|\mathcal{A}|^{|\mathcal{S}|}$ policies</div>
+              </div>
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Optimality</div>
+                <div style="font-size:0.75rem;">$\pi' = \pi \;\Rightarrow\; v^\pi = v^*$</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: policy iteration illustration -->
+        <section>
+          <div class="slide-panel" style="max-width:960px;">
+            <h2>Policy Iteration <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+
+            <div id="piit-wrap" style="position:relative;">
+
+              <!-- Row 1: eval GIFs -->
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.2rem;">
+                <div style="flex:1;text-align:center;">
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.15rem;">Eval $\pi_0$</div>
+                  <img id="piit-gif-0" src="assets/policy_iter_eval_0.gif" data-src="assets/policy_iter_eval_0.gif" data-last="assets/policy_iter_eval_0_last.png" style="width:90%;border-radius:5px;border:1px solid rgba(0,212,255,0.15);" />
+                </div>
+                <div id="piit-col-1" style="flex:1;text-align:center;opacity:0;transition:opacity 0.4s;">
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.15rem;">Eval $\pi_1$</div>
+                  <img id="piit-gif-1" src="" data-src="assets/policy_iter_eval_1.gif" data-last="assets/policy_iter_eval_1_last.png" style="width:90%;border-radius:5px;border:1px solid rgba(0,212,255,0.15);" />
+                </div>
+                <div id="piit-col-2" style="flex:1;text-align:center;opacity:0;transition:opacity 0.4s;">
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.15rem;">Eval $\pi^*$</div>
+                  <img id="piit-gif-star" src="" data-src="assets/policy_iter_eval_star.gif" data-last="assets/policy_iter_eval_star_last.png" style="width:90%;border-radius:5px;border:1px solid rgba(0,212,255,0.15);" />
+                </div>
+              </div>
+
+              <!-- Row 2: down arrows + connectors -->
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.2rem;align-items:center;">
+                <div id="piit-arr-0"    style="flex:1;text-align:center;color:var(--accent);font-size:0.9rem;opacity:0;transition:opacity 0.4s;">↓</div>
+                <div id="piit-conn-01"  style="flex:1;text-align:center;color:var(--accent);font-size:0.75rem;opacity:0;transition:opacity 0.4s;font-family:'JetBrains Mono',monospace;">↗</div>
+                <div id="piit-arr-1"    style="flex:1;text-align:center;color:var(--accent);font-size:0.9rem;opacity:0;transition:opacity 0.4s;">↓</div>
+                <div id="piit-conn-12"  style="flex:1;text-align:center;color:rgba(0,212,255,0.55);font-size:0.75rem;opacity:0;transition:opacity 0.4s;font-family:'JetBrains Mono',monospace;">···↗</div>
+                <div id="piit-arr-star" style="flex:1;text-align:center;color:var(--accent);font-size:0.9rem;opacity:0;transition:opacity 0.4s;">↓</div>
+              </div>
+
+              <!-- Row 3: policy PNGs -->
+              <div style="display:flex;gap:0.5rem;">
+                <div id="piit-img-1" style="flex:1;text-align:center;opacity:0;transition:opacity 0.4s;">
+                  <img src="assets/policy_iter_pi_1.png" style="width:90%;border-radius:5px;border:1px solid rgba(167,139,250,0.2);" />
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-top:0.15rem;">$\pi_1$ greedy</div>
+                </div>
+                <div id="piit-img-2" style="flex:1;text-align:center;opacity:0;transition:opacity 0.4s;">
+                  <img src="assets/policy_iter_pi_2.png" style="width:90%;border-radius:5px;border:1px solid rgba(167,139,250,0.2);" />
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-top:0.15rem;">$\pi_2$ greedy</div>
+                </div>
+                <div id="piit-img-star" style="flex:1;text-align:center;opacity:0;transition:opacity 0.4s;">
+                  <img src="assets/policy_iter_pi_star.png" style="width:90%;border-radius:5px;border:1px solid rgba(167,139,250,0.2);" />
+                  <div style="font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-top:0.15rem;">$\pi^*$ optimal</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: bellman optimality operator -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Bellman Optimality Operator</h2>
+
+            <div style="text-align:center;margin:0.8rem 0 1rem;">
+              $$(\mathcal{T}^* V)(s) \;=\; \max_{a \in \mathcal{A}}\; \underset{S' \sim P(\cdot \mid s,\, a)}{\mathbb{E}}\!\left[r(s) + \gamma\, V(S')\right]$$
+            </div>
+
+            <div style="display:flex;gap:0.7rem;">
+              <div style="flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Contraction</div>
+                <div style="font-size:0.75rem;">$\|\mathcal{T}^* V - \mathcal{T}^* W\|_\infty \leq \gamma\, \|V - W\|_\infty$</div>
+              </div>
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Fixed Point</div>
+                <div style="font-size:0.75rem;">$V^* = \mathcal{T}^* V^*$</div>
+                <div style="font-size:0.65rem;color:var(--muted);margin-top:0.2rem;">Bellman optimality equation</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: value iteration -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Value Iteration <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+
+            <div style="background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1.2rem;margin-bottom:0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text);line-height:1.9;">
+              <span style="color:var(--muted);">input</span> &nbsp;$P \in \mathbb{R}^{|\mathcal{S}|\times|\mathcal{S}|\times|\mathcal{A}|},\; R \in \mathbb{R}^{|\mathcal{S}|},\; \gamma,\; \varepsilon$<br>
+              <span style="color:var(--muted);">init</span> &nbsp;&nbsp;$V_0 \in \mathbb{R}^{|\mathcal{S}|}$ arbitrary<br>
+              <span style="color:var(--accent);">repeat</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;$V_{k+1} \leftarrow \mathcal{T}^* V_k$<br>
+              <span style="color:var(--accent);">until</span> &nbsp;$\|V_{k+1} - V_k\|_\infty < \varepsilon$<br>
+              <span style="color:var(--muted);">return</span> &nbsp;$V^* \approx V_k$<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\displaystyle\pi^*(s) = \arg\max_{a \in \mathcal{A}}\; \underset{S' \sim P(\cdot \mid s,\, a)}{\mathbb{E}}\!\left[r(s) + \gamma\, V^*(S')\right]$
+            </div>
+
+            <div style="display:flex;gap:0.7rem;">
+              <div style="flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Convergence</div>
+                <div style="font-size:0.75rem;">$\|V_k - V^*\|_\infty \leq \dfrac{\gamma^k}{1-\gamma}\,\|V_1 - V_0\|_\infty$</div>
+              </div>
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">vs Policy Iteration</div>
+                <div style="font-size:0.75rem;">no inner eval loop</div>
+                <div style="font-size:0.65rem;color:var(--muted);margin-top:0.2rem;">eval + improve fused into $\mathcal{T}^*$</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: PI vs VI comparison -->
+        <section>
+          <div class="slide-panel" style="max-width:960px;">
+            <h2>PI vs VI </h2>
+
+            <div id="cmp-wrap" style="display:flex;gap:1rem;margin-bottom:0.6rem;">
+              <div style="flex:1;text-align:center;">
+                <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.2rem;">Policy Iteration</div>
+                <img id="cmp-gif-pi" src="" data-src="assets/compare_pi.gif" data-last="assets/compare_pi_last.png"
+                     style="width:92%;border-radius:5px;border:1px solid rgba(0,212,255,0.15);" />
+              </div>
+              <div style="flex:1;text-align:center;">
+                <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-bottom:0.2rem;">Value Iteration</div>
+                <img id="cmp-gif-vi" src="" data-src="assets/compare_vi.gif" data-last="assets/compare_vi_last.png"
+                     style="width:92%;border-radius:5px;border:1px solid rgba(167,139,250,0.2);" />
+              </div>
+            </div>
+
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: TD learning -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Temporal Difference Learning <span style="font-size:0.5em;color:var(--muted);">(Model-Free)</span></h2>
+
+            <!-- Animation -->
+            <div style="text-align:center;margin-bottom:0.7rem;">
+              <img src="js/td_learning.svg" style="height:175px;width:100%;max-width:620px;" />
+            </div>
+
+            <!-- Two boxes -->
+            <div style="display:flex;gap:0.7rem;margin-bottom:0.6rem;">
+
+              <div style="flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">TD Error</div>
+                $$\delta_t = r(S_t,A_t) + \gamma\, v(S_{t+1}) - v(S_t)$$
+              </div>
+
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Update</div>
+                $$v(S_t) \leftarrow v(S_t) + \alpha\,\delta_t$$
+                <div style="font-size:0.65rem;color:var(--muted);margin-top:0.35rem;">bootstrap — uses estimate $v(S_{t+1})$, not true value</div>
+              </div>
+
+            </div>
+
+            <!-- Gradient descent derivation -->
+            <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.2rem;font-size:0.78rem;line-height:2.0;">
+              <span style="font-size:0.58rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.1rem;font-family:'JetBrains Mono',monospace;">Gradient descent view</span>
+              <div style="display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;">
+                <div>$v_{k+1} = \displaystyle\arg\min_{v}\;\tfrac{1}{2}\!\left(v(s_t) - \mathcal{T}^\pi v_k(s_t)\right)^2$</div>
+                <div style="color:var(--muted);">$\xRightarrow{\;\nabla_v\;}$</div>
+                <div>$\nabla_v = \underbrace{v_k(s_t) - \mathcal{T}^\pi v_k(s_t)}_{-\delta_t}$</div>
+                <div style="color:var(--muted);">$\xRightarrow{\;-\alpha\nabla_v\;}$</div>
+                <div>$v_{k+1}(s_t) = v_k(s_t) + \alpha\,\delta_t$</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: TD(0) algorithm -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>TD(0) — Policy Evaluation <span style="font-size:0.5em;color:var(--muted);">V-function</span></h2>
+
+            <div id="tdv-wrap" style="display:flex;gap:1.2rem;align-items:flex-start;">
+
+              <!-- pseudocode -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:2.1;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Pseudocode</div>
+                <div style="color:var(--accent2);"><strong>Input:</strong> $\mathcal{D} = \{(s_t,\, a_t,\, r_t,\, s'_t)\}$ &nbsp;with&nbsp; $s'_t \sim P^\pi(\cdot \mid s_t)$
+                  <span style="color:var(--muted);font-size:0.72em;">← on-policy</span></div>
+                <div><strong>Init:</strong> $v(s) \leftarrow 0 \quad \forall\, s \in \mathcal{S}$</div>
+                <div><strong>For</strong> each $(s_t,\, a_t,\, r_t,\, s'_t) \in \mathcal{D}$:</div>
+                <div style="margin-left:1.4rem;">$\delta_t = r_t + \gamma\,v(s'_t) - v(s_t)$</div>
+                <div style="margin-left:1.4rem;">$v(s_t) \leftarrow v(s_t) + \alpha\,\delta_t$</div>
+              </div>
+
+              <!-- GIF -->
+              <div style="flex:0 0 auto;text-align:center;">
+                <img id="tdv-gif" src="" data-src="assets/td_v.gif" data-last="assets/td_v_last.png"
+                     style="height:220px;border-radius:6px;border:1px solid rgba(0,212,255,0.15);" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Q-function & Bellman operator -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Action-Value Function <span style="font-size:0.5em;color:var(--muted);">Q-Function</span></h2>
+
+            <!-- Backup diagram -->
+            <div style="text-align:center;margin-bottom:0.7rem;">
+              <img src="js/q_backup_diagram.svg" style="height:190px;width:100%;max-width:620px;" />
+            </div>
+
+            <!-- Bottom row: definition + contraction -->
+            <div style="display:flex;gap:0.7rem;">
+
+              <!-- Q definition + Bellman equation -->
+              <div style="flex:2;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Definition</div>
+                $$q^\pi(s,a) = r(s,a) + \gamma \underset{\substack{S' \sim P(\cdot \mid s,a) \\ A' \sim \pi(\cdot \mid S')}}{\mathbb{E}}\!\left[q^\pi(S',A')\right]$$
+                <div style="font-size:0.65rem;color:var(--muted);margin-top:0.35rem;">fixed point &nbsp;$\mathcal{T}^\pi_Q\, q^\pi = q^\pi$</div>
+              </div>
+
+              <!-- Contraction -->
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.7rem 1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Contraction</div>
+                $$\|\mathcal{T}^\pi_Q f - \mathcal{T}^\pi_Q g\|_\infty \leq \gamma\,\|f - g\|_\infty$$
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: TD(0) Q-function (SARSA) -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>TD(0) — Policy Evaluation <span style="font-size:0.5em;color:var(--muted);">Q-function (SARSA)</span></h2>
+
+            <div id="tdq-wrap" style="display:flex;gap:1.2rem;align-items:flex-start;">
+
+              <!-- pseudocode -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:2.1;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Pseudocode</div>
+                <div style="color:var(--accent2);"><strong>Input:</strong> $\mathcal{D} = \{(s_t,\, a_t,\, r_t,\, s'_t,\, a'_t)\}$ &nbsp;with&nbsp; $a'_t \sim \pi(\cdot \mid s'_t)$
+                  <span style="color:var(--muted);font-size:0.72em;">← on-policy</span></div>
+                <div><strong>Init:</strong> $q(s, a) \leftarrow 0 \quad \forall\, s \in \mathcal{S},\, a \in \mathcal{A}$</div>
+                <div><strong>For</strong> each $(s_t,\, a_t,\, r_t,\, s'_t,\, a'_t) \in \mathcal{D}$:</div>
+                <div style="margin-left:1.4rem;">$\delta_t = r_t + \gamma\,q(s'_t, a'_t) - q(s_t, a_t)$</div>
+                <div style="margin-left:1.4rem;">$q(s_t, a_t) \leftarrow q(s_t, a_t) + \alpha\,\delta_t$</div>
+                <div style="margin-top:0.6rem;border-top:1px solid var(--border);padding-top:0.5rem;color:var(--muted);font-size:0.72em;">
+                  $\hat{v}(s) = \textstyle\sum_a \pi(a \mid s)\, q(s, a)$
+                </div>
+              </div>
+
+              <!-- GIF -->
+              <div style="flex:0 0 auto;text-align:center;">
+                <img id="tdq-gif" src="" data-src="assets/td_q.gif" data-last="assets/td_q_last.png"
+                     style="height:220px;border-radius:6px;border:1px solid rgba(167,139,250,0.15);" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: V vs Q -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>V-function vs Q-function</h2>
+
+            <div style="display:flex;flex-direction:column;gap:0.55rem;">
+
+              <!-- Column headers -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;padding:0 0.1rem;">
+                <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;">V-function</div>
+                <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;">Q-function</div>
+              </div>
+
+              <!-- Row 1: greedy policy -->
+              <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;">Greedy policy</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;overflow:hidden;">
+                  <div style="font-size:0.78em;">$$\pi'(s) = \arg\max_a \Bigl[ r(s,a) + \gamma \sum_{s'} P(s'\!\mid\! s,a)\, v(s') \Bigr]$$</div>
+                </div>
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;display:flex;align-items:center;justify-content:center;">
+                  <div style="font-size:0.78em;">$$\pi'(s) = \arg\max_a\; q(s,a)$$</div>
+                </div>
+              </div>
+
+              <!-- Row 2: empirical update -->
+              <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;">Required sampling</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.3rem;">TD target</div>
+                  <div style="margin-bottom:0.4rem;">$r(s) + \gamma\, v(S')$</div>
+                  <div style="font-size:0.62rem;color:var(--muted);">requires $S' \sim P^{\pi}(\cdot \mid s)$ — must follow $\pi$</div>
+                </div>
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-bottom:0.3rem;">TD target</div>
+                  <div style="margin-bottom:0.4rem;">$r(s,a) + \gamma\, q(S',A')$</div>
+                  <div style="font-size:0.62rem;color:var(--muted);">$(s,a,r,S')$ arbitrary &nbsp;·&nbsp; $A' \sim \pi(\cdot \mid S')$</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Q-learning -->
+        <section>
+          <div class="slide-panel" style="max-width:960px;">
+            <h2>Q-Learning <span style="font-size:0.5em;color:var(--muted);">Off-Policy TD(0)</span></h2>
+
+            <div id="ql-wrap" style="display:flex;gap:1.2rem;align-items:flex-start;">
+
+              <!-- pseudocode -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:2.1;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-family:'JetBrains Mono',monospace;">Pseudocode</div>
+                <div style="color:var(--accent2);"><strong>Input:</strong> $\mathcal{D} = \{(s_t,\, a_t,\, r_t,\, s'_t)\}$ &nbsp;with&nbsp; $a_t \sim b(\cdot \mid s_t)$
+                  <span style="color:var(--muted);font-size:0.72em;">← any behavior</span></div>
+                <div><strong>Init:</strong> $q(s, a) \leftarrow 0 \quad \forall\, s,\, a$</div>
+                <div><strong>For</strong> each $(s_t,\, a_t,\, r_t,\, s'_t) \in \mathcal{D}$:</div>
+                <div style="margin-left:1.4rem;">$\delta_t = r_t + \gamma\,\max_{a'} q(s'_t,\, a') - q(s_t, a_t)$</div>
+                <div style="margin-left:1.4rem;">$q(s_t, a_t) \leftarrow q(s_t, a_t) + \alpha\,\delta_t$</div>
+                <div style="margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid var(--border);color:var(--accent);">$\hat{v}^*(s) = \max_a\, q(s, a) \;\xrightarrow{k\to\infty}\; v^*$</div>
+              </div>
+
+              <!-- GIF -->
+              <div style="flex:0 0 auto;text-align:center;">
+                <img id="ql-gif" src="" data-src="assets/sarsa_vs_qlearning.gif" data-last="assets/sarsa_vs_qlearning_last.png"
+                     style="height:200px;border-radius:6px;border:1px solid rgba(167,139,250,0.15);" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: How Far Should We Look? (n-step intro) -->
+        <section>
+          <div class="slide-panel" style="max-width:900px;">
+            <h2>How Far Should We Look? <span style="font-size:0.5em;color:var(--muted);">n-step Return</span></h2>
+
+            <div style="display:flex;gap:2rem;align-items:flex-start;margin-top:0.8rem;">
+
+              <!-- equations -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.8rem;">
+
+                <!-- value function definition -->
+                <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1.1rem;">
+                  <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Value function — ideal target</div>
+                  $$v^\pi(s_t) = \underset{\substack{A_i \sim \pi(\cdot \mid S_i) \\ S_{i+1} \sim P(\cdot \mid S_i,\, A_i)}}{\mathbb{E}}\!\!\left[\,\sum_{i=0}^{\infty} \gamma^i\, r(S_{t+i}) \;\Big|\; S_t = s_t\right]$$
+                  <div style="font-size:0.68rem;color:var(--muted);margin-top:0.2rem;">We can't observe the infinite sum — we must choose how far to unroll.</div>
+                </div>
+
+                <!-- TD(0) -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:0.65rem 1.1rem;">
+                  <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">TD(0) — truncate at <em>n</em> = 1</div>
+                  $$G_t^{(1)} = r_t + \gamma\, v_k(s_{t+1})$$
+                </div>
+
+                <!-- n-step -->
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.65rem 1.1rem;">
+                  <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">n-step — truncate at <em>n</em></div>
+                  $$G_t^{(n)} = \sum_{i=0}^{n-1}\gamma^i\, r_{t+i} \;+\; \gamma^n\, v_k(s_{t+n})$$
+                </div>
+
+                <!-- update + limits -->
+                <div style="display:flex;align-items:baseline;gap:1.4rem;flex-wrap:wrap;font-size:0.72rem;padding:0 0.2rem;">
+                  <div>$v_{k+1}(s_t) = v_k(s_t) + \alpha\!\left(G_t^{(n)} - v_k(s_t)\right)$</div>
+                  <div style="color:var(--muted);">
+                    $n{=}1$ <span style="color:var(--accent);">TD(0)</span>
+                    &ensp;·&ensp;
+                    $n{\to}\infty$ <span style="color:var(--accent2);">Monte Carlo</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- backup diagram SVG -->
+              <div style="flex:0 0 auto;display:flex;gap:2.2rem;align-items:flex-start;padding-top:0.2rem;">
+
+                <!-- TD(0) diagram -->
+                <div style="text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">TD(0)</div>
+                  <svg width="60" height="160" viewBox="0 0 60 160" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="16" r="11" fill="none" stroke="#00d4ff" stroke-width="1.8"/>
+                    <text x="30" y="20.5" text-anchor="middle" fill="#00d4ff" font-size="9" font-family="monospace">sₜ</text>
+                    <line x1="30" y1="27" x2="30" y2="68" stroke="#7a8fa6" stroke-width="1.2" stroke-dasharray="3,2"/>
+                    <text x="38" y="52" fill="#e2e8f0" font-size="8.5" font-family="monospace">rₜ</text>
+                    <circle cx="30" cy="79" r="11" fill="none" stroke="#00d4ff" stroke-width="1.8"/>
+                    <text x="30" y="83.5" text-anchor="middle" fill="#00d4ff" font-size="8" font-family="monospace">sₜ₊₁</text>
+                    <rect x="14" y="104" width="32" height="13" rx="3" fill="rgba(0,212,255,0.18)" stroke="#00d4ff" stroke-width="1.2"/>
+                    <text x="30" y="113.5" text-anchor="middle" fill="#00d4ff" font-size="7.5" font-family="monospace">vₖ</text>
+                    <line x1="30" y1="90" x2="30" y2="104" stroke="#00d4ff" stroke-width="1.2"/>
+                    <line x1="4" y1="97" x2="56" y2="97" stroke="rgba(0,212,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+                    <text x="30" y="145" text-anchor="middle" fill="#7a8fa6" font-size="7.5" font-family="monospace">n = 1</text>
+                  </svg>
+                </div>
+
+                <!-- n-step diagram -->
+                <div style="text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.5rem;">n-step</div>
+                  <svg width="60" height="160" viewBox="0 0 60 160" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="14" r="10" fill="none" stroke="#a78bfa" stroke-width="1.8"/>
+                    <text x="30" y="18" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="monospace">sₜ</text>
+                    <line x1="30" y1="24" x2="30" y2="43" stroke="#7a8fa6" stroke-width="1.2" stroke-dasharray="3,2"/>
+                    <text x="38" y="37" fill="#e2e8f0" font-size="7.5" font-family="monospace">rₜ</text>
+                    <circle cx="30" cy="53" r="9" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+                    <text x="30" y="57" text-anchor="middle" fill="#a78bfa" font-size="7.5" font-family="monospace">sₜ₊₁</text>
+                    <line x1="30" y1="62" x2="30" y2="74" stroke="#7a8fa6" stroke-width="1.2" stroke-dasharray="3,2"/>
+                    <text x="38" y="71" fill="#e2e8f0" font-size="7.5" font-family="monospace">rₜ₊₁</text>
+                    <text x="30" y="87" text-anchor="middle" fill="#7a8fa6" font-size="11">⋮</text>
+                    <circle cx="30" cy="103" r="9" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+                    <text x="30" y="107" text-anchor="middle" fill="#a78bfa" font-size="7" font-family="monospace">sₜ₊ₙ</text>
+                    <rect x="14" y="125" width="32" height="13" rx="3" fill="rgba(167,139,250,0.18)" stroke="#a78bfa" stroke-width="1.2"/>
+                    <text x="30" y="134.5" text-anchor="middle" fill="#a78bfa" font-size="7.5" font-family="monospace">vₖ</text>
+                    <line x1="30" y1="112" x2="30" y2="125" stroke="#a78bfa" stroke-width="1.2"/>
+                    <line x1="4" y1="118" x2="56" y2="118" stroke="rgba(167,139,250,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+                    <text x="30" y="150" text-anchor="middle" fill="#7a8fa6" font-size="7.5" font-family="monospace">n steps</text>
+                  </svg>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Choosing the Horizon (animated n-step) -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Choosing the Horizon <span style="font-size:0.5em;color:var(--muted);">n-step Return</span></h2>
+
+            <div id="nstep-wrap" style="margin-top:1.2rem;">
+              <div style="display:flex;align-items:flex-start;justify-content:center;gap:2.5rem;">
+                <svg id="nstep-svg" width="480" height="285" viewBox="0 0 480 285" xmlns="http://www.w3.org/2000/svg"></svg>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding-top:3rem;">
+                  <div style="font-family:'JetBrains Mono',monospace;">
+                    <span style="color:var(--muted);font-size:0.8rem;">n =&nbsp;</span><span id="nstep-n-lbl" style="color:#e2e8f0;font-size:1.6rem;font-weight:700;">1</span>
+                    <div id="nstep-algo-lbl" style="font-size:0.75rem;color:var(--accent);margin-top:0.3rem;">TD(0)</div>
+                  </div>
+                  <div style="font-size:0.65rem;color:var(--muted);line-height:2.0;border-left:2px solid var(--border);padding-left:0.8rem;">
+                    <div><span style="color:var(--accent);">&#9679;</span> sampled path</div>
+                    <div><span style="color:#a78bfa;">- -</span> other trajectories</div>
+                    <div><span style="color:#a78bfa;">&#9632;</span> bootstrap v&#x2096;</div>
+                  </div>
+                  <div style="font-size:0.62rem;color:var(--muted);line-height:1.8;border-left:2px solid var(--border);padding-left:0.8rem;">
+                    <div>small <em>n</em> &rarr; <strong style="color:var(--accent);">more bias</strong></div>
+                    <div>large <em>n</em> &rarr; <strong style="color:var(--accent2);">more variance</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: λ-Return (TD(λ)) -->
+        <section>
+          <div class="slide-panel" style="max-width:940px;">
+            <h2>The λ-Return <span style="font-size:0.5em;color:var(--muted);">TD(λ)</span></h2>
+            <div style="display:flex;gap:2rem;align-items:flex-start;margin-top:0.8rem;">
+
+              <!-- equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.9rem;">
+                <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;">
+                  <div style="font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">geometric mixture of all n-step returns</div>
+                  $$G_t^\lambda \;=\; (1-\lambda)\sum_{n=1}^{\infty}\lambda^{n-1}\, G_t^{(n)}$$
+                </div>
+                <div style="display:flex;gap:0.8rem;">
+                  <div style="flex:1;position:relative;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:0.7rem 0.8rem 0.9rem;">
+                    <strong style="color:var(--accent);font-size:0.68rem;">λ = 0</strong>
+                    <div style="text-align:center;margin-top:0.3rem;">$G_t^0 = r_t + \gamma\,v_k(s_{t+1})$</div>
+                    <div style="text-align:center;font-size:0.6rem;color:var(--muted);margin-top:0.3rem;">→ TD(0)</div>
+                  </div>
+                  <div style="flex:1;position:relative;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:6px;padding:0.7rem 0.8rem 0.9rem;">
+                    <strong style="color:var(--accent2);font-size:0.68rem;">λ = 1</strong>
+                    <div style="text-align:center;margin-top:0.3rem;">$G_t^1 = {\displaystyle\sum_{i=0}^{\infty}}\gamma^i\,r_{t+i}$</div>
+                    <div style="text-align:center;font-size:0.6rem;color:var(--muted);margin-top:0.3rem;">→ Monte Carlo</div>
+                  </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;padding:0.7rem 0.9rem;">
+                  <div style="font-size:0.58rem;color:var(--muted);margin-bottom:0.3rem;">update</div>
+                  $v_{k+1}(s_t) = v_k(s_t) + \alpha\!\left(G_t^\lambda - v_k(s_t)\right)$
+                  <div style="border-top:1px solid var(--border);margin-top:0.45rem;padding-top:0.35rem;">
+                    $$G_t^\lambda - v_k(s_t) \;=\; \sum_{n=0}^{\infty}(\gamma\lambda)^n\,\delta_{t+n}$$
+                    <div style="font-size:0.57rem;color:var(--muted);margin-top:0.2rem;">$\delta_{t+n} = r_{t+n} + \gamma\,v_k(s_{t+n+1}) - v_k(s_{t+n})$</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- animated tree + weight bars -->
+              <div id="lam-wrap" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;padding-top:0.2rem;">
+                <svg id="lam-svg" style="width:100%;max-width:290px;" viewBox="0 0 480 285"
+                     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+                <div style="display:flex;gap:1.6rem;align-items:flex-start;">
+                  <div style="font-family:'JetBrains Mono',monospace;">
+                    <span style="color:var(--muted);font-size:0.72rem;">λ =&nbsp;</span><span id="lam-lbl" style="color:#e2e8f0;font-size:1.4rem;font-weight:700;">0</span>
+                    <div id="lam-algo" style="font-size:0.72rem;color:var(--accent);margin-top:0.2rem;">TD(0)</div>
+                  </div>
+                  <div style="font-size:0.6rem;color:var(--muted);font-family:'JetBrains Mono',monospace;line-height:2.2;">
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><span>n=1</span><span id="lnwbar1" style="display:inline-block;height:5px;background:var(--accent);border-radius:2px;transition:width 0.5s ease;width:60px;"></span></div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><span>n=2</span><span id="lnwbar2" style="display:inline-block;height:5px;background:var(--accent);border-radius:2px;transition:width 0.5s ease;width:1px;"></span></div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><span>n=3</span><span id="lnwbar3" style="display:inline-block;height:5px;background:var(--accent);border-radius:2px;transition:width 0.5s ease;width:1px;"></span></div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><span>n=4</span><span id="lnwbar4" style="display:inline-block;height:5px;background:var(--accent);border-radius:2px;transition:width 0.5s ease;width:1px;"></span></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Forward View -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Forward View <span style="font-size:0.5em;color:var(--muted);">TD(λ)</span></h2>
+            <div style="margin-top:1.2rem;">
+              <svg id="fv-svg" viewBox="0 0 700 215" style="width:100%;" xmlns="http://www.w3.org/2000/svg">
+                <!-- timeline -->
+                <line x1="60" y1="72" x2="660" y2="72" stroke="#1e2a38" stroke-width="2"/>
+                <!-- sₜ — vantage point -->
+                <circle cx="80"  cy="72" r="18" fill="#070b14" stroke="#00d4ff" stroke-width="2.5"/>
+                <text x="80"  y="77" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="monospace">sₜ</text>
+                <text x="80"  y="47" text-anchor="middle" fill="#00d4ff" font-size="9"  font-family="monospace">now</text>
+                <!-- future states (nodes dim progressively) -->
+                <circle cx="220" cy="72" r="13" fill="#070b14" stroke="#334155" stroke-width="1.8"/>
+                <text x="220" y="77" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">sₜ₊₁</text>
+                <circle cx="360" cy="72" r="13" fill="#070b14" stroke="#2a3a4f" stroke-width="1.6"/>
+                <text x="360" y="77" text-anchor="middle" fill="#7a8fa6" font-size="9" font-family="monospace">sₜ₊₂</text>
+                <circle cx="500" cy="72" r="13" fill="#070b14" stroke="#1e2e42" stroke-width="1.4"/>
+                <text x="500" y="77" text-anchor="middle" fill="#56697d" font-size="9" font-family="monospace">sₜ₊₃</text>
+                <circle cx="630" cy="72" r="13" fill="#070b14" stroke="#14222f" stroke-width="1.2"/>
+                <text x="630" y="77" text-anchor="middle" fill="#3a4f61" font-size="9" font-family="monospace">sₜ₊₄</text>
+                <!-- reward labels (decaying opacity) -->
+                <text x="150" y="58" text-anchor="middle" fill="#00d4ff" font-size="10" font-family="monospace">rₜ</text>
+                <text x="290" y="58" text-anchor="middle" fill="#00d4ff" font-size="10" font-family="monospace" opacity="0.75">rₜ₊₁</text>
+                <text x="430" y="58" text-anchor="middle" fill="#00d4ff" font-size="10" font-family="monospace" opacity="0.5">rₜ₊₂</text>
+                <text x="568" y="58" text-anchor="middle" fill="#00d4ff" font-size="10" font-family="monospace" opacity="0.28">rₜ₊₃</text>
+                <!-- edges (decaying) -->
+                <line x1="98"  y1="72" x2="207" y2="72" stroke="#00d4ff" stroke-width="2"/>
+                <line x1="233" y1="72" x2="347" y2="72" stroke="#00d4ff" stroke-width="1.6" opacity="0.7"/>
+                <line x1="373" y1="72" x2="487" y2="72" stroke="#00d4ff" stroke-width="1.2" opacity="0.45"/>
+                <line x1="513" y1="72" x2="617" y2="72" stroke="#00d4ff" stroke-width="0.8" opacity="0.25"/>
+                <!-- drop lines: dashed violet from node bottom → bar top -->
+                <line x1="220" y1="85" x2="220" y2="128" stroke="#a78bfa" stroke-width="1"   stroke-dasharray="3,3" opacity="0.75"/>
+                <line x1="360" y1="85" x2="360" y2="144" stroke="#a78bfa" stroke-width="1"   stroke-dasharray="3,3" opacity="0.58"/>
+                <line x1="500" y1="85" x2="500" y2="155" stroke="#a78bfa" stroke-width="1"   stroke-dasharray="3,3" opacity="0.4"/>
+                <line x1="630" y1="85" x2="630" y2="163" stroke="#a78bfa" stroke-width="1"   stroke-dasharray="3,3" opacity="0.24"/>
+                <!-- bar baseline -->
+                <line x1="195" y1="181" x2="650" y2="181" stroke="#1e2a38" stroke-width="1"/>
+                <!-- weight bars (bottom at y=181) -->
+                <rect x="211" y="128" width="18" height="53" rx="2" fill="#a78bfa" opacity="0.85"/>
+                <rect x="351" y="144" width="18" height="37" rx="2" fill="#a78bfa" opacity="0.65"/>
+                <rect x="491" y="155" width="18" height="26" rx="2" fill="#a78bfa" opacity="0.45"/>
+                <rect x="621" y="163" width="18" height="18" rx="2" fill="#a78bfa" opacity="0.28"/>
+                <!-- weight labels -->
+                <text x="220" y="198" text-anchor="middle" fill="#a78bfa" font-size="8" font-family="monospace">(1-λ)λ⁰</text>
+                <text x="360" y="198" text-anchor="middle" fill="#a78bfa" font-size="8" font-family="monospace" opacity="0.8">(1-λ)λ¹</text>
+                <text x="500" y="198" text-anchor="middle" fill="#a78bfa" font-size="8" font-family="monospace" opacity="0.6">(1-λ)λ²</text>
+                <text x="630" y="198" text-anchor="middle" fill="#a78bfa" font-size="8" font-family="monospace" opacity="0.4">(1-λ)λ³</text>
+                <!-- future arrow -->
+                <text x="655" y="76" fill="#334155" font-size="14" font-family="monospace">→</text>
+              </svg>
+              <div style="text-align:center;margin-top:0.6rem;font-size:0.7rem;color:var(--muted);">
+                requires future rewards &nbsp;·&nbsp; <strong style="color:#f87171;">not online</strong>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Backward View — Eligibility Traces -->
+        <section>
+          <div class="slide-panel" style="max-width:900px;">
+            <h2>Backward View <span style="font-size:0.5em;color:var(--muted);">Eligibility Traces</span></h2>
+            <div style="display:flex;gap:2rem;align-items:center;margin-top:1rem;">
+
+              <!-- backward timeline -->
+              <div style="flex:1.6;">
+                <svg viewBox="0 0 640 200" style="width:100%;" xmlns="http://www.w3.org/2000/svg">
+                  <!-- timeline -->
+                  <line x1="30" y1="95" x2="610" y2="95" stroke="#1e2a38" stroke-width="2"/>
+                  <text x="620" y="99" fill="#334155" font-size="14" font-family="monospace">→</text>
+                  <!-- past states -->
+                  <circle cx="70"  cy="95" r="13" fill="#070b14" stroke="#1e2a38" stroke-width="1.5"/>
+                  <text x="70"  y="99" text-anchor="middle" fill="#4a5e72" font-size="9" font-family="monospace">sₜ₋₃</text>
+                  <circle cx="210" cy="95" r="13" fill="#070b14" stroke="#253547" stroke-width="1.5"/>
+                  <text x="210" y="99" text-anchor="middle" fill="#5a7088" font-size="9" font-family="monospace">sₜ₋₂</text>
+                  <circle cx="350" cy="95" r="13" fill="#070b14" stroke="#2e4055" stroke-width="1.5"/>
+                  <text x="350" y="99" text-anchor="middle" fill="#6a8098" font-size="9" font-family="monospace">sₜ₋₁</text>
+                  <!-- current state sₜ -->
+                  <circle cx="540" cy="95" r="18" fill="#070b14" stroke="#00d4ff" stroke-width="2.5"/>
+                  <text x="540" y="100" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="monospace">sₜ</text>
+                  <!-- δₜ at sₜ -->
+                  <text x="540" y="52" text-anchor="middle" fill="#f59e0b" font-size="15" font-family="monospace">δₜ</text>
+                  <line x1="540" y1="56" x2="540" y2="77" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,2"/>
+                  <!-- backward propagation (decaying) -->
+                  <line x1="363" y1="95" x2="522" y2="95" stroke="#f59e0b" stroke-width="2.2" opacity="0.88"/>
+                  <line x1="223" y1="95" x2="337" y2="95" stroke="#f59e0b" stroke-width="1.3" opacity="0.55"/>
+                  <line x1="83"  y1="95" x2="197" y2="95" stroke="#f59e0b" stroke-width="0.7" opacity="0.28"/>
+                  <!-- eligibility bars -->
+                  <rect x="533" y="118" width="14" height="46" rx="2" fill="#f59e0b" opacity="0.92"/>
+                  <rect x="343" y="131" width="14" height="33" rx="2" fill="#f59e0b" opacity="0.65"/>
+                  <rect x="203" y="142" width="14" height="22" rx="2" fill="#f59e0b" opacity="0.45"/>
+                  <rect x="63"  y="149" width="14" height="15" rx="2" fill="#f59e0b" opacity="0.28"/>
+                  <!-- ×γλ decay labels between bars -->
+                  <text x="140" y="170" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="monospace" opacity="0.40">×γλ</text>
+                  <text x="278" y="170" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="monospace" opacity="0.55">×γλ</text>
+                  <text x="445" y="170" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="monospace" opacity="0.72">×γλ</text>
+                  <!-- trace labels -->
+                  <text x="540" y="182" text-anchor="middle" fill="#f59e0b" font-size="8.5" font-family="monospace">e=1</text>
+                  <text x="350" y="182" text-anchor="middle" fill="#f59e0b" font-size="8.5" font-family="monospace" opacity="0.65">γλ</text>
+                  <text x="210" y="182" text-anchor="middle" fill="#f59e0b" font-size="8.5" font-family="monospace" opacity="0.45">(γλ)²</text>
+                  <text x="70"  y="182" text-anchor="middle" fill="#f59e0b" font-size="8.5" font-family="monospace" opacity="0.28">(γλ)³</text>
+                </svg>
+              </div>
+
+              <!-- algorithm -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.8rem;padding-top:0.2rem;">
+                <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;padding:0.75rem 1rem;font-size:0.68rem;line-height:2.1;">
+                  <div style="font-size:0.58rem;color:var(--muted);margin-bottom:0.3rem;">TD(λ) — online</div>
+                  $\delta_t = r_t + \gamma\,v(s_{t+1}) - v(s_t)$<br>
+                  $e_t(s_t) \mathrel{+}= 1$<br>
+                  <span style="color:var(--muted);">for all $s$:</span><br>
+                  &ensp;$v(s) \mathrel{+}= \alpha\,\delta_t\,e_t(s)$<br>
+                  &ensp;$e_t(s) \mathrel{*}= \gamma\lambda$
+                </div>
+                <!-- trace accumulation for one state -->
+                <svg viewBox="0 0 220 115" style="width:100%;margin-top:0.2rem;" xmlns="http://www.w3.org/2000/svg">
+                  <text x="110" y="10" text-anchor="middle" fill="#f59e0b" font-size="7" font-family="monospace" opacity="0.65">e(s) — trace for one state</text>
+                  <!-- baseline -->
+                  <line x1="15" y1="90" x2="205" y2="90" stroke="#1e2a38" stroke-width="1"/>
+                  <!-- t-4: tiny -->
+                  <rect x="25" y="87" width="10" height="3" rx="1" fill="#f59e0b" opacity="0.2"/>
+                  <text x="30" y="101" text-anchor="middle" fill="#4a5e72" font-size="6.5" font-family="monospace">t-4</text>
+                  <!-- t-3: visit ★ → e=1 -->
+                  <rect x="65" y="48" width="10" height="42" rx="1" fill="#f59e0b" opacity="0.88"/>
+                  <text x="70" y="42" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="monospace">★</text>
+                  <text x="70" y="101" text-anchor="middle" fill="#f59e0b" font-size="6.5" font-family="monospace">t-3</text>
+                  <!-- decay t-3→t-2 -->
+                  <line x1="79" y1="67" x2="101" y2="72" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+                  <text x="90" y="61" text-anchor="middle" fill="#f59e0b" font-size="6" font-family="monospace" opacity="0.5">×γλ</text>
+                  <!-- t-2: decayed -->
+                  <rect x="105" y="60" width="10" height="30" rx="1" fill="#f59e0b" opacity="0.6"/>
+                  <text x="110" y="101" text-anchor="middle" fill="#7a8fa6" font-size="6.5" font-family="monospace">t-2</text>
+                  <!-- decay t-2→t-1 -->
+                  <line x1="119" y1="72" x2="141" y2="67" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+                  <!-- t-1: visit ★ → e=1 -->
+                  <rect x="145" y="48" width="10" height="42" rx="1" fill="#f59e0b" opacity="0.88"/>
+                  <text x="150" y="42" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="monospace">★</text>
+                  <text x="150" y="101" text-anchor="middle" fill="#f59e0b" font-size="6.5" font-family="monospace">t-1</text>
+                  <!-- decay t-1→t -->
+                  <line x1="159" y1="67" x2="181" y2="72" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+                  <text x="170" y="61" text-anchor="middle" fill="#f59e0b" font-size="6" font-family="monospace" opacity="0.5">×γλ</text>
+                  <!-- t: decayed -->
+                  <rect x="185" y="60" width="10" height="30" rx="1" fill="#f59e0b" opacity="0.6"/>
+                  <text x="190" y="101" text-anchor="middle" fill="#7a8fa6" font-size="6.5" font-family="monospace">t</text>
+                  <!-- time arrow -->
+                  <text x="207" y="93" fill="#334155" font-size="11" font-family="monospace">→</text>
+                </svg>
+                <div style="font-size:0.6rem;color:var(--muted);border-left:2px solid var(--accent2);padding-left:0.6rem;line-height:1.8;margin-top:0.3rem;">
+                  <strong style="color:#e2e8f0;">forward = backward</strong><br>
+                  same update as $G_t^\lambda$, online
+                </div>
+              </div>
+
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
@@ -1117,6 +1887,481 @@
       else if (indexh !== 2 && document.fullscreenElement)
         document.exitFullscreen().catch(() => {});
     });
+
+    // Policy Iteration cascade animation
+    (function () {
+      const GIF_MS = 20 * 120;
+      const STEP   = 400;
+      let   pending = [];
+      const buffers = {}; // preloaded raw GIF bytes keyed by element id
+
+      // Preload GIF bytes at page load so blob URLs can be created instantly
+      ['piit-gif-0', 'piit-gif-1', 'piit-gif-star'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.dataset.src) return;
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { buffers[id] = buf; })
+          .catch(() => {});
+      });
+
+      function fade(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.opacity = '1';
+      }
+
+      function startGif(gifId) {
+        const img = document.getElementById(gifId);
+        if (!img) return;
+        const buf = buffers[gifId];
+        if (buf) {
+          // Fresh blob URL each call → browser has no history → always frame 0
+          if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+          const url = URL.createObjectURL(new Blob([buf], { type: 'image/gif' }));
+          img.src = url;
+          pending.push(setTimeout(() => {
+            img.src = img.dataset.last;
+            URL.revokeObjectURL(url);
+          }, GIF_MS));
+        } else {
+          // Fallback (file:// protocol or fetch not yet done)
+          img.src = img.dataset.src;
+          pending.push(setTimeout(() => { img.src = img.dataset.last; }, GIF_MS));
+        }
+      }
+
+      function reset() {
+        pending.forEach(clearTimeout);
+        pending = [];
+        ['piit-arr-0','piit-arr-1','piit-arr-star',
+         'piit-conn-01','piit-conn-12',
+         'piit-img-1','piit-img-2','piit-img-star',
+         'piit-col-1','piit-col-2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.opacity = '0';
+        });
+        startGif('piit-gif-0');
+      }
+
+      function after(ms, fn) { pending.push(setTimeout(fn, ms)); }
+
+      function runCascade() {
+        after(GIF_MS,            () => { fade('piit-arr-0'); });
+        after(GIF_MS + STEP,     () => { fade('piit-img-1'); });
+        after(GIF_MS + STEP*2,   () => { fade('piit-conn-01'); fade('piit-col-1'); startGif('piit-gif-1'); });
+        after(GIF_MS*2 + STEP*2, () => { fade('piit-arr-1'); });
+        after(GIF_MS*2 + STEP*3, () => { fade('piit-img-2'); });
+        after(GIF_MS*2 + STEP*4, () => { fade('piit-conn-12'); fade('piit-col-2'); startGif('piit-gif-star'); });
+        after(GIF_MS*3 + STEP*4, () => { fade('piit-arr-star'); });
+        after(GIF_MS*3 + STEP*5, () => { fade('piit-img-star'); });
+      }
+
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (currentSlide && currentSlide.querySelector('#piit-wrap')) {
+          reset();
+          runCascade();
+        }
+      });
+    })();
+
+    // ── PI vs VI comparison GIF restart ──────────────────────────────────────
+    (function () {
+      const cmpBufs = {};
+
+      ['cmp-gif-pi', 'cmp-gif-vi'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.dataset.src) return;
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { cmpBufs[id] = buf; })
+          .catch(() => {});
+      });
+
+      function startCmpGif(id) {
+        const img = document.getElementById(id);
+        if (!img) return;
+        const buf = cmpBufs[id];
+        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+        if (buf) {
+          img.src = URL.createObjectURL(new Blob([buf], { type: 'image/gif' }));
+        } else {
+          img.src = img.dataset.src;
+        }
+      }
+
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (currentSlide && currentSlide.querySelector('#cmp-wrap')) {
+          startCmpGif('cmp-gif-pi');
+          startCmpGif('cmp-gif-vi');
+        }
+      });
+    })();
+
+    // ── TD(0) GIF restart ─────────────────────────────────────────────────────
+    (function () {
+      const el = document.getElementById('tdv-gif');
+      let tdvBuf = null;
+      if (el && el.dataset.src) {
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { tdvBuf = buf; })
+          .catch(() => {});
+      }
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (!currentSlide || !currentSlide.querySelector('#tdv-wrap')) return;
+        const img = document.getElementById('tdv-gif');
+        if (!img) return;
+        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+        if (tdvBuf) {
+          img.src = URL.createObjectURL(new Blob([tdvBuf], { type: 'image/gif' }));
+        } else {
+          img.src = img.dataset.src;
+        }
+      });
+    })();
+
+    // ── TD(0) Q GIF restart ────────────────────────────────────────────────────
+    (function () {
+      const el = document.getElementById('tdq-gif');
+      let tdqBuf = null;
+      if (el && el.dataset.src) {
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { tdqBuf = buf; })
+          .catch(() => {});
+      }
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (!currentSlide || !currentSlide.querySelector('#tdq-wrap')) return;
+        const img = document.getElementById('tdq-gif');
+        if (!img) return;
+        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+        if (tdqBuf) {
+          img.src = URL.createObjectURL(new Blob([tdqBuf], { type: 'image/gif' }));
+        } else {
+          img.src = img.dataset.src;
+        }
+      });
+    })();
+
+    // ── Q-learning GIF restart ─────────────────────────────────────────────────
+    (function () {
+      const el = document.getElementById('ql-gif');
+      let qlBuf = null;
+      if (el && el.dataset.src) {
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { qlBuf = buf; })
+          .catch(() => {});
+      }
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (!currentSlide || !currentSlide.querySelector('#ql-wrap')) return;
+        const img = document.getElementById('ql-gif');
+        if (!img) return;
+        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+        if (qlBuf) {
+          img.src = URL.createObjectURL(new Blob([qlBuf], { type: 'image/gif' }));
+        } else {
+          img.src = img.dataset.src;
+        }
+      });
+    })();
+
+    // ── n-step horizon animation — JS-generated tree ─────────────────────────
+    (function () {
+      const DEPTH  = 4;       // max n; change here to grow the tree
+      const CYAN   = '#00d4ff';
+      const VIOLET = '#a78bfa';
+      const DIM    = '#1e2a38';
+      const BG     = '#070b14';
+
+      // Sampled-path node positions (x decreases as depth grows, leftward)
+      const SX = [240, 145, 83, 50, 33];
+      const SY = [15,   78, 139, 196, 248];
+      const SR = [17,   15,  13,  11,   9];
+
+      // Unchosen sibling positions (one per transition, to the right)
+      const UX = [355, 208, 122, 72];
+      const UR = [ 13,  11,   9,  8];
+
+      // Reward labels for sampled path edges
+      const RLABELS = ['r\u209C', 'r\u209C\u208A\u2081', 'r\u209C\u208A\u2082', 'r\u209C\u208A\u2083'];
+      // State labels
+      const SLABELS = ['s\u209C', 's\u209C\u208A\u2081', 's\u209C\u208A\u2082', 's\u209C\u208A\u2083', 's\u209C\u208A\u2084'];
+
+      function svgEl(tag, attrs) {
+        const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+        return e;
+      }
+
+      function buildTree() {
+        const svg = document.getElementById('nstep-svg');
+        if (!svg || svg.children.length > 0) return;
+
+        // 1. Subtree triangles below unchosen nodes (d = 0..DEPTH-2)
+        for (let d = 0; d < DEPTH - 1; d++) {
+          const cx = UX[d], cy = SY[d + 1], r = UR[d];
+          const ty = cy + r + 3, tw = 20 - d * 3, th = 22 - d * 3;
+          svg.appendChild(svgEl('polygon', {
+            id: `ntri${d}`,
+            points: `${cx},${ty} ${cx - tw},${ty + th} ${cx + tw},${ty + th}`,
+            fill: 'rgba(167,139,250,0.07)', stroke: VIOLET,
+            'stroke-width': 0.8, opacity: 0,
+          }));
+        }
+
+        // 2. Background dim edges
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('line', { x1: SX[d], y1: SY[d], x2: SX[d+1], y2: SY[d+1], stroke: DIM, 'stroke-width': 1.5 }));
+          svg.appendChild(svgEl('line', { x1: SX[d], y1: SY[d], x2: UX[d],   y2: SY[d+1], stroke: DIM, 'stroke-width': 1.5 }));
+        }
+
+        // 3. Sampled-path colored edges (animated)
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('line', {
+            id: `nts${d}`,
+            x1: SX[d], y1: SY[d], x2: SX[d+1], y2: SY[d+1],
+            stroke: CYAN, 'stroke-width': 2.5, opacity: 0,
+          }));
+        }
+
+        // 4. Unchosen edges (violet dashed, animated)
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('line', {
+            id: `ntu${d}`,
+            x1: SX[d], y1: SY[d], x2: UX[d], y2: SY[d+1],
+            stroke: VIOLET, 'stroke-width': 1.5, 'stroke-dasharray': '4,3', opacity: 0,
+          }));
+        }
+
+        // 5. Reward labels (on sampled edges)
+        for (let d = 0; d < DEPTH; d++) {
+          const mx = (SX[d] + SX[d+1]) / 2 - 12, my = (SY[d] + SY[d+1]) / 2;
+          const t = svgEl('text', { id: `ntr${d}`, x: mx, y: my, fill: CYAN, 'font-size': 10, 'font-family': 'monospace', opacity: 0 });
+          t.textContent = RLABELS[d];
+          svg.appendChild(t);
+        }
+
+        // 6. Sampled-path circles + labels
+        for (let d = 0; d <= DEPTH; d++) {
+          svg.appendChild(svgEl('circle', { id: `ntns${d}`, cx: SX[d], cy: SY[d], r: SR[d], fill: BG, stroke: DIM, 'stroke-width': 2 }));
+          const t = svgEl('text', { x: SX[d], y: SY[d] + 4, 'text-anchor': 'middle', fill: '#7a8fa6', 'font-size': Math.max(7, 10 - d), 'font-family': 'monospace' });
+          t.textContent = SLABELS[d];
+          svg.appendChild(t);
+        }
+
+        // 7. Unchosen sibling circles (animated)
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('circle', { id: `ntnu${d}`, cx: UX[d], cy: SY[d+1], r: UR[d], fill: BG, stroke: DIM, 'stroke-width': 1.5, opacity: 0 }));
+        }
+
+        // 8. Bootstrap rects + labels (one per sampled depth 1..DEPTH)
+        for (let d = 1; d <= DEPTH; d++) {
+          const bx = SX[d] - 24, by = SY[d] + SR[d] + 4;
+          svg.appendChild(svgEl('rect', { id: `ntboot${d}`, x: bx, y: by, width: 48, height: 14, rx: 3, fill: 'rgba(167,139,250,0.14)', stroke: VIOLET, 'stroke-width': 1.2, opacity: 0 }));
+          const bt = svgEl('text', { id: `ntbootl${d}`, x: SX[d], y: by + 10, 'text-anchor': 'middle', fill: VIOLET, 'font-size': 8, 'font-family': 'monospace', opacity: 0 });
+          bt.textContent = 'v\u2096(s\u209C\u208A\u2099)';
+          svg.appendChild(bt);
+        }
+
+        // 9. "other trajectories" annotation
+        const ann = svgEl('text', { id: 'ntann', x: UX[0] + 16, y: SY[1] - 18, fill: VIOLET, 'font-size': 9, 'font-family': 'monospace', opacity: 0 });
+        ann.textContent = '\u2190 other trajectories';
+        svg.appendChild(ann);
+      }
+
+      // Animation steps
+      const STEPS = [
+        { n: '1', label: 'TD(0)',       lit: 1, mc: false },
+        { n: '2', label: 'n-step',      lit: 2, mc: false },
+        { n: '3', label: 'n-step',      lit: 3, mc: false },
+        { n: '4', label: 'n-step',      lit: 4, mc: false },
+        { n: '\u221e', label: 'Monte Carlo', lit: 4, mc: true },
+      ];
+
+      function op(id, v) { const e = document.getElementById(id); if (e) e.setAttribute('opacity', v); }
+
+      function applyStep(s) {
+        const { n, label, lit, mc } = s;
+        for (let d = 0; d < DEPTH; d++) {
+          const on = d < lit;
+          op(`nts${d}`, on ? 1 : 0);
+          op(`ntr${d}`, on ? 1 : 0);
+          op(`ntu${d}`, on ? 0.75 : 0);
+          op(`ntnu${d}`, on ? 0.55 : 0);
+          if (d < DEPTH - 1) op(`ntri${d}`, on ? 1 : 0);
+        }
+        for (let d = 0; d <= DEPTH; d++) {
+          const e = document.getElementById(`ntns${d}`);
+          if (e) e.setAttribute('stroke', d <= lit ? CYAN : DIM);
+        }
+        const SUB = ['\u2080','\u2081','\u2082','\u2083','\u2084','\u2085'];
+        for (let d = 1; d <= DEPTH; d++) {
+          const show = !mc && d === lit ? 1 : 0;
+          op(`ntboot${d}`, show);
+          op(`ntbootl${d}`, show);
+          if (show) {
+            const lbl = document.getElementById(`ntbootl${d}`);
+            if (lbl) lbl.textContent = 'v\u2096(s\u209C\u208A' + SUB[d] + ')';
+          }
+        }
+        op('ntann', lit > 0 ? 1 : 0);
+        document.getElementById('nstep-n-lbl').textContent = n;
+        const algoEl = document.getElementById('nstep-algo-lbl');
+        algoEl.textContent = label;
+        algoEl.style.color = mc ? 'var(--accent2)' : (n === '1' ? 'var(--accent)' : '#e2e8f0');
+      }
+
+      let stepIdx = 0, timer = null;
+      function startAnim() {
+        stopAnim(); buildTree(); stepIdx = 0; applyStep(STEPS[0]);
+        timer = setInterval(() => { stepIdx = (stepIdx + 1) % STEPS.length; applyStep(STEPS[stepIdx]); }, 2000);
+      }
+      function stopAnim() { if (timer) { clearInterval(timer); timer = null; } }
+
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (currentSlide && currentSlide.querySelector('#nstep-wrap')) startAnim();
+        else stopAnim();
+      });
+    })();
+
+    // ── λ-return animation ─────────────────────────────────────────────────────
+    (function () {
+      const DEPTH = 4;
+      const CYAN = '#00d4ff', VIOLET = '#a78bfa', DIM = '#1e2a38', BG = '#070b14';
+      const SX = [240, 145, 83, 50, 33];
+      const SY = [15, 78, 139, 196, 248];
+      const SR = [17, 15, 13, 11, 9];
+      const UX = [355, 208, 122, 72];
+      const UR = [13, 11, 9, 8];
+      const RLABELS = ['r\u209C', 'r\u209C\u208A\u2081', 'r\u209C\u208A\u2082', 'r\u209C\u208A\u2083'];
+      const SLABELS = ['s\u209C', 's\u209C\u208A\u2081', 's\u209C\u208A\u2082', 's\u209C\u208A\u2083', 's\u209C\u208A\u2084'];
+      const SUB = ['\u2080', '\u2081', '\u2082', '\u2083', '\u2084'];
+
+      function svgEl(tag, attrs) {
+        const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+        return e;
+      }
+
+      function rawW(d, lam) { return (1 - lam) * Math.pow(lam, d - 1); }
+
+      function normWeights(lam) {
+        const ws = Array.from({ length: DEPTH }, (_, i) => rawW(i + 1, lam));
+        const mx = Math.max(...ws);
+        return mx > 0 ? ws.map(w => w / mx) : ws;
+      }
+
+      function buildTree() {
+        const svg = document.getElementById('lam-svg');
+        if (!svg || svg.children.length > 0) return;
+
+        for (let d = 0; d < DEPTH - 1; d++) {
+          const tx = UX[d], ty = SY[d + 1];
+          svg.appendChild(svgEl('polygon', { points: `${tx},${ty} ${tx-20},${ty+42} ${tx+25},${ty+42}`, fill: 'rgba(167,139,250,0.07)', stroke: VIOLET, 'stroke-width': 0.8, opacity: 0.25 }));
+        }
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('line', { x1: SX[d], y1: SY[d], x2: SX[d+1], y2: SY[d+1], stroke: DIM, 'stroke-width': 1.5 }));
+          svg.appendChild(svgEl('line', { x1: SX[d], y1: SY[d], x2: UX[d],   y2: SY[d+1], stroke: DIM, 'stroke-width': 1.5 }));
+        }
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('line', { id: `lns${d}`, x1: SX[d], y1: SY[d], x2: SX[d+1], y2: SY[d+1], stroke: CYAN, 'stroke-width': 2.5, opacity: 1 }));
+          svg.appendChild(svgEl('line', { id: `lnu${d}`, x1: SX[d], y1: SY[d], x2: UX[d], y2: SY[d+1], stroke: VIOLET, 'stroke-width': 1.5, 'stroke-dasharray': '4,3', opacity: 0.3 }));
+        }
+        for (let d = 0; d < DEPTH; d++) {
+          const mx = (SX[d] + SX[d+1]) / 2 - 12, my = (SY[d] + SY[d+1]) / 2;
+          const t = svgEl('text', { id: `lnr${d}`, x: mx, y: my, fill: CYAN, 'font-size': 10, 'font-family': 'monospace', opacity: 1 });
+          t.textContent = RLABELS[d];
+          svg.appendChild(t);
+        }
+        for (let d = 0; d <= DEPTH; d++) {
+          svg.appendChild(svgEl('circle', { id: `lnns${d}`, cx: SX[d], cy: SY[d], r: SR[d], fill: BG, stroke: CYAN, 'stroke-width': 2 }));
+          const t = svgEl('text', { x: SX[d], y: SY[d] + 4, 'text-anchor': 'middle', fill: '#7a8fa6', 'font-size': Math.max(7, 10 - d), 'font-family': 'monospace' });
+          t.textContent = SLABELS[d];
+          svg.appendChild(t);
+        }
+        for (let d = 0; d < DEPTH; d++) {
+          svg.appendChild(svgEl('circle', { id: `lnnu${d}`, cx: UX[d], cy: SY[d+1], r: UR[d], fill: BG, stroke: VIOLET, 'stroke-width': 1.5, opacity: 0.3 }));
+        }
+        for (let d = 1; d <= DEPTH; d++) {
+          const bx = SX[d] - 26, by = SY[d] + SR[d] + 4;
+          svg.appendChild(svgEl('rect', { id: `lnboot${d}`, x: bx, y: by, width: 52, height: 14, rx: 3, fill: 'rgba(167,139,250,0.14)', stroke: VIOLET, 'stroke-width': 1.2, opacity: 1 }));
+          const bt = svgEl('text', { id: `lnbootl${d}`, x: SX[d], y: by + 10, 'text-anchor': 'middle', fill: VIOLET, 'font-size': 8, 'font-family': 'monospace', opacity: 1 });
+          bt.textContent = 'v\u2096(s\u209C\u208A' + SUB[d] + ')';
+          svg.appendChild(bt);
+        }
+      }
+
+      function op(id, v) { const e = document.getElementById(id); if (e) e.setAttribute('opacity', String(Math.max(0, Math.min(1, v)))); }
+
+      const LAMBDAS = [
+        { lam: 0,    label: 'TD(0)',       color: 'var(--accent)' },
+        { lam: 0.5,  label: 'TD(\u03bb)',  color: '#e2e8f0' },
+        { lam: 0.8,  label: 'TD(\u03bb)',  color: '#e2e8f0' },
+        { lam: 0.95, label: 'TD(\u03bb)',  color: '#e2e8f0' },
+        { lam: 1,    label: 'Monte Carlo', color: 'var(--accent2)' },
+      ];
+
+      function applyLambda({ lam, label, color }) {
+        const isMC = lam >= 1;
+        const accentColor = isMC ? 'var(--accent2)' : 'var(--accent)';
+
+        if (isMC) {
+          for (let d = 0; d < DEPTH; d++) {
+            op(`lns${d}`, 1); op(`lnr${d}`, 1);
+            op(`lnu${d}`, 0.5); op(`lnnu${d}`, 0.4);
+          }
+          for (let d = 0; d <= DEPTH; d++) {
+            const e = document.getElementById(`lnns${d}`); if (e) e.setAttribute('stroke', CYAN);
+          }
+          for (let d = 1; d <= DEPTH; d++) { op(`lnboot${d}`, 0); op(`lnbootl${d}`, 0); }
+          for (let d = 1; d <= DEPTH; d++) {
+            const bar = document.getElementById(`lnwbar${d}`);
+            if (bar) { bar.style.width = '60px'; bar.style.background = accentColor; }
+          }
+        } else {
+          const ws = normWeights(lam);
+          const w1 = rawW(1, lam);
+          for (let d = 0; d < DEPTH; d++) {
+            const w = ws[d];
+            op(`lns${d}`, Math.max(0.08, w)); op(`lnr${d}`, Math.max(0.05, w));
+            op(`lnu${d}`, Math.max(0.04, w * 0.55)); op(`lnnu${d}`, Math.max(0.04, w * 0.45));
+          }
+          for (let d = 0; d <= DEPTH; d++) {
+            const e = document.getElementById(`lnns${d}`);
+            if (e) e.setAttribute('stroke', (d === 0 ? 1 : ws[d-1]) > 0.35 ? CYAN : DIM);
+          }
+          for (let d = 1; d <= DEPTH; d++) {
+            const w = ws[d-1];
+            op(`lnboot${d}`, Math.max(0.06, w * 0.9)); op(`lnbootl${d}`, Math.max(0.06, w * 0.9));
+          }
+          for (let d = 1; d <= DEPTH; d++) {
+            const bar = document.getElementById(`lnwbar${d}`);
+            if (bar) {
+              bar.style.width = Math.max(1, (w1 > 0 ? rawW(d, lam) / w1 : 0) * 60) + 'px';
+              bar.style.background = accentColor;
+            }
+          }
+        }
+
+        const lblEl = document.getElementById('lam-lbl');
+        if (lblEl) lblEl.textContent = isMC ? '1' : String(lam);
+        const algoEl = document.getElementById('lam-algo');
+        if (algoEl) { algoEl.textContent = label; algoEl.style.color = color; }
+      }
+
+      let lamIdx = 0, lamTimer = null;
+      function startLamAnim() {
+        stopLamAnim(); buildTree(); lamIdx = 0; applyLambda(LAMBDAS[0]);
+        lamTimer = setInterval(() => { lamIdx = (lamIdx + 1) % LAMBDAS.length; applyLambda(LAMBDAS[lamIdx]); }, 2000);
+      }
+      function stopLamAnim() { if (lamTimer) { clearInterval(lamTimer); lamTimer = null; } }
+
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (currentSlide && currentSlide.querySelector('#lam-wrap')) startLamAnim();
+        else stopLamAnim();
+      });
+    })();
 
     // Wheel: always navigate between major sections
     let wheelLocked = false;
