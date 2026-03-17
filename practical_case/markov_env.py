@@ -20,6 +20,32 @@ Visualisation (return go.Figure):
     rho_animation(P, n_frames=120)
     mixing_plot(policies: dict[str, ndarray])
     occupation_plot(P, gammas=(0.5, 0.9, 0.99))
+
+Reward:
+    GOAL_CELL, GOAL_STATE
+    default_reward()            -> r  (N,)
+
+Dynamic Programming:
+    policy_eval(pi, r, gamma)   -> V^pi  (N,)
+    greedy_policy(V, r, gamma)  -> pi    (N, A_DIM)
+    policy_iteration(r, gamma)  -> [(pi_k, V_k)]
+    value_iteration(r, gamma)   -> [V_0, V_1, ..., V_*]
+
+Visualisation (DP):
+    show_value(V, pi=None, title='')
+    vi_pi_convergence(vi_hist, pi_hist, V_star)
+
+Model-Free:
+    td_eval(pi, r, gamma, ...)                       -> [(ep, V_snapshot)]
+    td_convergence(pi, r, gamma, V_ref, alphas, ...) -> {label: error_curve}
+    sarsa(r, gamma, ...)                             -> (Q, episode_returns)
+    q_learning(r, gamma, ...)                        -> (Q, episode_returns)
+    policy_from_q(Q)                                 -> pi  (N, A_DIM)
+    td_lambda_convergence(pi, r, gamma, V_ref, ...)  -> {label: error_curve}
+
+Visualisation (Model-Free):
+    show_td_snapshots(snapshots, V_true)
+    show_mf_convergence(curves, ylabel, title, smooth)
 """
 
 from __future__ import annotations
@@ -148,6 +174,18 @@ def tv_curve(P: np.ndarray, n_steps: int = 150) -> np.ndarray:
     for _ in range(n_steps):
         tv.append(0.5 * np.abs(mu - mu_inf).sum())
         mu = PT @ mu
+    return np.array(tv)
+
+
+def tv_incremental_curve(P: np.ndarray, n_steps: int = 150) -> np.ndarray:
+    """TV distance ||mu_{t+1} - mu_t||_1 / 2 from a Dirac at s0=(19,0)."""
+    mu, PT = np.zeros(N), P.T
+    mu[19*GRID] = 1.0
+    tv = []
+    for _ in range(n_steps):
+        mu_next = PT @ mu
+        tv.append(0.5 * np.abs(mu_next - mu).sum())
+        mu = mu_next
     return np.array(tv)
 
 def occupation(P: np.ndarray, gamma: float, tol: float = 1e-6) -> np.ndarray:
@@ -293,21 +331,32 @@ def rho_animation(P: np.ndarray, n_frames: int = 120) -> go.Figure:
 
 
 def mixing_plot(policies: dict[str, np.ndarray]) -> go.Figure:
-    """TV distance ||mu_t - mu_inf||_1/2 for each policy."""
-    fig = go.Figure()
+    """Two subplots: TV(mu_t, mu_inf) and TV(mu_{t+1}, mu_t) for each policy."""
+    from plotly.subplots import make_subplots
+    fig = make_subplots(rows=1, cols=2,
+                        subplot_titles=["TV(μ<sub>t</sub>, μ<sub>∞</sub>)",
+                                        "TV(μ<sub>t+1</sub>, μ<sub>t</sub>)"])
     for (name, pi), color in zip(policies.items(), _POLICY_COLORS):
         P = induced_chain(pi)
         fig.add_trace(go.Scatter(y=tv_curve(P), mode="lines", name=name,
-                                 line=dict(color=color, width=2)))
+                                 line=dict(color=color, width=2)),
+                      row=1, col=1)
+        fig.add_trace(go.Scatter(y=tv_incremental_curve(P), mode="lines",
+                                 name=name, showlegend=False,
+                                 line=dict(color=color, width=2)),
+                      row=1, col=2)
+    fig.update_xaxes(title_text="step t", color=_MUTED, gridcolor="#1e2a3a")
+    fig.update_yaxes(color=_MUTED, gridcolor="#1e2a3a")
     fig.update_layout(
         paper_bgcolor=_DARK, plot_bgcolor="#0d1220", font_color=_FG,
-        xaxis=dict(title="step t", color=_MUTED, gridcolor="#1e2a3a"),
-        yaxis=dict(title="TV(μ_t, μ_∞)", color=_MUTED, gridcolor="#1e2a3a"),
         title=dict(text="Mixing time", font_color=_FG),
         legend=dict(bgcolor="#0d1220", bordercolor="#1e2a3a"),
-        width=700, height=400, margin=dict(l=10, r=10, t=50, b=10)
+        width=900, height=400, margin=dict(l=10, r=10, t=50, b=10)
     )
     return fig
+
+
+_VALUE_CS = [[0.0, "#070b14"], [0.4, "#0d3d6b"], [0.75, "#f59e0b"], [1.0, "#fffbeb"]]
 
 
 def occupation_plot(P: np.ndarray,
@@ -333,5 +382,371 @@ def occupation_plot(P: np.ndarray,
         paper_bgcolor=_DARK, plot_bgcolor=_DARK, font_color=_FG,
         title=dict(text="Discounted occupation measure d^π_γ", font_color=_FG),
         width=1100, height=420, margin=dict(l=5, r=5, t=50, b=5)
+    )
+    return fig
+
+
+# ── Goal & reward ──────────────────────────────────────────────────────────────
+GOAL_CELL  = (2, 17)
+GOAL_STATE = GOAL_CELL[0] * GRID + GOAL_CELL[1]
+
+
+def default_reward() -> np.ndarray:
+    """Sparse reward: +1 at GOAL_STATE, 0 elsewhere."""
+    r = np.zeros(N)
+    r[GOAL_STATE] = 1.0
+    return r
+
+
+# ── Dynamic Programming ────────────────────────────────────────────────────────
+def policy_eval(
+    pi: np.ndarray, r: np.ndarray, gamma: float,
+    tol: float = 1e-6, max_iter: int = 5000,
+) -> np.ndarray:
+    """Iterative policy evaluation — V^π via Bellman backups."""
+    P = induced_chain(pi, alpha=1.0, eps=0.0)
+    V = np.zeros(N)
+    for _ in range(max_iter):
+        V_new = r + gamma * (P @ V)
+        if np.max(np.abs(V_new - V)) < tol:
+            return V_new
+        V = V_new
+    return V
+
+
+def greedy_policy(V: np.ndarray, r: np.ndarray, gamma: float) -> np.ndarray:
+    """Greedy policy: π(s) = argmax_a [r(s) + γ Σ_{s'} P(s'|s,a) V(s')]."""
+    P_sa = _kernel()                                       # (N, N, A_DIM)
+    Q    = r[:, None] + gamma * np.einsum("sna,n->sa", P_sa, V)
+    pi   = np.zeros((N, A_DIM))
+    pi[np.arange(N), np.argmax(Q, axis=1)] = 1.0
+    for s in WALL_STATES:
+        pi[s] = 1.0 / A_DIM
+    return pi
+
+
+def policy_iteration(
+    r: np.ndarray, gamma: float,
+    tol: float = 1e-6, max_iter: int = 50,
+) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Policy Iteration. Returns [(π_k, V^{π_k})] for each step."""
+    pi      = np.ones((N, A_DIM)) / A_DIM
+    history: list[tuple[np.ndarray, np.ndarray]] = []
+    for _ in range(max_iter):
+        V      = policy_eval(pi, r, gamma, tol)
+        history.append((pi.copy(), V.copy()))
+        pi_new = greedy_policy(V, r, gamma)
+        if np.allclose(pi_new, pi):
+            break
+        pi = pi_new
+    return history
+
+
+def value_iteration(
+    r: np.ndarray, gamma: float,
+    tol: float = 1e-6, max_iter: int = 2000,
+) -> list[np.ndarray]:
+    """Value Iteration. Returns [V_0, V_1, ..., V_*]."""
+    P_sa    = _kernel()
+    V       = np.zeros(N)
+    history = [V.copy()]
+    for _ in range(max_iter):
+        Q     = r[:, None] + gamma * np.einsum("sna,n->sa", P_sa, V)
+        V_new = Q.max(axis=1)
+        history.append(V_new.copy())
+        if np.max(np.abs(V_new - V)) < tol:
+            break
+        V = V_new
+    return history
+
+
+# ── Visualisation (DP) ────────────────────────────────────────────────────────
+def show_value(
+    V: np.ndarray, pi: np.ndarray | None = None, title: str = "",
+) -> go.Figure:
+    """Value heatmap + goal marker + optional policy arrows."""
+    traces = [
+        go.Heatmap(z=V.reshape(GRID, GRID), colorscale=_VALUE_CS,
+                   showscale=True, hoverinfo="skip"),
+        go.Heatmap(z=_wall_z(), colorscale=_WALL_CS,
+                   showscale=False, zmin=0, zmax=1, hoverinfo="skip"),
+        go.Scatter(x=[GOAL_CELL[1]], y=[GOAL_CELL[0]], mode="markers",
+                   marker=dict(symbol="star", size=16, color=_WARM),
+                   showlegend=False, hoverinfo="skip"),
+    ]
+    if pi is not None:
+        P_pi = induced_chain(pi, alpha=1.0, eps=0.0)
+        traces += _quiver(*_mean_arrows(P_pi))
+    fig = go.Figure(data=traces)
+    fig.update_layout(**_grid_layout(title))
+    return fig
+
+
+def vi_pi_convergence(
+    vi_hist: list[np.ndarray],
+    pi_hist: list[tuple[np.ndarray, np.ndarray]],
+    V_star: np.ndarray,
+) -> go.Figure:
+    """‖V_k − V*‖∞ convergence curves for VI and PI."""
+    vi_err = [float(np.max(np.abs(V - V_star))) for V in vi_hist]
+    pi_err = [float(np.max(np.abs(V - V_star))) for _, V in pi_hist]
+    fig = go.Figure([
+        go.Scatter(y=vi_err, mode="lines", name="Value Iteration",
+                   line=dict(color=_ACCENT, width=2)),
+        go.Scatter(y=pi_err, mode="lines+markers", name="Policy Iteration",
+                   line=dict(color=_WARM, width=2), marker=dict(size=7)),
+    ])
+    fig.update_layout(
+        paper_bgcolor=_DARK, plot_bgcolor="#0d1220", font_color=_FG,
+        title=dict(text="Convergence  ‖V<sub>k</sub> − V*‖<sub>∞</sub>",
+                   font_color=_FG),
+        xaxis=dict(title="iteration k", color=_MUTED, gridcolor="#1e2a3a"),
+        yaxis=dict(title="error (log scale)", type="log",
+                   color=_MUTED, gridcolor="#1e2a3a"),
+        legend=dict(bgcolor="#0d1220", bordercolor="#1e2a3a"),
+        width=700, height=380, margin=dict(l=10, r=10, t=50, b=10),
+    )
+    return fig
+
+
+# ── Model-Free helpers ─────────────────────────────────────────────────────────
+_NEXT_SA: np.ndarray | None = None
+_FREE_ARR: np.ndarray | None = None
+
+
+def _ns_matrix() -> np.ndarray:
+    """Deterministic next-state table — shape (N, A_DIM), dtype int."""
+    global _NEXT_SA
+    if _NEXT_SA is None:
+        _NEXT_SA = np.argmax(_kernel(), axis=1)  # argmax over s' axis
+    return _NEXT_SA
+
+
+def _free_arr() -> np.ndarray:
+    """States that are neither walls nor the goal."""
+    global _FREE_ARR
+    if _FREE_ARR is None:
+        _FREE_ARR = np.array([s for s in range(N)
+                               if s not in WALL_STATES and s != GOAL_STATE])
+    return _FREE_ARR
+
+
+def _td0_run(
+    pi: np.ndarray, r: np.ndarray, gamma: float,
+    n_episodes: int, alpha: float, max_steps: int,
+    V_ref: np.ndarray | None,
+    checkpoints: set[int],
+    seed: int,
+) -> tuple[list[tuple[int, np.ndarray]], np.ndarray | None]:
+    """Internal TD(0) runner — continuing task, reward r[s] at current state."""
+    rng   = np.random.default_rng(seed)
+    NS    = _ns_matrix()
+    free  = _free_arr()
+    V     = np.zeros(N)
+    snaps: list[tuple[int, np.ndarray]] = []
+    errs  = np.empty(n_episodes) if V_ref is not None else None
+    for ep in range(1, n_episodes + 1):
+        s = int(rng.choice(free))
+        for _ in range(max_steps):
+            a  = int(rng.choice(A_DIM, p=pi[s]))
+            s2 = NS[s, a]
+            V[s] += alpha * (r[s] + gamma * V[s2] - V[s])
+            s = s2
+        if ep in checkpoints:
+            snaps.append((ep, V.copy()))
+        if errs is not None:
+            errs[ep - 1] = float(np.max(np.abs(V - V_ref)))
+    return snaps, errs
+
+
+# ── Model-Free — Policy Evaluation ────────────────────────────────────────────
+def td_eval(
+    pi: np.ndarray, r: np.ndarray, gamma: float,
+    n_episodes: int = 3000, alpha: float = 0.05, max_steps: int = 500,
+    checkpoints: tuple[int, ...] = (100, 500, 1500, 3000),
+    seed: int = 42,
+) -> list[tuple[int, np.ndarray]]:
+    """TD(0) policy evaluation. Returns [(episode, V_snapshot)] at checkpoints."""
+    snaps, _ = _td0_run(pi, r, gamma, n_episodes, alpha, max_steps,
+                         None, set(checkpoints), seed)
+    return snaps
+
+
+def td_convergence(
+    pi: np.ndarray, r: np.ndarray, gamma: float, V_ref: np.ndarray,
+    alphas: tuple[float, ...] = (0.01, 0.05, 0.2),
+    n_episodes: int = 3000, seed: int = 42,
+) -> dict[str, np.ndarray]:
+    """TD(0) ‖V − V_ref‖∞ error curve for each α. Returns {label: error_array}."""
+    return {
+        f"α = {a}": _td0_run(pi, r, gamma, n_episodes, a, 500,
+                               V_ref, set(), seed)[1]
+        for a in alphas
+    }
+
+
+def td_lambda_convergence(
+    pi: np.ndarray, r: np.ndarray, gamma: float, V_ref: np.ndarray,
+    lambdas: tuple[float, ...] = (0.0, 0.5, 0.9),
+    n_episodes: int = 3000, alpha: float = 0.05,
+    max_steps: int = 500, seed: int = 42,
+) -> dict[str, np.ndarray]:
+    """TD(λ) ‖V − V_ref‖∞ error curve for each λ. Returns {label: error_array}."""
+    NS   = _ns_matrix()
+    free = _free_arr()
+    out: dict[str, np.ndarray] = {}
+    for lam in lambdas:
+        rng  = np.random.default_rng(seed)
+        V    = np.zeros(N)
+        errs = np.empty(n_episodes)
+        for ep in range(n_episodes):
+            s = int(rng.choice(free))
+            e = np.zeros(N)
+            for _ in range(max_steps):
+                a     = int(rng.choice(A_DIM, p=pi[s]))
+                s2    = NS[s, a]
+                delta = r[s] + gamma * V[s2] - V[s]
+                e[s] += 1.0
+                V    += alpha * delta * e
+                e    *= gamma * lam
+                s     = s2
+            errs[ep] = float(np.max(np.abs(V - V_ref)))
+        out[f"λ = {lam}"] = errs
+    return out
+
+
+# ── Model-Free — Control ───────────────────────────────────────────────────────
+def sarsa(
+    r: np.ndarray, gamma: float,
+    n_episodes: int = 5000, alpha: float = 0.1, eps: float = 0.1,
+    max_steps: int = 1000, seed: int = 42,
+) -> tuple[np.ndarray, np.ndarray]:
+    """SARSA (on-policy TD control). Returns (Q, episode_returns)."""
+    rng  = np.random.default_rng(seed)
+    NS   = _ns_matrix()
+    free = _free_arr()
+    Q    = np.zeros((N, A_DIM))
+    rets = np.zeros(n_episodes)
+    for ep in range(n_episodes):
+        s      = int(rng.choice(free))
+        a      = int(np.argmax(Q[s]) if rng.random() > eps else rng.integers(A_DIM))
+        ep_ret = 0.0
+        disc   = 1.0
+        for _ in range(max_steps):
+            s2  = NS[s, a]
+            rew = r[s]
+            ep_ret += disc * rew
+            disc   *= gamma
+            if s2 == GOAL_STATE:
+                Q[s, a] += alpha * (rew + gamma * r[GOAL_STATE] - Q[s, a])
+                ep_ret  += disc * r[GOAL_STATE]
+                break
+            a2 = int(np.argmax(Q[s2]) if rng.random() > eps else rng.integers(A_DIM))
+            Q[s, a] += alpha * (rew + gamma * Q[s2, a2] - Q[s, a])
+            s, a = s2, a2
+        rets[ep] = ep_ret
+    return Q, rets
+
+
+def q_learning(
+    r: np.ndarray, gamma: float,
+    n_episodes: int = 5000, alpha: float = 0.1, eps: float = 0.1,
+    max_steps: int = 1000, seed: int = 42,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Q-Learning (off-policy TD control). Returns (Q, episode_returns)."""
+    rng  = np.random.default_rng(seed)
+    NS   = _ns_matrix()
+    free = _free_arr()
+    Q    = np.zeros((N, A_DIM))
+    rets = np.zeros(n_episodes)
+    for ep in range(n_episodes):
+        s      = int(rng.choice(free))
+        ep_ret = 0.0
+        disc   = 1.0
+        for _ in range(max_steps):
+            a  = int(np.argmax(Q[s]) if rng.random() > eps else rng.integers(A_DIM))
+            s2 = NS[s, a]
+            rew = r[s]
+            ep_ret += disc * rew
+            disc   *= gamma
+            if s2 == GOAL_STATE:
+                Q[s, a] += alpha * (rew + gamma * r[GOAL_STATE] - Q[s, a])
+                ep_ret  += disc * r[GOAL_STATE]
+                break
+            Q[s, a] += alpha * (rew + gamma * np.max(Q[s2]) - Q[s, a])
+            s = s2
+        rets[ep] = ep_ret
+    return Q, rets
+
+
+def policy_from_q(Q: np.ndarray) -> np.ndarray:
+    """Greedy deterministic policy derived from Q-values."""
+    pi = np.zeros((N, A_DIM))
+    pi[np.arange(N), np.argmax(Q, axis=1)] = 1.0
+    for s in WALL_STATES:
+        pi[s] = 1.0 / A_DIM
+    return pi
+
+
+# ── Visualisation (Model-Free) ─────────────────────────────────────────────────
+def show_td_snapshots(
+    snapshots: list[tuple[int, np.ndarray]], V_true: np.ndarray,
+) -> go.Figure:
+    """Subplots: V̂ at each TD checkpoint + exact V^π (rightmost panel)."""
+    from plotly.subplots import make_subplots
+    panels = list(snapshots) + [(-1, V_true)]
+    titles = [f"TD — ep {ep}" for ep, _ in snapshots] + ["V<sup>π</sup> exact"]
+    n      = len(panels)
+    fig    = make_subplots(rows=1, cols=n, subplot_titles=titles)
+    wall   = _wall_z()
+    vmax   = float(V_true.max())
+    for col, (_, V) in enumerate(panels, 1):
+        ax = "" if col == 1 else str(col)
+        fig.add_trace(go.Heatmap(z=V.reshape(GRID, GRID), colorscale=_VALUE_CS,
+                                  showscale=False, zmin=0, zmax=vmax,
+                                  hoverinfo="skip"), row=1, col=col)
+        fig.add_trace(go.Heatmap(z=wall, colorscale=_WALL_CS,
+                                  showscale=False, zmin=0, zmax=1,
+                                  hoverinfo="skip"), row=1, col=col)
+        fig.add_trace(go.Scatter(x=[GOAL_CELL[1]], y=[GOAL_CELL[0]], mode="markers",
+                                  marker=dict(symbol="star", size=12, color=_WARM),
+                                  showlegend=False, hoverinfo="skip"),
+                       row=1, col=col)
+        fig.update_layout(**{
+            f"xaxis{ax}": dict(showticklabels=False, showgrid=False, zeroline=False),
+            f"yaxis{ax}": dict(showticklabels=False, showgrid=False, zeroline=False,
+                               autorange="reversed"),
+        })
+    fig.update_layout(
+        paper_bgcolor=_DARK, plot_bgcolor=_DARK, font_color=_FG,
+        title=dict(text="TD(0) estimates vs exact V<sup>π</sup>", font_color=_FG),
+        width=min(n * 260, 1200), height=320,
+        margin=dict(l=5, r=5, t=60, b=5),
+    )
+    return fig
+
+
+def show_mf_convergence(
+    curves: dict[str, np.ndarray],
+    ylabel: str = "",
+    title: str = "",
+    smooth: int = 1,
+) -> go.Figure:
+    """Line chart of named learning curves (error or episode return)."""
+    colors = [_ACCENT, _WARM, _VIOLET, "#4ade80", "#f87171"]
+    fig = go.Figure()
+    for (name, y), col in zip(curves.items(), colors):
+        y_plot = np.convolve(y, np.ones(smooth) / smooth, mode="valid") if smooth > 1 else y
+        fig.add_trace(go.Scatter(
+            y=y_plot, mode="lines", name=name,
+            line=dict(color=col, width=2),
+        ))
+    fig.update_layout(
+        paper_bgcolor=_DARK, plot_bgcolor="#0d1220", font_color=_FG,
+        title=dict(text=title, font_color=_FG),
+        xaxis=dict(title="episode", color=_MUTED, gridcolor="#1e2a3a"),
+        yaxis=dict(title=ylabel, color=_MUTED, gridcolor="#1e2a3a"),
+        legend=dict(bgcolor="#0d1220", bordercolor="#1e2a3a"),
+        width=700, height=380, margin=dict(l=10, r=10, t=50, b=10),
     )
     return fig

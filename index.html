@@ -1192,6 +1192,26 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
+        <!-- slide: notebook 03 -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Notebook 03 — Dynamic Programming</h2>
+            <p style="color:var(--muted);font-size:0.85rem;margin:0.6rem 0 1.4rem;">Evaluate fixed policies on a grid, visualise the effect of γ, then find the optimal policy via Policy Iteration and Value Iteration.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;">
+              <a href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03_dynamic_programming.ipynb"
+                 target="_blank" rel="noopener"
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:var(--accent);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Open in Colab ↗
+              </a>
+              <a href="notebooks/03_dynamic_programming.ipynb" download
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--fg);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Download ↓
+              </a>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
         <!-- slide: TD learning -->
         <section>
           <div class="slide-panel" style="max-width:860px;">
@@ -1735,11 +1755,63 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
+        <!-- slide: notebook 03b -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Notebook 03b — Model-Free Methods</h2>
+            <p style="color:var(--muted);font-size:0.85rem;margin:0.6rem 0 1.4rem;">
+              TD(0) policy evaluation, effect of α, SARSA vs Q-Learning control,
+              and TD(λ) eligibility traces — all on the Grid World.
+            </p>
+            <div style="display:flex;gap:1rem;justify-content:center;">
+              <a href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03b_model_free.ipynb"
+                 target="_blank" rel="noopener"
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:var(--accent);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Open in Colab ↗
+              </a>
+              <a href="notebooks/03b_model_free.ipynb" download
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--fg);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Download ↓
+              </a>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
         <!-- slide 9: summary ch2 -->
         <section class="chapter-summary">
-          <div class="slide-panel">
+          <div class="slide-panel" style="max-width:620px;">
             <div class="chapter-num">Summary — Chapter 2</div>
-            <p class="slide-placeholder">TODO — key takeaways · Notebooks 02, 03</p>
+            <div style="display:flex;flex-direction:column;gap:1.1rem;margin-top:1.2rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">①</span>
+                <div>
+                  <strong>The MDP framework</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">$(\mathcal{S}, \mathcal{A}, P, r, \gamma)$ — the minimal structure needed to define sequential decision-making.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">②</span>
+                <div>
+                  <strong>Bellman equation</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">$V^\pi = r + \gamma P^\pi V^\pi$ — a fixed-point that defines value, and whose solution is unique.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">③</span>
+                <div>
+                  <strong>Dynamic Programming finds $\pi^*$</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">Policy Iteration and Value Iteration converge to the optimal policy — but require the model $P$.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">④</span>
+                <div>
+                  <strong>Model-free TD learns from experience</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">Same fixed point, no model needed. SARSA stays on-policy; Q-Learning goes off-policy directly to $Q^*$.</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
