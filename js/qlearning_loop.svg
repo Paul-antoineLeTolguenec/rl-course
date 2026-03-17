@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="160" viewBox="0 0 600 160">
+  <style>
+    .box-agent { fill: rgba(13,18,32,0.85); stroke: #00d4ff; stroke-width: 2; }
+    .box-env   { fill: rgba(13,18,32,0.85); stroke: #a78bfa; stroke-width: 2; }
+    .lbl-main  { font-family: Inter, system-ui, sans-serif; font-size: 13px; text-anchor: middle; dominant-baseline: middle; font-weight: 600; }
+    .lbl-sub   { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-arrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-anchor: middle; }
+    .arr-ae    { stroke: rgba(0,212,255,0.35); stroke-width: 1.8; fill: none; marker-end: url(#m-ae); }
+    .arr-ea    { stroke: rgba(167,139,250,0.35); stroke-width: 1.8; fill: none; marker-end: url(#m-ea); }
+
+    /* Agent glow: phase 1 (has s) + phase 5 (TD update) */
+    @keyframes glow-agent {
+      0%,100%  { filter: drop-shadow(0 0 0px #00d4ff); }
+      4%, 13%  { filter: drop-shadow(0 0 10px #00d4ff); }
+      76%, 88% { filter: drop-shadow(0 0 16px #00d4ff); }
+    }
+    /* Env glow: phase 3 */
+    @keyframes glow-env {
+      0%,100%  { filter: drop-shadow(0 0 0px #a78bfa); }
+      40%, 53% { filter: drop-shadow(0 0 10px #a78bfa); }
+    }
+    /* "TD update" label flash */
+    @keyframes flash-td {
+      0%,73%  { opacity: 0; }
+      78%,89% { opacity: 1; }
+      94%,100%{ opacity: 0; }
+    }
+    /* dot agent→env */
+    @keyframes dot-ae {
+      0%,17%  { opacity: 0; offset-distance: 0%; }
+      19%     { opacity: 1; }
+      35%     { opacity: 0; offset-distance: 100%; }
+      100%    { opacity: 0; offset-distance: 100%; }
+    }
+    /* dot env→agent */
+    @keyframes dot-ea {
+      0%,55%  { opacity: 0; offset-distance: 0%; }
+      57%     { opacity: 1; }
+      72%     { opacity: 0; offset-distance: 100%; }
+      100%    { opacity: 0; offset-distance: 100%; }
+    }
+
+    .grp-agent  { animation: glow-agent 7s ease-in-out infinite; }
+    .grp-env    { animation: glow-env   7s ease-in-out infinite; }
+    .txt-td     { animation: flash-td   7s ease-in-out infinite; opacity: 0; }
+    .sig-ae     { offset-path: path("M 212,70 L 388,70"); animation: dot-ae 7s ease-in-out infinite; opacity: 0; }
+    .sig-ea     { offset-path: path("M 388,96 L 212,96"); animation: dot-ea 7s ease-in-out infinite; opacity: 0; }
+  </style>
+
+  <defs>
+    <marker id="m-ae" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.55)" />
+    </marker>
+    <marker id="m-ea" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(167,139,250,0.55)" />
+    </marker>
+  </defs>
+
+  <!-- Arrows -->
+  <line class="arr-ae" x1="212" y1="70" x2="388" y2="70" />
+  <line class="arr-ea" x1="388" y1="96" x2="212" y2="96" />
+
+  <!-- Arrow labels -->
+  <text class="lbl-arrow" x="300" y="56" fill="rgba(0,212,255,0.7)">a</text>
+  <text class="lbl-arrow" x="300" y="114" fill="rgba(167,139,250,0.7)">r ,  s'</text>
+
+  <!-- Agent box -->
+  <g class="grp-agent">
+    <rect class="box-agent" x="48" y="56" width="164" height="54" rx="8" />
+    <text class="lbl-main" x="130" y="76" fill="#00d4ff">Agent</text>
+    <text class="lbl-sub"  x="130" y="95" fill="rgba(0,212,255,0.5)">q(s, a)  — ε-greedy</text>
+  </g>
+  <text class="txt-td lbl-sub" x="130" y="128" fill="rgba(0,212,255,0.85)">← TD update</text>
+
+  <!-- Env box -->
+  <g class="grp-env">
+    <rect class="box-env" x="388" y="56" width="164" height="54" rx="8" />
+    <text class="lbl-main" x="470" y="76" fill="#a78bfa">Environment</text>
+    <text class="lbl-sub"  x="470" y="95" fill="rgba(167,139,250,0.5)">black box — no P needed</text>
+  </g>
+
+  <!-- Signal dots -->
+  <circle class="sig-ae" r="5" fill="#00d4ff" />
+  <circle class="sig-ea" r="5" fill="#a78bfa" />
+</svg>

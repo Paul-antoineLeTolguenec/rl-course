@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="190" viewBox="0 0 600 190">
+  <style>
+    .node-t  { fill: rgba(13,18,32,0.85); stroke: #00d4ff; stroke-width: 2; }
+    .node-t1 { fill: rgba(13,18,32,0.85); stroke: #a78bfa; stroke-width: 2; }
+    .lbl-t   { fill: #00d4ff;  font-family: Inter, system-ui, sans-serif; font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-t1  { fill: #a78bfa;  font-family: Inter, system-ui, sans-serif; font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-val { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-anchor: middle; }
+    .lbl-e   { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; }
+    .txt-bot { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; }
+    .arr-fwd { stroke: rgba(0,212,255,0.35);    stroke-width: 2;   fill: none; marker-end: url(#m-fwd); }
+    .arr-bwd { stroke: rgba(167,139,250,0.45);  stroke-width: 1.8; fill: none; marker-end: url(#m-bwd); stroke-dasharray: 5,3; }
+
+    /* Phase 1: St glows */
+    @keyframes glow-st {
+      0%,100% { filter: drop-shadow(0 0 0px  #00d4ff); }
+      4%, 13% { filter: drop-shadow(0 0 10px #00d4ff); }
+      78%,90% { filter: drop-shadow(0 0 18px #00d4ff); }
+    }
+    /* Phase 3: St+1 glows */
+    @keyframes glow-st1 {
+      0%,100%  { filter: drop-shadow(0 0 0px  #a78bfa); }
+      35%,46%  { filter: drop-shadow(0 0 10px #a78bfa); }
+    }
+    /* Phase 2: dot St → St+1 */
+    @keyframes dot-fwd {
+      0%,15%  { opacity:0; offset-distance:0%;   }
+      17%     { opacity:1; }
+      30%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; offset-distance:100%; }
+    }
+    /* Phase 4: dot St+1 → St (bootstrap) */
+    @keyframes dot-bwd {
+      0%,48%  { opacity:0; offset-distance:0%;   }
+      50%     { opacity:1; }
+      63%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; offset-distance:100%; }
+    }
+    /* Phase 5a: delta text */
+    @keyframes show-delta {
+      0%,63%  { opacity:0; }
+      68%,87% { opacity:1; }
+      93%,100%{ opacity:0; }
+    }
+    /* Phase 5b: update rule */
+    @keyframes show-upd {
+      0%,70%  { opacity:0; }
+      75%,87% { opacity:1; }
+      93%,100%{ opacity:0; }
+    }
+
+    .grp-st     { animation: glow-st    8s ease-in-out infinite; }
+    .grp-st1    { animation: glow-st1   8s ease-in-out infinite; }
+    .sig-fwd    { offset-path: path("M 193,85 L 407,85"); animation: dot-fwd 8s ease-in-out infinite; opacity:0; }
+    .sig-bwd    { offset-path: path("M 407,97 L 193,97"); animation: dot-bwd 8s ease-in-out infinite; opacity:0; }
+    .txt-delta  { animation: show-delta 8s ease-in-out infinite; opacity:0; }
+    .txt-update { animation: show-upd   8s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="m-fwd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.55)" />
+    </marker>
+    <marker id="m-bwd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(167,139,250,0.6)" />
+    </marker>
+  </defs>
+
+  <!-- Value labels above nodes -->
+  <text class="lbl-val" x="160" y="44" fill="rgba(0,212,255,0.55)">v(S&#x209C;)</text>
+  <text class="lbl-val" x="440" y="44" fill="rgba(167,139,250,0.55)">v(S&#x209C;&#x208A;&#x2081;)</text>
+
+  <!-- Forward arrow -->
+  <line class="arr-fwd" x1="193" y1="85" x2="407" y2="85" />
+  <text class="lbl-e" x="300" y="70" fill="rgba(0,212,255,0.65)">a ,  r</text>
+
+  <!-- Bootstrap arrow (dashed) -->
+  <line class="arr-bwd" x1="407" y1="100" x2="193" y2="100" />
+
+  <!-- St node -->
+  <g class="grp-st">
+    <circle class="node-t" cx="160" cy="90" r="30" />
+    <text class="lbl-t" x="160" y="92">S<tspan dy="-6" font-size="9">t</tspan></text>
+  </g>
+
+  <!-- St+1 node -->
+  <g class="grp-st1">
+    <circle class="node-t1" cx="440" cy="90" r="30" />
+    <text class="lbl-t1" x="440" y="92">S<tspan dy="-6" font-size="9">t+1</tspan></text>
+  </g>
+
+  <!-- Signal dots -->
+  <circle class="sig-fwd" r="5" fill="#00d4ff" />
+  <circle class="sig-bwd" r="5" fill="#a78bfa" />
+
+  <!-- Phase 5 text -->
+  <text class="txt-bot txt-delta" x="300" y="152" fill="rgba(255,255,255,0.8)">&#x3B4;&#x209C; = r + &#x3B3; v(S&#x209C;&#x208A;&#x2081;) &#x2212; v(S&#x209C;)</text>
+  <text class="txt-bot txt-update" x="300" y="173" fill="rgba(0,212,255,0.85)">v(S&#x209C;) &#x2190; v(S&#x209C;) + &#x3B1; &#x3B4;&#x209C;</text>
+</svg>

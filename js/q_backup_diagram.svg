@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="240" viewBox="0 0 600 240">
+  <style>
+    /* ── base styles ── */
+    .node-s    { fill: rgba(13,18,32,0.85); stroke: #00d4ff;              stroke-width: 2; }
+    .node-a    { fill: rgba(13,18,32,0.85); stroke: #a78bfa;              stroke-width: 2; }
+    .node-sp   { fill: rgba(13,18,32,0.85); stroke: rgba(167,139,250,0.5); stroke-width: 1.5; }
+    .lbl-s     { fill: #00d4ff;              font-family: Inter, system-ui, sans-serif; font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-a     { fill: #a78bfa;              font-family: Inter, system-ui, sans-serif; font-size: 11px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-sp    { fill: rgba(167,139,250,0.6); font-family: Inter, system-ui, sans-serif; font-size: 10px; text-anchor: middle; dominant-baseline: middle; }
+    .arrow-sa  { stroke: rgba(0,212,255,0.30); stroke-width: 1.5; fill: none; marker-end: url(#arr-sa); }
+    .arrow-asp { stroke: rgba(167,139,250,0.30); stroke-width: 1.5; fill: none; marker-end: url(#arr-asp); }
+    .edge-lbl  { fill: rgba(255,255,255,0.25); font-family: 'JetBrains Mono', monospace; font-size: 9px; text-anchor: middle; dominant-baseline: middle; }
+
+    /* ── Phase 1: s' nodes pulse ── */
+    @keyframes pulse-sp1 { 0%,100% { opacity:0.45; } 8%,18%  { opacity:1; filter:drop-shadow(0 0 5px rgba(167,139,250,0.7)); } }
+    @keyframes pulse-sp2 { 0%,100% { opacity:0.45; } 12%,22% { opacity:1; filter:drop-shadow(0 0 5px rgba(167,139,250,0.7)); } }
+    @keyframes pulse-sp3 { 0%,100% { opacity:0.45; } 16%,26% { opacity:1; filter:drop-shadow(0 0 5px rgba(167,139,250,0.7)); } }
+    @keyframes pulse-sp4 { 0%,100% { opacity:0.45; } 20%,30% { opacity:1; filter:drop-shadow(0 0 5px rgba(167,139,250,0.7)); } }
+
+    /* ── Phase 2: signals s' → action nodes ── */
+    @keyframes travel-sp1 { 0%,27% { opacity:0; offset-distance:100%; } 29% { opacity:1; } 43% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+    @keyframes travel-sp2 { 0%,31% { opacity:0; offset-distance:100%; } 33% { opacity:1; } 47% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+    @keyframes travel-sp3 { 0%,35% { opacity:0; offset-distance:100%; } 37% { opacity:1; } 51% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+    @keyframes travel-sp4 { 0%,39% { opacity:0; offset-distance:100%; } 41% { opacity:1; } 55% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+
+    /* ── Phase 3: action nodes pulse ── */
+    @keyframes pulse-a1 { 0%,100% { opacity:0.55; } 50%,60% { opacity:1; filter:drop-shadow(0 0 7px #a78bfa); } }
+    @keyframes pulse-a2 { 0%,100% { opacity:0.55; } 55%,65% { opacity:1; filter:drop-shadow(0 0 7px #a78bfa); } }
+
+    /* ── Phase 4: signals action → s ── */
+    @keyframes travel-a1 { 0%,62% { opacity:0; offset-distance:100%; } 64% { opacity:1; } 78% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+    @keyframes travel-a2 { 0%,66% { opacity:0; offset-distance:100%; } 68% { opacity:1; } 82% { opacity:0; offset-distance:0%; } 100% { opacity:0; offset-distance:0%; } }
+
+    /* ── Phase 5: s node glows ── */
+    @keyframes glow-s { 0%,80% { filter:drop-shadow(0 0 0px #00d4ff); } 86%,96% { filter:drop-shadow(0 0 14px #00d4ff); } 100% { filter:drop-shadow(0 0 0px #00d4ff); } }
+
+    /* animation bindings — total cycle 8s */
+    .grp-sp1 { animation: pulse-sp1 8s ease-in-out infinite; }
+    .grp-sp2 { animation: pulse-sp2 8s ease-in-out infinite; }
+    .grp-sp3 { animation: pulse-sp3 8s ease-in-out infinite; }
+    .grp-sp4 { animation: pulse-sp4 8s ease-in-out infinite; }
+    .grp-a1  { animation: pulse-a1  8s ease-in-out infinite; }
+    .grp-a2  { animation: pulse-a2  8s ease-in-out infinite; }
+    .grp-s   { animation: glow-s    8s ease-in-out infinite; }
+
+    /* signal dots — s' → action */
+    .dot-sp1 { offset-path: path("M 115,195 L 190,130"); animation: travel-sp1 8s ease-in-out infinite; opacity:0; }
+    .dot-sp2 { offset-path: path("M 245,195 L 210,130"); animation: travel-sp2 8s ease-in-out infinite; opacity:0; }
+    .dot-sp3 { offset-path: path("M 355,195 L 390,130"); animation: travel-sp3 8s ease-in-out infinite; opacity:0; }
+    .dot-sp4 { offset-path: path("M 485,195 L 410,130"); animation: travel-sp4 8s ease-in-out infinite; opacity:0; }
+
+    /* signal dots — action → s */
+    .dot-a1 { offset-path: path("M 190,108 L 286,42"); animation: travel-a1 8s ease-in-out infinite; opacity:0; }
+    .dot-a2 { offset-path: path("M 410,108 L 314,42"); animation: travel-a2 8s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="arr-sa"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" fill="rgba(0,212,255,0.4)" />
+    </marker>
+    <marker id="arr-asp" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" fill="rgba(167,139,250,0.4)" />
+    </marker>
+  </defs>
+
+  <!-- ── Arrows s → action nodes ── -->
+  <line class="arrow-sa" x1="288" y1="42" x2="200" y2="108" />
+  <line class="arrow-sa" x1="312" y1="42" x2="400" y2="108" />
+
+  <!-- ── Edge labels s → a (π) ── -->
+  <text class="edge-lbl" x="225" y="72">π(a₁|s)</text>
+  <text class="edge-lbl" x="375" y="72">π(a₂|s)</text>
+
+  <!-- ── Arrows action → s' nodes ── -->
+  <line class="arrow-asp" x1="178" y1="130" x2="122" y2="190" />
+  <line class="arrow-asp" x1="202" y1="130" x2="238" y2="190" />
+  <line class="arrow-asp" x1="398" y1="130" x2="362" y2="190" />
+  <line class="arrow-asp" x1="422" y1="130" x2="478" y2="190" />
+
+  <!-- ── Edge labels a → s' (P) ── -->
+  <text class="edge-lbl" x="132" y="168">P(s'₁|s,a₁)</text>
+  <text class="edge-lbl" x="238" y="168">P(s'₂|s,a₁)</text>
+  <text class="edge-lbl" x="362" y="168">P(s'₃|s,a₂)</text>
+  <text class="edge-lbl" x="480" y="168">P(s'₄|s,a₂)</text>
+
+  <!-- ── Level-2: next state nodes ── -->
+  <g class="grp-sp1">
+    <circle class="node-sp" cx="115" cy="205" r="20" />
+    <text class="lbl-sp" x="115" y="205">s'<tspan dy="-3" font-size="8">1</tspan></text>
+  </g>
+  <g class="grp-sp2">
+    <circle class="node-sp" cx="245" cy="205" r="20" />
+    <text class="lbl-sp" x="245" y="205">s'<tspan dy="-3" font-size="8">2</tspan></text>
+  </g>
+  <g class="grp-sp3">
+    <circle class="node-sp" cx="355" cy="205" r="20" />
+    <text class="lbl-sp" x="355" y="205">s'<tspan dy="-3" font-size="8">3</tspan></text>
+  </g>
+  <g class="grp-sp4">
+    <circle class="node-sp" cx="485" cy="205" r="20" />
+    <text class="lbl-sp" x="485" y="205">s'<tspan dy="-3" font-size="8">4</tspan></text>
+  </g>
+
+  <!-- ── Level-1: action nodes (diamonds) ── -->
+  <g class="grp-a1">
+    <rect class="node-a" x="168" y="108" width="44" height="24" rx="4" />
+    <text class="lbl-a" x="190" y="120">q<tspan dy="-4" font-size="8">π</tspan><tspan dy="4">(s,a₁)</tspan></text>
+  </g>
+  <g class="grp-a2">
+    <rect class="node-a" x="388" y="108" width="44" height="24" rx="4" />
+    <text class="lbl-a" x="410" y="120">q<tspan dy="-4" font-size="8">π</tspan><tspan dy="4">(s,a₂)</tspan></text>
+  </g>
+
+  <!-- ── Signal dots s' → action ── -->
+  <circle class="dot-sp1" r="4" fill="#a78bfa" />
+  <circle class="dot-sp2" r="4" fill="#a78bfa" />
+  <circle class="dot-sp3" r="4" fill="#a78bfa" />
+  <circle class="dot-sp4" r="4" fill="#a78bfa" />
+
+  <!-- ── Signal dots action → s ── -->
+  <circle class="dot-a1" r="4" fill="#00d4ff" />
+  <circle class="dot-a2" r="4" fill="#00d4ff" />
+
+  <!-- ── Level-0: state s ── -->
+  <g class="grp-s">
+    <circle class="node-s" cx="300" cy="26" r="22" />
+    <text class="lbl-s" x="300" y="26">s</text>
+  </g>
+</svg>
