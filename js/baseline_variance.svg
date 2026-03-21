@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="158" viewBox="0 0 660 158">
+  <style>
+    .lbl  { font-family: Inter, system-ui, sans-serif; font-size: 11px; dominant-baseline: middle; }
+    .mono { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; }
+    .tag  { font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    @keyframes fadeIn {
+      0%,100% { opacity: 0; }
+      8%      { opacity: 1; }
+      82%     { opacity: 1; }
+      92%     { opacity: 0; }
+    }
+
+    .tl1  { animation: fadeIn 7s 0.00s infinite; opacity:0; }
+    .tl2  { animation: fadeIn 7s 0.18s infinite; opacity:0; }
+    .tl3  { animation: fadeIn 7s 0.36s infinite; opacity:0; }
+    .tl4  { animation: fadeIn 7s 0.54s infinite; opacity:0; }
+    .tl5  { animation: fadeIn 7s 0.72s infinite; opacity:0; }
+    .tl6  { animation: fadeIn 7s 0.90s infinite; opacity:0; }
+    .tl7  { animation: fadeIn 7s 1.08s infinite; opacity:0; }
+    .tl8  { animation: fadeIn 7s 1.26s infinite; opacity:0; }
+    .tl9  { animation: fadeIn 7s 1.44s infinite; opacity:0; }
+    .tl10 { animation: fadeIn 7s 1.62s infinite; opacity:0; }
+    .tl11 { animation: fadeIn 7s 1.80s infinite; opacity:0; }
+    .tl12 { animation: fadeIn 7s 1.98s infinite; opacity:0; }
+
+    .tr1  { animation: fadeIn 7s 0.00s infinite; opacity:0; }
+    .tr2  { animation: fadeIn 7s 0.18s infinite; opacity:0; }
+    .tr3  { animation: fadeIn 7s 0.36s infinite; opacity:0; }
+    .tr4  { animation: fadeIn 7s 0.54s infinite; opacity:0; }
+    .tr5  { animation: fadeIn 7s 0.72s infinite; opacity:0; }
+    .tr6  { animation: fadeIn 7s 0.90s infinite; opacity:0; }
+    .tr7  { animation: fadeIn 7s 1.08s infinite; opacity:0; }
+    .tr8  { animation: fadeIn 7s 1.26s infinite; opacity:0; }
+    .tr9  { animation: fadeIn 7s 1.44s infinite; opacity:0; }
+    .tr10 { animation: fadeIn 7s 1.62s infinite; opacity:0; }
+    .tr11 { animation: fadeIn 7s 1.80s infinite; opacity:0; }
+    .tr12 { animation: fadeIn 7s 1.98s infinite; opacity:0; }
+  </style>
+
+  <!-- Left panel -->
+  <rect x="8" y="8" width="305" height="142" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- Right panel -->
+  <rect x="347" y="8" width="305" height="142" rx="6"
+        fill="rgba(167,139,250,0.03)" stroke="rgba(167,139,250,0.20)" stroke-width="0.5"/>
+
+  <!-- Panel headers -->
+  <text class="tag" x="160" y="23" fill="rgba(255,255,255,0.28)" text-anchor="middle">without baseline</text>
+  <text class="tag" x="500" y="23" fill="rgba(167,139,250,0.70)" text-anchor="middle">with baseline  ·  − b(Sₜ)</text>
+
+  <!-- Wide Gaussian (left), center x=160, peak y=44, tails at y=108 -->
+  <path d="M 28,108 C 58,108 100,38 160,33 C 220,38 262,108 292,108"
+        fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.18)" stroke-width="1"/>
+
+  <!-- Narrow Gaussian (right), center x=500, peak y=34, tails at y=108 -->
+  <path d="M 452,108 C 468,108 484,32 500,28 C 516,32 532,108 548,108"
+        fill="rgba(167,139,250,0.11)" stroke="rgba(167,139,250,0.42)" stroke-width="1"/>
+
+  <!-- Axes (number lines) -->
+  <line x1="28"  y1="108" x2="292" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+  <line x1="372" y1="108" x2="628" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+
+  <!-- True gradient lines (dashed) -->
+  <line x1="160" y1="33" x2="160" y2="116" stroke="rgba(0,212,255,0.55)"   stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="500" y1="28" x2="500" y2="116" stroke="rgba(167,139,250,0.65)" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- ∇J(θ) labels -->
+  <text class="mono" x="160" y="124" fill="rgba(0,212,255,0.55)"   text-anchor="middle">∇J(θ)</text>
+  <text class="mono" x="500" y="124" fill="rgba(167,139,250,0.65)" text-anchor="middle">∇J(θ)</text>
+
+  <!-- Variance labels -->
+  <text class="tag" x="160" y="141" fill="rgba(255,255,255,0.25)"  text-anchor="middle">large variance</text>
+  <text class="tag" x="500" y="141" fill="rgba(167,139,250,0.60)"  text-anchor="middle">small variance</text>
+
+  <!-- Left: sample ticks (spread ~±110px from center 160) -->
+  <line class="tl1"  x1="52"  y1="103" x2="52"  y2="113" stroke="rgba(0,212,255,0.50)"   stroke-width="1.5"/>
+  <line class="tl2"  x1="72"  y1="103" x2="72"  y2="113" stroke="rgba(0,212,255,0.50)"   stroke-width="1.5"/>
+  <line class="tl3"  x1="94"  y1="103" x2="94"  y2="113" stroke="rgba(0,212,255,0.45)"   stroke-width="1.5"/>
+  <line class="tl4"  x1="116" y1="103" x2="116" y2="113" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line class="tl5"  x1="136" y1="103" x2="136" y2="113" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line class="tl6"  x1="156" y1="103" x2="156" y2="113" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line class="tl7"  x1="176" y1="103" x2="176" y2="113" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line class="tl8"  x1="198" y1="103" x2="198" y2="113" stroke="rgba(167,139,250,0.50)" stroke-width="1.5"/>
+  <line class="tl9"  x1="220" y1="103" x2="220" y2="113" stroke="rgba(167,139,250,0.50)" stroke-width="1.5"/>
+  <line class="tl10" x1="240" y1="103" x2="240" y2="113" stroke="rgba(245,158,11,0.50)"  stroke-width="1.5"/>
+  <line class="tl11" x1="260" y1="103" x2="260" y2="113" stroke="rgba(245,158,11,0.45)"  stroke-width="1.5"/>
+  <line class="tl12" x1="275" y1="103" x2="275" y2="113" stroke="rgba(245,158,11,0.40)"  stroke-width="1.5"/>
+
+  <!-- Right: sample ticks (tight ~±18px from center 500) -->
+  <line class="tr1"  x1="482" y1="103" x2="482" y2="113" stroke="rgba(167,139,250,0.45)" stroke-width="1.5"/>
+  <line class="tr2"  x1="486" y1="103" x2="486" y2="113" stroke="rgba(167,139,250,0.56)" stroke-width="1.5"/>
+  <line class="tr3"  x1="490" y1="103" x2="490" y2="113" stroke="rgba(167,139,250,0.67)" stroke-width="1.5"/>
+  <line class="tr4"  x1="494" y1="103" x2="494" y2="113" stroke="rgba(167,139,250,0.78)" stroke-width="1.5"/>
+  <line class="tr5"  x1="497" y1="103" x2="497" y2="113" stroke="rgba(167,139,250,0.87)" stroke-width="1.5"/>
+  <line class="tr6"  x1="500" y1="103" x2="500" y2="113" stroke="rgba(167,139,250,0.92)" stroke-width="1.5"/>
+  <line class="tr7"  x1="503" y1="103" x2="503" y2="113" stroke="rgba(167,139,250,0.87)" stroke-width="1.5"/>
+  <line class="tr8"  x1="506" y1="103" x2="506" y2="113" stroke="rgba(167,139,250,0.78)" stroke-width="1.5"/>
+  <line class="tr9"  x1="510" y1="103" x2="510" y2="113" stroke="rgba(167,139,250,0.67)" stroke-width="1.5"/>
+  <line class="tr10" x1="514" y1="103" x2="514" y2="113" stroke="rgba(167,139,250,0.56)" stroke-width="1.5"/>
+  <line class="tr11" x1="518" y1="103" x2="518" y2="113" stroke="rgba(167,139,250,0.45)" stroke-width="1.5"/>
+  <line class="tr12" x1="495" y1="103" x2="495" y2="113" stroke="rgba(167,139,250,0.82)" stroke-width="1.5"/>
+
+  <!-- Center arrow -->
+  <text style="font-family:Inter,sans-serif;font-size:20px"
+        x="330" y="72" fill="rgba(255,255,255,0.18)" text-anchor="middle">→</text>
+</svg>

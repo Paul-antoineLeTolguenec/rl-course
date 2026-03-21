@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .itl { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+
+    @keyframes showTrunk { 0%,100%{opacity:0} 8%{opacity:1} 44%{opacity:1} 52%{opacity:0} }
+    @keyframes showHeads { 0%,52%{opacity:0} 60%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+
+    .trunk { animation: showTrunk 9s ease-in-out infinite; opacity:0; }
+    .heads { animation: showHeads 9s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Input node -->
+  <circle cx="50" cy="74" r="10" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+  <text class="itl" x="50" y="74" fill="rgba(255,255,255,0.65)" text-anchor="middle">s</text>
+
+  <!-- Input → Layer1 connections -->
+  <line x1="60" y1="74" x2="143" y2="35"  stroke="rgba(255,255,255,0.07)" stroke-width="0.6"/>
+  <line x1="60" y1="74" x2="143" y2="74"  stroke="rgba(255,255,255,0.07)" stroke-width="0.6"/>
+  <line x1="60" y1="74" x2="143" y2="113" stroke="rgba(255,255,255,0.07)" stroke-width="0.6"/>
+
+  <!-- Layer1 → Layer2 connections -->
+  <line x1="157" y1="35"  x2="243" y2="35"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="35"  x2="243" y2="74"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="35"  x2="243" y2="113" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="74"  x2="243" y2="35"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="74"  x2="243" y2="74"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="74"  x2="243" y2="113" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="113" x2="243" y2="35"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="113" x2="243" y2="74"  stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+  <line x1="157" y1="113" x2="243" y2="113" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+
+  <!-- Layer1 nodes -->
+  <circle cx="150" cy="35"  r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+  <circle cx="150" cy="74"  r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+  <circle cx="150" cy="113" r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+
+  <!-- Layer2 nodes -->
+  <circle cx="250" cy="35"  r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+  <circle cx="250" cy="74"  r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+  <circle cx="250" cy="113" r="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+
+  <!-- Shared trunk tag -->
+  <text class="tag" x="200" y="16" fill="rgba(255,255,255,0.20)" text-anchor="middle">shared trunk</text>
+
+  <!-- Vertical split divider -->
+  <line x1="282" y1="12" x2="282" y2="136" stroke="rgba(255,255,255,0.07)" stroke-width="0.7" stroke-dasharray="3,4"/>
+
+  <!-- Layer2 → Policy head connections -->
+  <line x1="257" y1="35"  x2="342" y2="38" stroke="rgba(0,212,255,0.08)" stroke-width="0.6"/>
+  <line x1="257" y1="74"  x2="342" y2="38" stroke="rgba(0,212,255,0.08)" stroke-width="0.6"/>
+  <line x1="257" y1="113" x2="342" y2="38" stroke="rgba(0,212,255,0.08)" stroke-width="0.6"/>
+
+  <!-- Layer2 → Value head connections -->
+  <line x1="257" y1="35"  x2="342" y2="110" stroke="rgba(34,197,94,0.07)" stroke-width="0.6"/>
+  <line x1="257" y1="74"  x2="342" y2="110" stroke="rgba(34,197,94,0.07)" stroke-width="0.6"/>
+  <line x1="257" y1="113" x2="342" y2="110" stroke="rgba(34,197,94,0.07)" stroke-width="0.6"/>
+
+  <!-- Policy head node -->
+  <circle cx="350" cy="38" r="8" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.28)" stroke-width="1"/>
+  <!-- Policy head → output connection -->
+  <line x1="358" y1="38" x2="440" y2="38" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+  <!-- Policy output node -->
+  <circle cx="448" cy="38" r="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.38)" stroke-width="1.2"/>
+
+  <!-- Value head node -->
+  <circle cx="350" cy="110" r="8" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.28)" stroke-width="1"/>
+  <!-- Value head → output connection -->
+  <line x1="358" y1="110" x2="440" y2="110" stroke="rgba(34,197,94,0.15)" stroke-width="0.8"/>
+  <!-- Value output node -->
+  <circle cx="448" cy="110" r="8" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.38)" stroke-width="1.2"/>
+
+  <!-- Always-visible head tags -->
+  <text class="tag" x="399" y="22" fill="rgba(0,212,255,0.28)" text-anchor="middle">policy head</text>
+  <text class="tag" x="399" y="130" fill="rgba(34,197,94,0.28)" text-anchor="middle">value head</text>
+
+  <!-- ── Phase 1: shared trunk highlighted ── -->
+  <g class="trunk">
+    <circle cx="150" cy="35"  r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <circle cx="150" cy="74"  r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <circle cx="150" cy="113" r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <circle cx="250" cy="35"  r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <circle cx="250" cy="74"  r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <circle cx="250" cy="113" r="7" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+    <!-- forward arrow -->
+    <line x1="60" y1="74" x2="130" y2="74" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
+    <polygon points="132,74 126,70.5 126,77.5" fill="rgba(255,255,255,0.65)"/>
+    <text class="tag" x="200" y="133" fill="rgba(255,255,255,0.42)" text-anchor="middle">shared representation φ(s)</text>
+  </g>
+
+  <!-- ── Phase 2: heads highlighted ── -->
+  <g class="heads">
+    <!-- Policy head glow -->
+    <circle cx="350" cy="38"  r="8" fill="rgba(0,212,255,0.14)" stroke="rgba(0,212,255,0.72)" stroke-width="1.5"/>
+    <circle cx="448" cy="38"  r="8" fill="rgba(0,212,255,0.18)" stroke="rgba(0,212,255,0.82)" stroke-width="1.5"/>
+    <line x1="358" y1="38" x2="439" y2="38" stroke="rgba(0,212,255,0.65)" stroke-width="1.5"/>
+    <polygon points="441,38 435,34.5 435,41.5" fill="rgba(0,212,255,0.65)"/>
+    <text class="lbl" x="462" y="34" fill="rgba(0,212,255,0.82)">π<tspan dy="2.5" font-size="5.5">θ</tspan><tspan dy="-2.5">(a|s)</tspan></text>
+    <!-- Value head glow -->
+    <circle cx="350" cy="110" r="8" fill="rgba(34,197,94,0.14)" stroke="rgba(34,197,94,0.72)" stroke-width="1.5"/>
+    <circle cx="448" cy="110" r="8" fill="rgba(34,197,94,0.18)" stroke="rgba(34,197,94,0.82)" stroke-width="1.5"/>
+    <line x1="358" y1="110" x2="439" y2="110" stroke="rgba(34,197,94,0.65)" stroke-width="1.5"/>
+    <polygon points="441,110 435,106.5 435,113.5" fill="rgba(34,197,94,0.65)"/>
+    <text class="lbl" x="462" y="106" fill="rgba(34,197,94,0.82)">V<tspan dy="2.5" font-size="5.5">θ</tspan><tspan dy="-2.5">(s)</tspan></text>
+  </g>
+
+</svg>

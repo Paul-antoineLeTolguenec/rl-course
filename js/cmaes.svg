@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .itl { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+
+    @keyframes showInit  { 0%,100%{opacity:0} 8%{opacity:1} 44%{opacity:1} 52%{opacity:0} }
+    @keyframes showAdapt { 0%,52%{opacity:0} 60%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+
+    .init  { animation: showInit  9s ease-in-out infinite; opacity:0; }
+    .adapt { animation: showAdapt 9s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Axes -->
+  <line x1="45" y1="128" x2="515" y2="128" stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <line x1="45" y1="128" x2="45"  y2="12"  stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <polygon points="513,125 519,128 513,131" fill="rgba(255,255,255,0.13)"/>
+  <polygon points="42,14 45,8 48,14"        fill="rgba(255,255,255,0.13)"/>
+  <text class="itl" x="524" y="128" fill="rgba(255,255,255,0.26)">θ₁</text>
+  <text class="itl" x="45"  y="7"   fill="rgba(255,255,255,0.26)" text-anchor="middle">θ₂</text>
+
+  <!-- Objective contours centered at θ* = (410, 32) -->
+  <ellipse cx="410" cy="32" rx="20"  ry="13"  fill="none" stroke="rgba(0,212,255,0.40)" stroke-width="0.8"/>
+  <ellipse cx="410" cy="32" rx="48"  ry="30"  fill="none" stroke="rgba(0,212,255,0.27)" stroke-width="0.7"/>
+  <ellipse cx="410" cy="32" rx="82"  ry="52"  fill="none" stroke="rgba(0,212,255,0.16)" stroke-width="0.6"/>
+  <ellipse cx="410" cy="32" rx="125" ry="78"  fill="none" stroke="rgba(0,212,255,0.09)" stroke-width="0.5"/>
+  <ellipse cx="410" cy="32" rx="168" ry="106" fill="none" stroke="rgba(0,212,255,0.05)" stroke-width="0.5"/>
+
+  <!-- θ* dot -->
+  <circle cx="410" cy="32" r="3.2" fill="rgba(0,212,255,0.72)"/>
+  <text class="lbl" x="416" y="29" fill="rgba(0,212,255,0.65)">θ*</text>
+
+  <!-- μₖ dot (always visible) -->
+  <circle cx="160" cy="90" r="4.5" fill="rgba(245,158,11,0.88)"/>
+  <text class="lbl" x="140" y="104" fill="rgba(245,158,11,0.82)">μₖ</text>
+
+  <!-- ── Phase 1: isotropic circle N(μₖ, σ²I) ── -->
+  <g class="init">
+    <circle cx="160" cy="90" r="40"
+            fill="rgba(245,158,11,0.04)"
+            stroke="rgba(245,158,11,0.30)" stroke-width="0.8" stroke-dasharray="3,3"/>
+    <text class="tag" x="160" y="43" fill="rgba(245,158,11,0.42)" text-anchor="middle">N(μₖ, I) — isotropic</text>
+    <!-- green samples toward θ* -->
+    <circle cx="192" cy="68" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="197" cy="80" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="178" cy="58" r="3.5" fill="rgba(34,197,94,0.65)"/>
+    <!-- red samples away -->
+    <circle cx="125" cy="84" r="4"   fill="rgba(239,68,68,0.75)"/>
+    <circle cx="120" cy="106" r="4"  fill="rgba(239,68,68,0.75)"/>
+    <circle cx="148" cy="128" r="3.5" fill="rgba(239,68,68,0.60)"/>
+    <circle cx="172" cy="126" r="3"  fill="rgba(239,68,68,0.55)"/>
+  </g>
+
+  <!-- ── Phase 2: adapted ellipse N(μₖ, σ²Cₖ) ── -->
+  <!-- major axis toward θ*: direction (250,-58), angle ≈ -13° -->
+  <g class="adapt">
+    <ellipse cx="160" cy="90" rx="58" ry="20"
+             fill="rgba(245,158,11,0.06)"
+             stroke="rgba(245,158,11,0.55)" stroke-width="1.2" stroke-dasharray="3,3"
+             transform="rotate(-13,160,90)"/>
+    <text class="tag" x="160" y="28" fill="rgba(245,158,11,0.50)" text-anchor="middle">N(μₖ, Cₖ) — C aligns to landscape</text>
+    <!-- green samples along major axis toward θ* -->
+    <!-- major axis unit vector: (cos-13°, sin-13°) = (0.974,-0.225) -->
+    <!-- points at ~35-52px along major axis from center (160,90) -->
+    <circle cx="194" cy="82" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="207" cy="79" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="180" cy="86" r="3.5" fill="rgba(34,197,94,0.65)"/>
+    <!-- red samples along opposite direction -->
+    <circle cx="126" cy="98" r="4"   fill="rgba(239,68,68,0.70)"/>
+    <circle cx="113" cy="101" r="3.5" fill="rgba(239,68,68,0.55)"/>
+    <!-- μₖ₊₁ dot — pulled toward θ* -->
+    <!-- direction unit: (0.974,-0.225), shift ~22px: (160+22*0.974, 90+22*(-0.225)) = (181.4, 85.1) -->
+    <!-- arrow tip at (182,85); line from (160,90) to ~(176,87) -->
+    <line x1="160" y1="90" x2="176" y2="86"
+          stroke="rgba(255,255,255,0.65)" stroke-width="1.8"/>
+    <!-- arrowhead: tip=(182,85), dir=(22,-5), unit=(0.975,-0.222), perp=(0.222,0.975) -->
+    <!-- base 5px back: (182-5*0.975,85+5*0.222)=(177.1,86.1); ±3 perp: (177.8,89.0),(176.5,83.2) -->
+    <polygon points="182,85 178,89 176,83" fill="rgba(255,255,255,0.65)"/>
+    <circle cx="182" cy="85" r="4.5" fill="rgba(255,255,255,0.80)"/>
+    <text class="lbl" x="188" y="81" fill="rgba(255,255,255,0.78)">μₖ₊₁</text>
+  </g>
+
+</svg>

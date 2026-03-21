@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="168" viewBox="0 0 560 168">
+  <style>
+    .mono { font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+    .tag  { font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .act  { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; dominant-baseline: middle; }
+
+    /* Phase Q: 8-55% visible, fade out 55-65% */
+    @keyframes phQ { 0%{opacity:0} 8%{opacity:1} 55%{opacity:1} 65%{opacity:0} 100%{opacity:0} }
+    /* Phase V: appears at 38%, stays through A phase */
+    @keyframes phV { 0%{opacity:0} 38%{opacity:0} 48%{opacity:1} 90%{opacity:1} 100%{opacity:0} }
+    /* Phase A: 65-90% visible */
+    @keyframes phA { 0%{opacity:0} 60%{opacity:0} 70%{opacity:1} 90%{opacity:1} 100%{opacity:0} }
+
+    .pQ { animation: phQ 10s ease-in-out infinite; opacity:0; }
+    .pV { animation: phV 10s ease-in-out infinite; opacity:0; }
+    .pA { animation: phA 10s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="14" width="552" height="150" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Zero reference line (very subtle) -->
+  <line x1="228" y1="14" x2="228" y2="164"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="2,4"/>
+
+  <!-- Action labels (always visible) -->
+  <text class="act" x="52" y="41"  fill="rgba(255,255,255,0.65)" text-anchor="middle">↑</text>
+  <text class="act" x="52" y="76"  fill="rgba(255,255,255,0.65)" text-anchor="middle">→</text>
+  <text class="act" x="52" y="111" fill="rgba(255,255,255,0.65)" text-anchor="middle">←</text>
+  <text class="act" x="52" y="146" fill="rgba(255,255,255,0.65)" text-anchor="middle">↓</text>
+
+  <!-- Bar background tracks -->
+  <rect x="78" y="28"  width="460" height="22" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="78" y="63"  width="460" height="22" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="78" y="98"  width="460" height="22" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="78" y="133" width="460" height="22" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+
+  <!-- ===== PHASE Q ===== -->
+  <!-- scale: 85px/unit, zero at x=228 -->
+  <!-- ↑ Q=+1.8 → x: 228→381 (w=153) -->
+  <rect class="pQ" x="228" y="28"  width="153" height="22" rx="3"
+        fill="rgba(0,212,255,0.25)" stroke="rgba(0,212,255,0.40)" stroke-width="0.5"/>
+  <!-- → Q=+0.5 → x: 228→271 (w=43) -->
+  <rect class="pQ" x="228" y="63"  width="43"  height="22" rx="3"
+        fill="rgba(0,212,255,0.25)" stroke="rgba(0,212,255,0.40)" stroke-width="0.5"/>
+  <!-- ← Q=+1.1 → x: 228→321 (w=93) -->
+  <rect class="pQ" x="228" y="98"  width="93"  height="22" rx="3"
+        fill="rgba(0,212,255,0.25)" stroke="rgba(0,212,255,0.40)" stroke-width="0.5"/>
+  <!-- ↓ Q=−0.3 → x: 202→228 (w=26), negative -->
+  <rect class="pQ" x="202" y="133" width="26"  height="22" rx="3"
+        fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.28)" stroke-width="0.5"/>
+
+  <!-- Q value labels -->
+  <text class="pQ mono" x="386" y="41"  fill="rgba(0,212,255,0.80)" text-anchor="start">Q = +1.8</text>
+  <text class="pQ mono" x="276" y="76"  fill="rgba(0,212,255,0.80)" text-anchor="start">Q = +0.5</text>
+  <text class="pQ mono" x="326" y="111" fill="rgba(0,212,255,0.80)" text-anchor="start">Q = +1.1</text>
+  <text class="pQ mono" x="198" y="146" fill="rgba(0,212,255,0.70)" text-anchor="end"  >Q = −0.3</text>
+
+  <!-- Q phase header -->
+  <text class="pQ tag" x="290" y="8" fill="rgba(0,212,255,0.50)" text-anchor="middle">Q<tspan dy="-2.5" font-size="5">π</tspan><tspan dy="2.5">(s, ·)</tspan></text>
+
+  <!-- ===== PHASE V — baseline line ===== -->
+  <!-- V^π(s) = 0.8 → x = 228 + 0.8*85 = 296 -->
+  <line class="pV" x1="296" y1="14" x2="296" y2="158"
+        stroke="rgba(245,158,11,0.75)" stroke-width="1.5"/>
+  <text class="pV tag" x="296" y="8" fill="rgba(245,158,11,0.80)" text-anchor="middle">V<tspan dy="-2.5" font-size="5">π</tspan><tspan dy="2.5">(s) = 0.8</tspan></text>
+
+  <!-- ===== PHASE A — advantage bars ===== -->
+  <!-- ↑ A=+1.0 → from x=296 to x=381 (w=85), green -->
+  <rect class="pA" x="296" y="28"  width="85"  height="22" rx="3"
+        fill="rgba(34,197,94,0.35)" stroke="rgba(34,197,94,0.55)" stroke-width="0.5"/>
+  <!-- → A=−0.3 → from x=271 to x=296 (w=25), red -->
+  <rect class="pA" x="271" y="63"  width="25"  height="22" rx="3"
+        fill="rgba(239,68,68,0.32)" stroke="rgba(239,68,68,0.50)" stroke-width="0.5"/>
+  <!-- ← A=+0.3 → from x=296 to x=321 (w=25), light green -->
+  <rect class="pA" x="296" y="98"  width="25"  height="22" rx="3"
+        fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.38)" stroke-width="0.5"/>
+  <!-- ↓ A=−1.1 → from x=202 to x=296 (w=94), red -->
+  <rect class="pA" x="202" y="133" width="94"  height="22" rx="3"
+        fill="rgba(239,68,68,0.35)" stroke="rgba(239,68,68,0.52)" stroke-width="0.5"/>
+
+  <!-- Advantage value labels -->
+  <text class="pA mono" x="386" y="41"  fill="rgba(34,197,94,0.85)"  text-anchor="start">A = +1.0</text>
+  <text class="pA mono" x="266" y="76"  fill="rgba(239,68,68,0.85)"  text-anchor="end"  >A = −0.3</text>
+  <text class="pA mono" x="326" y="111" fill="rgba(34,197,94,0.75)"  text-anchor="start">A = +0.3</text>
+  <text class="pA mono" x="198" y="146" fill="rgba(239,68,68,0.85)"  text-anchor="end"  >A = −1.1</text>
+
+  <!-- A phase header -->
+  <text class="pA tag" x="290" y="8" fill="rgba(255,255,255,0.42)" text-anchor="middle">A<tspan dy="-2.5" font-size="5">π</tspan><tspan dy="2.5">(s,·) = Q</tspan><tspan dy="-2.5" font-size="5">π</tspan><tspan dy="2.5">(s,·) − V</tspan><tspan dy="-2.5" font-size="5">π</tspan><tspan dy="2.5">(s)</tspan></text>
+</svg>

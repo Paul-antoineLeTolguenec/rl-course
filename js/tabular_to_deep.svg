@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .val { font-family: 'JetBrains Mono', monospace; font-size: 7px; dominant-baseline: middle; text-anchor: middle; }
+    .itl { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Panel labels -->
+  <text class="tag" x="102" y="20" fill="rgba(239,68,68,0.55)" text-anchor="middle">tabular</text>
+  <text class="tag" x="375" y="20" fill="rgba(0,212,255,0.55)" text-anchor="middle">deep</text>
+
+  <!-- ── LEFT: 3×3 Q-table (cell 32×24) ── -->
+  <!-- cols x=54,86,118 · rows y=28,52,76 -->
+  <rect x="54"  y="28" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="86"  y="28" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="118" y="28" width="32" height="24" fill="rgba(239,68,68,0.10)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="54"  y="52" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="86"  y="52" width="32" height="24" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="118" y="52" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="54"  y="76" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="86"  y="76" width="32" height="24" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+  <rect x="118" y="76" width="32" height="24" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.22)" stroke-width="0.7"/>
+
+  <!-- Values -->
+  <text class="val" x="70"  y="40" fill="rgba(239,68,68,0.45)">0.1</text>
+  <text class="val" x="102" y="40" fill="rgba(239,68,68,0.50)">0.3</text>
+  <text class="val" x="134" y="40" fill="rgba(239,68,68,0.80)">0.8</text>
+  <text class="val" x="70"  y="64" fill="rgba(239,68,68,0.50)">0.2</text>
+  <text class="val" x="102" y="64" fill="rgba(239,68,68,0.70)">0.6</text>
+  <text class="val" x="134" y="64" fill="rgba(239,68,68,0.50)">0.1</text>
+  <text class="val" x="70"  y="88" fill="rgba(239,68,68,0.50)">0.3</text>
+  <text class="val" x="102" y="88" fill="rgba(239,68,68,0.50)">0.4</text>
+  <text class="val" x="134" y="88" fill="rgba(239,68,68,0.65)">0.7</text>
+
+  <!-- expansion hints -->
+  <text class="val" x="70"  y="110" fill="rgba(239,68,68,0.22)">·</text>
+  <text class="val" x="102" y="110" fill="rgba(239,68,68,0.22)">·</text>
+  <text class="val" x="134" y="110" fill="rgba(239,68,68,0.22)">·</text>
+  <text class="val" x="156" y="64"  fill="rgba(239,68,68,0.20)">···</text>
+  <text class="lbl" x="102" y="130" fill="rgba(239,68,68,0.32)" text-anchor="middle">|S| × |A| entries</text>
+
+  <!-- ── CENTER: Arrow ── -->
+  <line x1="172" y1="74" x2="206" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+  <polygon points="212,74 205,70 205,78" fill="rgba(255,255,255,0.22)"/>
+
+  <!-- ── RIGHT: MLP ── -->
+  <!-- Input: x=240, y=42,74,106 · Hidden: x=340, y=30,57,87,114 · Output: x=440, y=74 -->
+
+  <!-- Connections input→hidden -->
+  <line x1="240" y1="42"  x2="340" y2="30"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="42"  x2="340" y2="57"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="42"  x2="340" y2="87"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="42"  x2="340" y2="114" stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="74"  x2="340" y2="30"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="74"  x2="340" y2="57"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="74"  x2="340" y2="87"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="74"  x2="340" y2="114" stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="106" x2="340" y2="30"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="106" x2="340" y2="57"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="106" x2="340" y2="87"  stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+  <line x1="240" y1="106" x2="340" y2="114" stroke="rgba(0,212,255,0.10)" stroke-width="0.6"/>
+
+  <!-- Connections hidden→output -->
+  <line x1="340" y1="30"  x2="440" y2="74" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+  <line x1="340" y1="57"  x2="440" y2="74" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+  <line x1="340" y1="87"  x2="440" y2="74" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+  <line x1="340" y1="114" x2="440" y2="74" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+
+  <!-- Input nodes -->
+  <circle cx="240" cy="42"  r="7" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+  <circle cx="240" cy="74"  r="7" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+  <circle cx="240" cy="106" r="7" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+
+  <!-- Hidden nodes -->
+  <circle cx="340" cy="30"  r="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.28)" stroke-width="1"/>
+  <circle cx="340" cy="57"  r="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.28)" stroke-width="1"/>
+  <circle cx="340" cy="87"  r="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.28)" stroke-width="1"/>
+  <circle cx="340" cy="114" r="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.28)" stroke-width="1"/>
+
+  <!-- Output node -->
+  <circle cx="440" cy="74" r="8" fill="rgba(0,212,255,0.14)" stroke="rgba(0,212,255,0.58)" stroke-width="1.2"/>
+
+  <!-- Labels -->
+  <text class="itl" x="222" y="74" fill="rgba(0,212,255,0.42)" text-anchor="middle">s</text>
+  <text class="lbl" x="452" y="70" fill="rgba(0,212,255,0.65)">f<tspan dy="2.5" font-size="5.5">θ</tspan><tspan dy="-2.5">(s)</tspan></text>
+  <text class="lbl" x="340" y="133" fill="rgba(0,212,255,0.28)" text-anchor="middle">d parameters — independent of |S|</text>
+
+</svg>

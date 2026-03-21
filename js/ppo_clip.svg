@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl  { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag  { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .itl  { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+
+    @keyframes showUnclip { 0%,100%{opacity:0} 8%{opacity:1} 44%{opacity:1} 52%{opacity:0} }
+    @keyframes showClip   { 0%,52%{opacity:0} 60%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+
+    .unclip { animation: showUnclip 9s ease-in-out infinite; opacity:0; }
+    .clip   { animation: showClip   9s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Axes -->
+  <!-- x: r_t(θ), baseline y=118, x from 55 to 525 -->
+  <!-- y: objective, up from y=118 to y=14 -->
+  <line x1="55"  y1="118" x2="525" y2="118" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+  <line x1="55"  y1="128" x2="55"  y2="14"  stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+  <polygon points="523,115 529,118 523,121" fill="rgba(255,255,255,0.14)"/>
+  <polygon points="52,16 55,10 58,16"       fill="rgba(255,255,255,0.14)"/>
+
+  <!-- Axis labels -->
+  <text class="itl" x="535" y="118" fill="rgba(255,255,255,0.26)">r</text>
+  <text class="lbl" x="30"  y="65"  fill="rgba(255,255,255,0.22)" text-anchor="middle" transform="rotate(-90,30,65)">objective</text>
+
+  <!-- Scale: x = 55 + (r - 0) * 160, so r=1 → x=215, r=0 → x=55 -->
+  <!-- ε = 0.2 → 1-ε=0.8 at x=183, 1+ε=1.2 at x=247 -->
+  <!-- y scale: 90px/unit, baseline y=118 → obj=1 at y=28 -->
+
+  <!-- r=0 tick -->
+  <line x1="55" y1="118" x2="55" y2="124" stroke="rgba(255,255,255,0.20)" stroke-width="0.8"/>
+  <text class="lbl" x="55" y="132" fill="rgba(255,255,255,0.30)" text-anchor="middle">0</text>
+
+  <!-- r=1 vertical guide -->
+  <line x1="215" y1="14" x2="215" y2="118"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.6" stroke-dasharray="2,4"/>
+  <text class="lbl" x="215" y="132" fill="rgba(255,255,255,0.30)" text-anchor="middle">1</text>
+
+  <!-- ε boundaries: 1−ε at x=183, 1+ε at x=247 -->
+  <line x1="183" y1="14" x2="183" y2="118"
+        stroke="rgba(245,158,11,0.28)" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <line x1="247" y1="14" x2="247" y2="118"
+        stroke="rgba(245,158,11,0.28)" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <text class="lbl" x="183" y="132" fill="rgba(245,158,11,0.55)" text-anchor="middle">1−ε</text>
+  <text class="lbl" x="247" y="132" fill="rgba(245,158,11,0.55)" text-anchor="middle">1+ε</text>
+
+  <!-- Clip zone shading (always visible) -->
+  <rect x="183" y="14" width="64" height="104"
+        fill="rgba(245,158,11,0.05)" stroke="none"/>
+  <text class="tag" x="215" y="26" fill="rgba(245,158,11,0.42)" text-anchor="middle">clip zone</text>
+
+  <!-- A > 0: obj = r * A, A = 0.8, scale 90px/unit -->
+  <!-- Unclipped: linear from r=0.2 (x=87, y=118-0.16*90=103) to r=1.7 (x=327, y=118-1.36*90=... y=118-122=-4→clip to 14) -->
+  <!-- At r=0 (x=55): obj=0, y=118 -->
+  <!-- At r=0.3 (x=103): obj=0.24, y=118-22=96 -->
+  <!-- At r=1.4 (x=279): obj=1.12, y=118-101=17 -->
+  <!-- At r=1.6 (x=311): obj=1.28, y=118-115=3 → clip to y=14, r=1.49: 118-1.49*0.8*90=118-107=11→14 at r=1.44 (x=285) -->
+
+  <!-- Unclipped line (red dashed): from (55,118) through clip zone and beyond -->
+  <!-- stops at y=14: r = (118-14)/(90*0.8) = 104/72 = 1.44 → x = 55+1.44*160 = 285 -->
+  <g class="unclip">
+    <line x1="55" y1="118" x2="285" y2="14"
+          stroke="rgba(239,68,68,0.70)" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <!-- arrowhead at (285,14) direction: dx=230, dy=-104, norm=(0.912,-0.411) -->
+    <polygon points="285,14 278,20 283,23" fill="rgba(239,68,68,0.70)"/>
+    <text class="lbl" x="310" y="28" fill="rgba(239,68,68,0.75)">unbounded</text>
+    <text class="lbl" x="310" y="40" fill="rgba(239,68,68,0.55)">r keeps growing</text>
+  </g>
+
+  <!-- Clipped line (green): linear up to r=1+ε=1.2 (x=247, y=118-1.2*0.8*90=118-86=32), then flat -->
+  <g class="clip">
+    <line x1="55"  y1="118" x2="247" y2="32"
+          stroke="rgba(34,197,94,0.88)" stroke-width="2"/>
+    <line x1="247" y1="32"  x2="490" y2="32"
+          stroke="rgba(34,197,94,0.88)" stroke-width="2"/>
+    <!-- kink marker -->
+    <circle cx="247" cy="32" r="3.5" fill="rgba(34,197,94,0.82)"/>
+    <!-- flat label -->
+    <text class="lbl" x="360" y="26" fill="rgba(34,197,94,0.80)">clipped — no incentive</text>
+    <text class="lbl" x="360" y="38" fill="rgba(34,197,94,0.55)">to push r beyond 1+ε</text>
+  </g>
+
+  <!-- r=1 dot (always visible) — current policy reference -->
+  <circle cx="215" cy="46" r="3" fill="rgba(255,255,255,0.50)"/>
+  <text class="lbl" x="219" y="43" fill="rgba(255,255,255,0.40)">r=1</text>
+  <text class="lbl" x="219" y="54" fill="rgba(255,255,255,0.25)">(old policy)</text>
+
+  <!-- Legend -->
+  <line class="clip"   x1="60" y1="50" x2="88" y2="50" stroke="rgba(34,197,94,0.85)" stroke-width="2"/>
+  <text class="clip   lbl" x="93" y="53" fill="rgba(34,197,94,0.78)">clipped (PPO)</text>
+  <line class="unclip" x1="60" y1="66" x2="88" y2="66" stroke="rgba(239,68,68,0.65)" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text class="unclip lbl" x="93" y="69" fill="rgba(239,68,68,0.72)">unclipped</text>
+
+</svg>

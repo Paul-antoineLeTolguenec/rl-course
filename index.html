@@ -39,12 +39,12 @@
               <button class="toc-item" onclick="Reveal.slide(2,16)">
                 <span class="toc-num">02</span>
                 <span class="toc-label">Markov Decision Processes &amp; Dynamic Programming</span>
-                <span class="toc-sub">Bellman equation · Policy evaluation · Policy improvement · Value iteration · Model-free</span>
+                <span class="toc-sub">Bellman equation · Policy iteration · Value iteration · Model-free · Approximated DP</span>
               </button>
               <button class="toc-item" onclick="Reveal.slide(2,48)">
                 <span class="toc-num">03</span>
-                <span class="toc-label">Policy Search &amp; Deep Reinforcement Learning</span>
-                <span class="toc-sub">Policy Gradient · Evolutionary Methods · Deep Q-Network</span>
+                <span class="toc-label">Policy Search</span>
+                <span class="toc-sub">Policy Gradient · REINFORCE · PPO · Evolutionary Strategies</span>
               </button>
             </nav>
         </div>
@@ -605,7 +605,7 @@
           <div class="slide-panel chapter-panel">
             <div class="chapter-num">Chapter 2</div>
             <h2>Markov Decision Processes &amp; Dynamic Programming</h2>
-            <p class="chapter-sub">Bellman equation · Policy evaluation · Policy improvement · Value iteration · Model-free</p>
+            <p class="chapter-sub">Bellman equation · Policy iteration · Value iteration · Model-free · Approximated DP</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
@@ -1778,6 +1778,101 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
+        <!-- slide: Tabular → Deep RL -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>Tabular → Deep RL</h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- problem -->
+                <div style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(239,68,68,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">tabular — doesn't scale</div>
+                  $Q \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|} \quad \xrightarrow{\text{large }\mathcal{S}} \quad \text{intractable}$
+                </div>
+
+                <!-- solution -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(0,212,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">function approximation</div>
+                  $V_w(s),\quad Q_w(s,a),\quad \pi_\theta(\cdot \mid s)$
+                </div>
+
+                <!-- unchanged -->
+                <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">same Bellman · same TD target</div>
+                  $w \leftarrow w + \alpha\,\nabla_w\,\mathcal{L}(w)$
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/tabular_to_deep.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: DQN -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>DQN <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Deep Q-Network</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- loss -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(0,212,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">loss</div>
+                  $\mathcal{L}(w) = \underset{(S_t,A_t,R_t,S_{t+1}) \sim \mathcal{B}}{\mathbb{E}}\!\left[\Bigl(R_t + \gamma \max_{a'} Q_{w^-}(S_{t+1},a') - Q_w(S_t,A_t)\Bigr)^{\!2}\right]$
+                </div>
+
+                <!-- update -->
+                <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(245,158,11,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">update</div>
+                  $w \leftarrow w - \alpha\,\nabla_w\mathcal{L}(w)$ &nbsp; every step
+                  <div style="margin-top:0.3rem;color:rgba(255,255,255,0.45);">$w^- \leftarrow w$ &nbsp; every $C$ steps</div>
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/dqn_loop.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: notebook 03c -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Notebook 03c — Deep RL</h2>
+            <p style="color:var(--muted);font-size:0.85rem;margin:0.6rem 0 1.4rem;">DQN · Experience replay · Target network</p>
+            <div style="display:flex;gap:1rem;justify-content:center;">
+              <a href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03c_deep_rl.ipynb"
+                 target="_blank" rel="noopener"
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:var(--accent);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Open in Colab ↗
+              </a>
+              <a href="notebooks/03c_deep_rl.ipynb" download
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--fg);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Download ↓
+              </a>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
         <!-- slide 9: summary ch2 -->
         <section class="chapter-summary">
           <div class="slide-panel" style="max-width:620px;">
@@ -1821,31 +1916,419 @@
         <section class="chapter-title">
           <div class="slide-panel chapter-panel">
             <div class="chapter-num">Chapter 3</div>
-            <h2>Policy Search &amp; Deep Reinforcement Learning</h2>
-            <p class="chapter-sub">Policy Gradient · Evolutionary Methods · Deep Q-Network</p>
-          </div>
-          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
-        </section>
-
-        <!-- slide 11: policy search -->
-        <section>
-          <div class="slide-panel">
             <h2>Policy Search</h2>
-            <p class="slide-placeholder">TODO — Reinforce, Cross-Entropy Method, Evolution Strategies</p>
+            <p class="chapter-sub">Policy Gradient · REINFORCE · PPO · Evolutionary Strategies</p>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- slide 12: deep rl -->
+        <!-- slide: why policy gradient -->
         <section>
-          <div class="slide-panel">
-            <h2>Deep Reinforcement Learning</h2>
-            <p class="slide-placeholder">TODO — function approximation, Deep Q-Network</p>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Why Policy Gradient?</h2>
+
+            <div style="text-align:center;margin-bottom:0.65rem;">
+              <img src="js/why_policy_gradient.svg" style="width:100%;" />
+            </div>
+
+            <div style="display:flex;gap:0.7rem;">
+
+              <div style="flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Value-Based</div>
+                $$Q^*(s,a) \;\xrightarrow{\;\arg\max_a\;}\; \pi^*(s)$$
+              </div>
+
+              <div style="flex:1;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.7rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Policy Gradient</div>
+                $$\theta_{k+1} = \theta_k + \alpha\,\nabla_\theta J(\theta_k)$$
+              </div>
+
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- slide 13: summary ch3 -->
+        <!-- slide: policy gradient theorem -->
+        <section>
+          <div class="slide-panel" style="max-width:860px;">
+            <h2>Policy Gradient Theorem</h2>
+
+            <div style="text-align:center;margin-bottom:0.65rem;">
+              <img src="js/pg_theorem.svg" style="width:100%;" />
+            </div>
+
+            <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.75rem 1.2rem;text-align:center;">
+              <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Theorem</div>
+              $$\nabla_\theta J(\theta) = \underset{\substack{S_t \sim \rho^{\pi_\theta}_\gamma \\ A_t \sim \pi_\theta(\cdot \mid S_t)}}{\mathbb{E}}\!\left[\nabla_\theta \log \pi_\theta(A_t \mid S_t)\cdot Q^{\pi_\theta}(S_t, A_t)\right]$$
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: REINFORCE -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>REINFORCE <span style="font-size:0.5em;color:var(--muted);">Monte Carlo Policy Gradient</span></h2>
+
+            <div id="reinforce-wrap" style="display:flex;gap:1.2rem;align-items:flex-start;">
+
+              <!-- pseudocode -->
+              <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;text-align:left;font-size:0.78rem;line-height:2.0;">
+                <div><strong>Init:</strong> $\theta$ arbitrary</div>
+                <div style="margin-top:0.3rem;"><strong>For</strong> $k = 0, 1, 2, \ldots$</div>
+
+                <!-- collect -->
+                <div style="margin:0.35rem 0 0 1.4rem;font-size:0.62rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:rgba(0,212,255,0.55);font-family:'JetBrains Mono',monospace;">── collect trajectory ───────────</div>
+                <div style="margin-left:1.4rem;">$S_0 \sim \delta_0$</div>
+                <div style="margin-left:1.4rem;"><strong>For</strong> $t = 0, \ldots, T{-}1$:</div>
+                <div style="margin-left:2.8rem;display:flex;gap:1.2rem;">
+                  <span>$A_t \sim \pi_\theta(\cdot \mid S_t)$</span>
+                  <span style="color:rgba(0,212,255,0.45);font-size:0.72rem;align-self:center;">sample action</span>
+                </div>
+                <div style="margin-left:2.8rem;display:flex;gap:1.2rem;">
+                  <span>$S_{t+1} \sim P(\cdot \mid S_t, A_t)$</span>
+                  <span style="color:rgba(0,212,255,0.45);font-size:0.72rem;align-self:center;">sample next state</span>
+                </div>
+
+                <!-- update -->
+                <div style="margin:0.35rem 0 0 1.4rem;font-size:0.62rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:rgba(167,139,250,0.55);font-family:'JetBrains Mono',monospace;">── update ───────────────────────</div>
+                <div style="margin-left:1.4rem;">$G_T \leftarrow 0$</div>
+                <div style="margin-left:1.4rem;"><strong>For</strong> $t = T{-}1, \ldots, 0$:</div>
+                <div style="margin-left:2.8rem;">$G_t \leftarrow r(S_t) + \gamma\, G_{t+1}$</div>
+                <div style="margin-left:2.8rem;">$\theta \leftarrow \theta + \alpha\, G_t\, \nabla_\theta \log \pi_\theta(A_t \mid S_t)$</div>
+              </div>
+
+              <!-- GIF -->
+              <div style="flex:0 0 auto;text-align:center;">
+                <img id="reinforce-gif" src="" data-src="assets/reinforce.gif" data-last="assets/reinforce_last.png"
+                     style="height:220px;border-radius:6px;border:1px solid rgba(167,139,250,0.15);" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: baseline / variance reduction -->
+        <section>
+          <div class="slide-panel" style="max-width:880px;">
+            <h2>Variance Reduction <span style="font-size:0.5em;color:var(--muted);">Baseline</span></h2>
+
+            <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:0.65rem;">
+
+              <!-- Log-derivative trick -->
+              <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.55rem 1rem;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem;font-family:'JetBrains Mono',monospace;">Log-derivative trick</div>
+                $$\underset{A_t \sim \pi_\theta(\cdot \mid s)}{\mathbb{E}}\!\left[\nabla_\theta \log \pi_\theta(A_t \mid s)\right] = \nabla_\theta\!\sum_{a \in \mathcal{A}}\pi_\theta(a \mid s) = \mathbf{0}$$
+              </div>
+
+              <!-- Modified estimator -->
+              <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.55rem 1rem;text-align:center;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.2rem;font-family:'JetBrains Mono',monospace;">Unbiased for any $b : \mathcal{S} \to \mathbb{R}$</div>
+                $$\nabla_\theta J(\theta) = \underset{\substack{S_t \sim \rho^{\pi_\theta}_\gamma \\ A_t \sim \pi_\theta(\cdot \mid S_t)}}{\mathbb{E}}\!\left[\nabla_\theta \log \pi_\theta(A_t \mid S_t)\cdot \bigl(G_t - b(S_t)\bigr)\right]$$
+              </div>
+
+            </div>
+
+            <img src="js/baseline_variance.svg" style="width:100%;" />
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: advantage function -->
+        <section>
+          <div class="slide-panel" style="max-width:880px;">
+            <h2>Advantage Function</h2>
+
+            <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+
+              <!-- Definition + update -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.65rem 1rem;text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">Definition</div>
+                  $$A^{\pi_\theta}(s,a) \;=\; Q^{\pi_\theta}(s,a) - V^{\pi_\theta}(s)$$
+                </div>
+
+                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1rem;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">REINFORCE with baseline</div>
+                  <div style="font-size:0.82rem;line-height:1.9;">
+                    <div>Optimal $b^*(s) = V^{\pi_\theta}(s)$</div>
+                    <div>$\theta \leftarrow \theta + \alpha\, A^{\pi_\theta}(S_t, A_t)\,\nabla_\theta \log \pi_\theta(A_t \mid S_t)$</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- SVG -->
+              <div style="flex:1.4;">
+                <img src="js/advantage_function.svg" style="width:100%;border-radius:6px;" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: actor-critic -->
+        <section>
+          <div class="slide-panel" style="max-width:900px;">
+            <h2>Actor-Critic</h2>
+
+            <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+
+              <!-- Equations -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+
+                <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:0.65rem 1rem;text-align:center;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,158,11,0.70);margin-bottom:0.3rem;font-family:'JetBrains Mono',monospace;">TD Error — advantage estimate</div>
+                  $$\delta_t \;=\; r(S_t) + \gamma\,V_w(S_{t+1}) - V_w(S_t)$$
+                </div>
+
+                <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.18);border-radius:8px;padding:0.55rem 1rem;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,158,11,0.60);margin-bottom:0.25rem;font-family:'JetBrains Mono',monospace;">Critic update</div>
+                  <div style="font-size:0.82rem;text-align:center;">$w \leftarrow w + \beta\,\delta_t\,\nabla_w V_w(S_t)$</div>
+                </div>
+
+                <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.18);border-radius:8px;padding:0.55rem 1rem;">
+                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(0,212,255,0.60);margin-bottom:0.25rem;font-family:'JetBrains Mono',monospace;">Actor update</div>
+                  <div style="font-size:0.82rem;text-align:center;">$\theta \leftarrow \theta + \alpha\,\delta_t\,\nabla_\theta \log \pi_\theta(A_t \mid S_t)$</div>
+                </div>
+
+              </div>
+
+              <!-- SVG -->
+              <div style="flex:1.4;">
+                <img src="js/actor_critic.svg" style="width:100%;border-radius:6px;" />
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: TRPO -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>TRPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Trust Region Policy Optimization</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- ratio -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  $\displaystyle r_t(\theta) \;=\; \frac{\pi_\theta(A_t \mid S_t)}{\pi_{\theta_\text{old}}(A_t \mid S_t)}$
+                </div>
+
+                <!-- objective -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.22);border-radius:5px;padding:0.4rem 0.8rem;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(0,212,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">objective</div>
+                  $\pi^* = \displaystyle\arg\max_\theta \underset{\substack{S_t \sim d^{\pi_{\theta_\text{old}}} \\ A_t \sim \pi_{\theta_\text{old}}(\cdot \mid S_t)}}{\mathbb{E}}\!\Big[r_t(\theta)\cdot A^{\pi_{\theta_\text{old}}}(S_t,A_t)\Big]$
+                </div>
+
+                <!-- constraint -->
+                <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:5px;padding:0.4rem 0.8rem;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(245,158,11,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">constraint</div>
+                  $\text{s.t.}\;\;\underset{S_t \sim d^{\pi_{\theta_\text{old}}}}{\mathbb{E}}\!\left[\text{KL}\!\left(\pi_{\theta_\text{old}}(\cdot\mid S_t)\,\|\,\pi_\theta(\cdot\mid S_t)\right)\right]\leq\delta$
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/trpo_trust_region.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: PPO -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>PPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Proximal Policy Optimization</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.76em;">
+
+                <!-- ratio (same as TRPO) -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  $\displaystyle r_t(\theta) \;=\; \frac{\pi_\theta(A_t \mid S_t)}{\pi_{\theta_\text{old}}(A_t \mid S_t)}$
+                </div>
+
+                <!-- objective -->
+                <div style="background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.22);border-radius:5px;padding:0.4rem 0.8rem;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(34,197,94,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">objective</div>
+                  $$\pi^* = \arg\max_\theta \underset{\substack{S_t \sim d^{\pi_{\theta_\text{old}}} \\ A_t \sim \pi_{\theta_\text{old}}(\cdot \mid S_t)}}{\mathbb{E}}\!\left[\min\!\left(\begin{array}{l}r_t(\theta)\,A^{\pi_{\theta_\text{old}}},\\[4pt]\text{clip}(r_t(\theta),1{-}\varepsilon,1{+}\varepsilon)\,A^{\pi_{\theta_\text{old}}}\end{array}\right)\right]$$
+                </div>
+
+                <!-- no KL constraint -->
+                <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:5px;padding:0.4rem 0.8rem;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(255,255,255,0.30);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">no KL constraint — ε controls the trust region</div>
+                  $\text{clip}\!\left(r_t(\theta),\,1{-}\varepsilon,\,1{+}\varepsilon\right) \;\in\; [1{-}\varepsilon,\;1{+}\varepsilon]$
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/ppo_clip.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Evolutionary Strategies -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>Evolutionary Strategies <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Black-box Policy Search</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- sampling -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  $\theta_i = \mu_k + \sigma\varepsilon_i, \quad \varepsilon_i \sim \mathcal{N}(0, I)$
+                </div>
+
+                <!-- objective -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(0,212,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">objective</div>
+                  $\mu^* = \displaystyle\arg\max_{\mu} \underset{\theta \sim \mathcal{N}(\mu,\,\sigma^2 I)}{\mathbb{E}}\!\left[J(\theta)\right]$
+                </div>
+
+                <!-- update -->
+                <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(245,158,11,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">update — no gradient needed</div>
+                  $\mu_{k+1} = \mu_k + \dfrac{\alpha}{n\sigma} \displaystyle\sum_{i=1}^{n} J(\theta_i)\,\varepsilon_i$
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/es_standard.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: CMA-ES -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>CMA-ES <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Covariance Matrix Adaptation</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: equations -->
+              <div style="flex:1.1;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- sampling -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  $\theta_i \sim \mathcal{N}(\mu_k,\; C_k)$
+                </div>
+
+                <!-- objective -->
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(0,212,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">objective</div>
+                  $(\mu^*, C^*) = \displaystyle\arg\max_{\mu,\, C} \underset{\theta \sim \mathcal{N}(\mu,\, C)}{\mathbb{E}}\!\left[J(\theta)\right]$
+                </div>
+
+                <!-- update -->
+                <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:5px;padding:0.4rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(245,158,11,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">update — top-λ elites, weights wᵢ ∝ rank J(θᵢ)</div>
+                  $\mu_{k+1} = \displaystyle\sum_{i=1}^{\lambda} w_i\,\theta_i$
+                  <div style="margin-top:0.3rem;">$C_{k+1} = \displaystyle\sum_{i=1}^{\lambda} w_i\,(\theta_i - \mu_k)(\theta_i - \mu_k)^\top$</div>
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/cmaes.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: Deep PPO -->
+        <section>
+          <div class="slide-panel" style="max-width:920px;">
+            <h2>Deep PPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">actor-critic · shared trunk</span></h2>
+
+            <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
+
+              <!-- Left: loss -->
+              <div style="flex:1.2;display:flex;flex-direction:column;gap:0.5rem;font-size:0.88em;">
+
+                <!-- combined loss -->
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:5px;padding:0.45rem 0.8rem;text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(255,255,255,0.30);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">combined loss</div>
+                  $\mathcal{L}(\theta) = \mathcal{L}^{\text{clip}} + c_1\,\mathcal{L}^{\text{value}} - c_2\,\mathcal{L}^{\text{entropy}}$
+                </div>
+
+                <!-- 3 terms -->
+                <div style="display:flex;flex-direction:column;gap:0.3rem;padding:0.1rem 0.5rem;font-size:0.92em;">
+                  <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.62em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.50);min-width:3.8rem;">clip</span>
+                    $-\underset{\substack{S_t \sim d^{\pi_{\theta_\text{old}}} \\ A_t \sim \pi_{\theta_\text{old}}(\cdot \mid S_t)}}{\mathbb{E}}\!\left[\min\!\left(r_t\hat{A}_t,\;\operatorname{clip}(r_t,1\!\pm\!\varepsilon)\hat{A}_t\right)\right]$
+                  </div>
+                  <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.62em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(34,197,94,0.55);min-width:3.8rem;">value</span>
+                    $\underset{S_t \sim d^{\pi_{\theta_\text{old}}}}{\mathbb{E}}\!\left[\bigl(V_\theta(S_t) - \hat{V}_t\bigr)^2\right]$
+                  </div>
+                  <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.62em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);min-width:3.8rem;">entropy</span>
+                    $\underset{S_t \sim d^{\pi_{\theta_\text{old}}}}{\mathbb{E}}\!\left[\mathcal{H}(\pi_\theta(\cdot \mid S_t))\right]$
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right: SVG -->
+              <div style="flex:1;display:flex;align-items:center;">
+                <img src="js/deep_ppo.svg" style="width:100%;border-radius:6px;"/>
+              </div>
+
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: notebook 04 -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Notebook 04 — Policy Gradient</h2>
+            <p style="color:var(--muted);font-size:0.85rem;margin:0.6rem 0 1.4rem;">REINFORCE · PPO · Brax Humanoid</p>
+            <div style="display:flex;gap:1rem;justify-content:center;">
+              <a href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/04_policy_search.ipynb"
+                 target="_blank" rel="noopener"
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:var(--accent);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Open in Colab ↗
+              </a>
+              <a href="notebooks/04_policy_search.ipynb" download
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--fg);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Download ↓
+              </a>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide 13: summary ch3 (placeholder) -->
         <section class="chapter-summary">
           <div class="slide-panel">
             <div class="chapter-num">Summary — Chapter 3</div>
@@ -1894,9 +2377,9 @@
               </div>
             </div>
 
-            <div class="notebook-card nb-optional">
+            <div class="notebook-card">
               <span class="nb-num">03b</span>
-              <h3>Model-Free Methods <span class="nb-tag">optional</span></h3>
+              <h3>Model-Free Methods</h3>
               <p>Monte Carlo, TD learning, Q-learning, SARSA</p>
               <div class="nb-actions">
                 <a class="nb-btn nb-download" href="notebooks/03b_model_free.ipynb" download>Download</a>
@@ -1905,22 +2388,22 @@
             </div>
 
             <div class="notebook-card">
-              <span class="nb-num">04</span>
-              <h3>Policy Search</h3>
-              <p>REINFORCE, CEM, Evolution Strategies</p>
+              <span class="nb-num">03c</span>
+              <h3>Deep RL</h3>
+              <p>DQN · Experience replay · Target network</p>
               <div class="nb-actions">
-                <a class="nb-btn nb-download" href="notebooks/04_policy_search.ipynb" download>Download</a>
-                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/04_policy_search.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+                <a class="nb-btn nb-download" href="notebooks/03c_deep_rl.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/03c_deep_rl.ipynb" target="_blank" rel="noopener">Open in Colab</a>
               </div>
             </div>
 
             <div class="notebook-card">
-              <span class="nb-num">05</span>
-              <h3>Deep Reinforcement Learning</h3>
-              <p>Approximate DP, function approximation, DQN</p>
+              <span class="nb-num">04</span>
+              <h3>Policy Gradient</h3>
+              <p>REINFORCE · PPO · Brax Humanoid (2048 parallel envs)</p>
               <div class="nb-actions">
-                <a class="nb-btn nb-download" href="notebooks/05_deep_rl.ipynb" download>Download</a>
-                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/05_deep_rl.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+                <a class="nb-btn nb-download" href="notebooks/04_policy_search.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/04_policy_search.ipynb" target="_blank" rel="noopener">Open in Colab</a>
               </div>
             </div>
 
@@ -1944,6 +2427,9 @@
       center: true,
       mouseWheel: false,
       plugins: [ RevealMath.KaTeX ],
+      math: {
+        katex: { throwOnError: false }
+      },
       keyboard: {
         37: () => Reveal.up(),    // ← prev slide
         38: () => Reveal.left(),  // ↑ prev section
@@ -2432,6 +2918,29 @@
       Reveal.on('slidechanged', ({ currentSlide }) => {
         if (currentSlide && currentSlide.querySelector('#lam-wrap')) startLamAnim();
         else stopLamAnim();
+      });
+    })();
+
+    // ── REINFORCE GIF restart ──────────────────────────────────────────────────
+    (function () {
+      const el = document.getElementById('reinforce-gif');
+      let rfBuf = null;
+      if (el && el.dataset.src) {
+        fetch(el.dataset.src)
+          .then(r => r.arrayBuffer())
+          .then(buf => { rfBuf = buf; })
+          .catch(() => {});
+      }
+      Reveal.on('slidechanged', ({ currentSlide }) => {
+        if (!currentSlide || !currentSlide.querySelector('#reinforce-wrap')) return;
+        const img = document.getElementById('reinforce-gif');
+        if (!img) return;
+        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+        if (rfBuf) {
+          img.src = URL.createObjectURL(new Blob([rfBuf], { type: 'image/gif' }));
+        } else {
+          img.src = img.dataset.src;
+        }
       });
     })();
 

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="170" viewBox="0 0 600 170">
+  <style>
+    .title { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-anchor: middle; }
+    .sub   { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-anchor: middle; }
+    .node  { fill: rgba(13,18,32,0.88); }
+    .lbl   { font-family: Inter, system-ui, sans-serif; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-s { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-anchor: middle; dominant-baseline: middle; }
+    .arr-c { stroke: rgba(0,212,255,0.5);    stroke-width: 1.8; fill: none; marker-end: url(#mc); }
+    .arr-v { stroke: rgba(167,139,250,0.55); stroke-width: 1.8; fill: none; marker-end: url(#mv); }
+
+    @keyframes d-left {
+      0%,5%   { opacity:0; offset-distance:0%; }
+      8%      { opacity:1; }
+      38%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+    @keyframes d-fwd {
+      0%,52%  { opacity:0; offset-distance:0%; }
+      55%     { opacity:1; }
+      78%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+    @keyframes d-back {
+      0%,80%  { opacity:0; offset-distance:0%; }
+      82%     { opacity:1; }
+      97%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+
+    .sig-l { offset-path: path("M 133,88 L 179,88"); animation: d-left 7s ease-in-out infinite; opacity:0; }
+    .sig-f { offset-path: path("M 381,78 L 462,63"); animation: d-fwd  7s ease-in-out infinite; opacity:0; }
+    .sig-b { offset-path: path("M 487,84 C 487,143 356,143 356,116"); animation: d-back 7s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="mc" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.6)" />
+    </marker>
+    <marker id="mv" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(167,139,250,0.65)" />
+    </marker>
+  </defs>
+
+  <!-- Divider -->
+  <line x1="300" y1="8" x2="300" y2="165" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+
+  <!-- ── LEFT: Value-Based ── -->
+  <text class="title" x="150" y="18" fill="#7a8fa6">Value-Based</text>
+  <text class="sub"   x="150" y="31" fill="rgba(0,212,255,0.38)">indirect — optimize Q, then derive &#x03C0;</text>
+
+  <!-- Q*(s,a) node -->
+  <rect class="node" x="18" y="67" width="113" height="42" rx="8" stroke="#00d4ff" stroke-width="1.5" />
+  <text class="lbl"   x="75" y="82" fill="#00d4ff">Q*(s,a)</text>
+  <text class="lbl-s" x="75" y="97" fill="rgba(0,212,255,0.45)">value function</text>
+
+  <!-- arrow + label -->
+  <line class="arr-c" x1="133" y1="88" x2="179" y2="88" />
+  <text class="sub" x="156" y="81" fill="rgba(0,212,255,0.45)">argmax</text>
+
+  <!-- &#x03C0;*(s) node -->
+  <rect class="node" x="182" y="67" width="100" height="42" rx="8" stroke="#00d4ff" stroke-width="1.5" />
+  <text class="lbl"   x="232" y="82" fill="#00d4ff">&#x03C0;*(s)</text>
+  <text class="lbl-s" x="232" y="97" fill="rgba(0,212,255,0.45)">greedy policy</text>
+
+  <circle class="sig-l" r="4.5" fill="#00d4ff" />
+
+  <!-- ── RIGHT: Policy Gradient ── -->
+  <text class="title" x="450" y="18" fill="#7a8fa6">Policy Gradient</text>
+  <text class="sub"   x="450" y="31" fill="rgba(167,139,250,0.38)">direct — gradient ascent on &#x03B8;</text>
+
+  <!-- &#x03B8; circle -->
+  <circle class="node" cx="356" cy="90" r="27" stroke="#a78bfa" stroke-width="1.5" />
+  <text class="lbl"   x="356" y="85" fill="#a78bfa">&#x03B8;</text>
+  <text class="lbl-s" x="356" y="100" fill="rgba(167,139,250,0.5)">params</text>
+
+  <!-- arrow &#x03B8; &#x2192; J(&#x03B8;) -->
+  <line class="arr-v" x1="381" y1="78" x2="462" y2="63" />
+  <text class="sub" x="428" y="61" fill="rgba(167,139,250,0.45)">&#x03C0;&#x03B8;(a|s)</text>
+
+  <!-- J(&#x03B8;) node -->
+  <rect class="node" x="465" y="44" width="100" height="40" rx="8" stroke="#a78bfa" stroke-width="1.5" />
+  <text class="lbl"   x="515" y="58" fill="#a78bfa">J(&#x03B8;)</text>
+  <text class="lbl-s" x="515" y="73" fill="rgba(167,139,250,0.5)">expected return</text>
+
+  <!-- curved return arrow J(&#x03B8;) &#x2192; &#x03B8; -->
+  <path class="arr-v" d="M 487,84 C 487,143 356,143 356,117" />
+  <text class="sub" x="435" y="139" fill="rgba(167,139,250,0.5)">&#x2207;&#x03B8; J(&#x03B8;)</text>
+
+  <circle class="sig-f" r="4.5" fill="#a78bfa" />
+  <circle class="sig-b" r="4.5" fill="#a78bfa" />
+</svg>

@@ -79,3 +79,6 @@ Before writing any new symbol or equation, always:
 | $r$ | reward function $\mathcal{S} \times \mathcal{A} \to \mathbb{R}$ | Ch2 |
 | $\gamma$ | discount factor | Ch2 |
 | $\mathcal{M}$ | MDP tuple $(\mathcal{S}, \mathcal{A}, P, r, \gamma)$ | Ch2 |
+| $\theta$ | policy parameter vector $\in \mathbb{R}^{\|\mathcal{S}\| \times \|\mathcal{A}\|}$ (tabular softmax) | Ch3 |
+| $\pi_\theta$ | softmax policy $\pi_\theta(a \mid s) = \text{softmax}(\theta_s)_a$ | Ch3 |
+| $J(\theta)$ | expected discounted return $\mathbb{E}_{\pi_\theta}[G_0]$ | Ch3 |

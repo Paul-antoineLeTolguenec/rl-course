@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl  { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag  { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .itl  { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+
+    @keyframes showUnc  { 0%,100%{opacity:0} 8%{opacity:1} 44%{opacity:1} 52%{opacity:0} }
+    @keyframes showTRPO { 0%,52%{opacity:0} 60%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+
+    .unc  { animation: showUnc  9s ease-in-out infinite; opacity:0; }
+    .trpo { animation: showTRPO 9s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Axes -->
+  <line x1="45" y1="128" x2="515" y2="128" stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <line x1="45" y1="128" x2="45"  y2="12"  stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <polygon points="513,125 519,128 513,131" fill="rgba(255,255,255,0.13)"/>
+  <polygon points="42,14 45,8 48,14"        fill="rgba(255,255,255,0.13)"/>
+  <text class="itl" x="524" y="128" fill="rgba(255,255,255,0.26)">θ₁</text>
+  <text class="itl" x="45"  y="7"   fill="rgba(255,255,255,0.26)" text-anchor="middle">θ₂</text>
+
+  <!-- Objective contours centered at θ* = (375, 36) -->
+  <ellipse cx="375" cy="36" rx="22"  ry="14"  fill="none" stroke="rgba(0,212,255,0.40)" stroke-width="0.8"/>
+  <ellipse cx="375" cy="36" rx="50"  ry="31"  fill="none" stroke="rgba(0,212,255,0.27)" stroke-width="0.7"/>
+  <ellipse cx="375" cy="36" rx="85"  ry="53"  fill="none" stroke="rgba(0,212,255,0.16)" stroke-width="0.6"/>
+  <ellipse cx="375" cy="36" rx="125" ry="78"  fill="none" stroke="rgba(0,212,255,0.09)" stroke-width="0.5"/>
+  <ellipse cx="375" cy="36" rx="168" ry="105" fill="none" stroke="rgba(0,212,255,0.05)" stroke-width="0.5"/>
+
+  <!-- θ* dot (always visible) -->
+  <circle cx="375" cy="36" r="3.2" fill="rgba(0,212,255,0.72)"/>
+  <text class="lbl" x="381" y="33" fill="rgba(0,212,255,0.65)">θ*</text>
+
+  <!-- Trust region circle — center θ_old = (185, 84), r = 60 -->
+  <circle cx="185" cy="84" r="60"
+          fill="rgba(245,158,11,0.04)"
+          stroke="rgba(245,158,11,0.45)" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <!-- δ radius indicator -->
+  <line x1="185" y1="24" x2="185" y2="84"
+        stroke="rgba(245,158,11,0.20)" stroke-width="0.7" stroke-dasharray="2,3"/>
+  <text class="lbl" x="190" y="55" fill="rgba(245,158,11,0.45)">δ</text>
+  <text class="tag" x="185" y="16" fill="rgba(245,158,11,0.50)" text-anchor="middle">trust region</text>
+
+  <!-- θ_old dot (always visible) -->
+  <circle cx="185" cy="84" r="4.5" fill="rgba(245,158,11,0.88)"/>
+  <text class="lbl" x="170" y="98" fill="rgba(245,158,11,0.82)">θ<tspan dy="2.5" font-size="5.5">old</tspan></text>
+
+  <!-- ── Unconstrained phase ── -->
+  <!-- Arrow from θ_old (185,84) toward θ* (375,36), exits trust region at (243,69) -->
+  <!-- Arrowhead tip at (370,38): polygon "370,38 362.9,42.8 361.5,37.0" -->
+  <g class="unc">
+    <line x1="185" y1="84" x2="366" y2="39"
+          stroke="rgba(239,68,68,0.72)" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <polygon points="370,38 362.9,42.8 361.5,37.0" fill="rgba(239,68,68,0.72)"/>
+    <text class="lbl"  x="290" y="52" fill="rgba(239,68,68,0.82)" text-anchor="middle">unconstrained</text>
+    <text style="font-family:Inter,sans-serif;font-size:8.5px"
+          x="290" y="66" fill="rgba(239,68,68,0.48)" text-anchor="middle">⚠ violates constraint</text>
+  </g>
+
+  <!-- ── TRPO phase ── -->
+  <!-- Arrow from θ_old (185,84) to θ_TRPO (243,69) — on trust region boundary -->
+  <!-- Arrowhead tip at (243,69): polygon "243,69 236.8,73.2 235.6,68.4" -->
+  <g class="trpo">
+    <line x1="185" y1="84" x2="238" y2="71"
+          stroke="rgba(34,197,94,0.88)" stroke-width="2"/>
+    <polygon points="243,69 236.8,73.2 235.6,68.4" fill="rgba(34,197,94,0.88)"/>
+    <circle cx="243" cy="69" r="3.5" fill="rgba(34,197,94,0.82)"/>
+    <text class="lbl" x="248" y="65" fill="rgba(34,197,94,0.85)">θ<tspan dy="2.5" font-size="5.5">TRPO</tspan></text>
+  </g>
+
+</svg>

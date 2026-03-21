@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="148" viewBox="0 0 560 148">
+  <style>
+    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 6px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .itl { font-family: Inter, sans-serif; font-size: 9px; font-style: italic; dominant-baseline: middle; }
+
+    @keyframes showSamp { 0%,100%{opacity:0} 8%{opacity:1} 44%{opacity:1} 52%{opacity:0} }
+    @keyframes showUpd  { 0%,52%{opacity:0} 60%{opacity:1} 92%{opacity:1} 100%{opacity:0} }
+
+    .samp { animation: showSamp 9s ease-in-out infinite; opacity:0; }
+    .upd  { animation: showUpd  9s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="552" height="140" rx="6"
+        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- Axes -->
+  <line x1="45" y1="128" x2="515" y2="128" stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <line x1="45" y1="128" x2="45"  y2="12"  stroke="rgba(255,255,255,0.13)" stroke-width="0.8"/>
+  <polygon points="513,125 519,128 513,131" fill="rgba(255,255,255,0.13)"/>
+  <polygon points="42,14 45,8 48,14"        fill="rgba(255,255,255,0.13)"/>
+  <text class="itl" x="524" y="128" fill="rgba(255,255,255,0.26)">θ₁</text>
+  <text class="itl" x="45"  y="7"   fill="rgba(255,255,255,0.26)" text-anchor="middle">θ₂</text>
+
+  <!-- Objective contours centered at θ* = (410, 32) -->
+  <ellipse cx="410" cy="32" rx="20"  ry="13"  fill="none" stroke="rgba(0,212,255,0.40)" stroke-width="0.8"/>
+  <ellipse cx="410" cy="32" rx="48"  ry="30"  fill="none" stroke="rgba(0,212,255,0.27)" stroke-width="0.7"/>
+  <ellipse cx="410" cy="32" rx="82"  ry="52"  fill="none" stroke="rgba(0,212,255,0.16)" stroke-width="0.6"/>
+  <ellipse cx="410" cy="32" rx="125" ry="78"  fill="none" stroke="rgba(0,212,255,0.09)" stroke-width="0.5"/>
+  <ellipse cx="410" cy="32" rx="168" ry="106" fill="none" stroke="rgba(0,212,255,0.05)" stroke-width="0.5"/>
+
+  <!-- θ* dot -->
+  <circle cx="410" cy="32" r="3.2" fill="rgba(0,212,255,0.72)"/>
+  <text class="lbl" x="416" y="29" fill="rgba(0,212,255,0.65)">θ*</text>
+
+  <!-- Search distribution N(μ, σ²I): dashed circle center=(160,90) r=40 -->
+  <circle cx="160" cy="90" r="40"
+          fill="rgba(245,158,11,0.04)"
+          stroke="rgba(245,158,11,0.30)" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <!-- σ radius indicator -->
+  <line x1="160" y1="50" x2="160" y2="90"
+        stroke="rgba(245,158,11,0.18)" stroke-width="0.6" stroke-dasharray="2,3"/>
+  <text class="lbl" x="165" y="72" fill="rgba(245,158,11,0.42)">σ</text>
+  <text class="tag" x="160" y="43" fill="rgba(245,158,11,0.42)" text-anchor="middle">N(μ, σ²I)</text>
+
+  <!-- μ_old dot (always visible) -->
+  <circle cx="160" cy="90" r="4.5" fill="rgba(245,158,11,0.88)"/>
+  <text class="lbl" x="140" y="104" fill="rgba(245,158,11,0.82)">μₖ</text>
+
+  <!-- ── Phase 1: Samples ── -->
+  <g class="samp">
+    <!-- green = high J (toward θ*) -->
+    <circle cx="192" cy="68" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="197" cy="80" r="4"   fill="rgba(34,197,94,0.82)"/>
+    <circle cx="178" cy="58" r="3.5" fill="rgba(34,197,94,0.65)"/>
+    <!-- red = low J (away from θ*) -->
+    <circle cx="125" cy="84" r="4"   fill="rgba(239,68,68,0.75)"/>
+    <circle cx="120" cy="106" r="4"  fill="rgba(239,68,68,0.75)"/>
+    <circle cx="148" cy="128" r="3.5" fill="rgba(239,68,68,0.60)"/>
+    <circle cx="172" cy="126" r="3"  fill="rgba(239,68,68,0.55)"/>
+    <!-- legend -->
+    <circle cx="295" cy="95"  r="3.5" fill="rgba(34,197,94,0.75)"/>
+    <text class="lbl" x="304" y="98"  fill="rgba(34,197,94,0.70)">high J(θᵢ)</text>
+    <circle cx="295" cy="112" r="3.5" fill="rgba(239,68,68,0.70)"/>
+    <text class="lbl" x="304" y="115" fill="rgba(239,68,68,0.65)">low J(θᵢ)</text>
+  </g>
+
+  <!-- ── Phase 2: μ update ── -->
+  <!-- μ_new = (180, 78) — pulled toward high-J region -->
+  <!-- arrow: tip=(180,78), direction=(20,-12), unit=(0.857,-0.514) -->
+  <!-- line endpoint 8px before tip: (180-8*0.857, 78+8*0.514)=(173.1,82.1) -->
+  <!-- arrowhead base 5px before tip: (175.7,80.6); perp ±4: (178,84),(174,78) -->
+  <g class="upd">
+    <line x1="160" y1="90" x2="173" y2="82"
+          stroke="rgba(255,255,255,0.65)" stroke-width="1.8"/>
+    <polygon points="180,78 178,84 174,78" fill="rgba(255,255,255,0.65)"/>
+    <circle cx="180" cy="78" r="4.5" fill="rgba(255,255,255,0.80)"/>
+    <text class="lbl" x="186" y="74" fill="rgba(255,255,255,0.78)">μₖ₊₁</text>
+    <!-- annotation -->
+    <text class="lbl" x="295" y="98"  fill="rgba(255,255,255,0.55)">μ updated toward</text>
+    <text class="lbl" x="295" y="110" fill="rgba(255,255,255,0.38)">high-J samples</text>
+  </g>
+
+</svg>
