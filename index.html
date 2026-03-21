@@ -2328,11 +2328,60 @@
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
 
-        <!-- slide 13: summary ch3 (placeholder) -->
+        <!-- slide: notebook 05 -->
+        <section>
+          <div class="slide-panel" style="max-width:620px;text-align:center;">
+            <h2>Notebook 05 — Evolution Strategies</h2>
+            <p style="color:var(--muted);font-size:0.85rem;margin:0.6rem 0 1.4rem;">ES · CMA-ES · Brax InvertedDoublePendulum</p>
+            <div style="display:flex;gap:1rem;justify-content:center;">
+              <a href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/05_evolution_strategies.ipynb"
+                 target="_blank" rel="noopener"
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:var(--accent);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Open in Colab ↗
+              </a>
+              <a href="notebooks/05_evolution_strategies.ipynb" download
+                 style="display:inline-block;padding:0.6rem 1.4rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--fg);font-size:0.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;">
+                Download ↓
+              </a>
+            </div>
+          </div>
+          <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
+        </section>
+
+        <!-- slide: summary ch3 -->
         <section class="chapter-summary">
-          <div class="slide-panel">
+          <div class="slide-panel" style="max-width:620px;">
             <div class="chapter-num">Summary — Chapter 3</div>
-            <p class="slide-placeholder">TODO — key takeaways · Notebooks 04, 05</p>
+            <div style="display:flex;flex-direction:column;gap:1.1rem;margin-top:1.2rem;">
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">①</span>
+                <div>
+                  <strong>Policy Gradient Theorem</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">$\nabla_\theta J = \mathbb{E}[\nabla_\theta \log \pi_\theta(A_t|S_t)\cdot G_t]$ — optimize $J(\theta)$ directly by gradient ascent in parameter space.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">②</span>
+                <div>
+                  <strong>REINFORCE</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">Monte Carlo PG: one rollout → discounted returns → gradient step. Unbiased but high variance.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">③</span>
+                <div>
+                  <strong>PPO clips the update</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">Constrains $r_t(\theta) = \pi_\theta / \pi_{\theta_\text{old}}$ to $[1\pm\varepsilon]$. GAE reduces variance of advantage estimates.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="color:rgba(167,139,250,0.9);font-size:1.1rem;font-weight:700;min-width:1.4rem;">④</span>
+                <div>
+                  <strong>Evolutionary Strategies are gradient-free</strong>
+                  <div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">ES estimates $\nabla J$ via fitness-weighted perturbations. CMA-ES adapts the search covariance and excels on harder problems.</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="slide-nav">← → navigate slides &nbsp;·&nbsp; ↓ resources</div>
         </section>
@@ -2404,6 +2453,16 @@
               <div class="nb-actions">
                 <a class="nb-btn nb-download" href="notebooks/04_policy_search.ipynb" download>Download</a>
                 <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/04_policy_search.ipynb" target="_blank" rel="noopener">Open in Colab</a>
+              </div>
+            </div>
+
+            <div class="notebook-card">
+              <span class="nb-num">05</span>
+              <h3>Evolution Strategies</h3>
+              <p>ES · CMA-ES · Brax InvertedDoublePendulum</p>
+              <div class="nb-actions">
+                <a class="nb-btn nb-download" href="notebooks/05_evolution_strategies.ipynb" download>Download</a>
+                <a class="nb-btn nb-colab" href="https://colab.research.google.com/github/Paul-antoineLeTolguenec/rl-course/blob/main/notebooks/05_evolution_strategies.ipynb" target="_blank" rel="noopener">Open in Colab</a>
               </div>
             </div>
 
