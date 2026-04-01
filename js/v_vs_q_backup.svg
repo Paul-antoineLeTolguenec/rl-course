@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="240" viewBox="0 0 850 270">
+  <style>
+    .nd-v  { fill: rgba(13,18,32,0.85); stroke: #00d4ff;              stroke-width: 2; }
+    .nd-q  { fill: rgba(13,18,32,0.85); stroke: #a78bfa;              stroke-width: 2; }
+    .nd-sp { fill: rgba(13,18,32,0.85); stroke: rgba(255,255,255,0.25); stroke-width: 1.5; }
+    .lb    { font-family: Inter, system-ui, sans-serif; text-anchor: middle; dominant-baseline: middle; }
+    .lb-e  { font-family: 'JetBrains Mono', monospace; font-size: 9px; dominant-baseline: middle; fill: rgba(255,255,255,0.35); }
+    .arr-v { fill: none; stroke: rgba(0,212,255,0.3);   stroke-width: 1.5; marker-end: url(#ah-v); }
+    .arr-q { fill: none; stroke: rgba(167,139,250,0.3); stroke-width: 1.5; marker-end: url(#ah-q); }
+
+    /* ── V side animations ── */
+    @keyframes v-pulse-sp  { 0%,100%{opacity:.4;} 6%,16%{opacity:1; filter:drop-shadow(0 0 6px #00d4ff);} }
+    @keyframes v-travel-1  { 0%,18%{opacity:0;offset-distance:100%;} 20%{opacity:1;} 40%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes v-travel-2  { 0%,23%{opacity:0;offset-distance:100%;} 25%{opacity:1;} 45%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes v-travel-3  { 0%,28%{opacity:0;offset-distance:100%;} 30%{opacity:1;} 50%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes v-glow-root { 0%,50%{filter:none;} 55%,68%{filter:drop-shadow(0 0 14px #00d4ff);} 75%,100%{filter:none;} }
+    @keyframes v-show-txt  { 0%,60%{opacity:0;} 66%,86%{opacity:1;} 92%,100%{opacity:0;} }
+
+    .v-sp1  { animation: v-pulse-sp  8s ease-in-out infinite; }
+    .v-sp2  { animation: v-pulse-sp  8s ease-in-out infinite; animation-delay:.25s; }
+    .v-sp3  { animation: v-pulse-sp  8s ease-in-out infinite; animation-delay:.5s; }
+    .v-root { animation: v-glow-root 8s ease-in-out infinite; }
+    .v-d1   { offset-path: path("M 50,178 L 138,96");   animation: v-travel-1 8s ease-in-out infinite; opacity:0; }
+    .v-d2   { offset-path: path("M 160,178 L 160,96");  animation: v-travel-2 8s ease-in-out infinite; opacity:0; }
+    .v-d3   { offset-path: path("M 270,178 L 182,96");  animation: v-travel-3 8s ease-in-out infinite; opacity:0; }
+    .v-txt  { animation: v-show-txt  8s ease-in-out infinite; opacity:0; }
+
+    /* ── Q side animations ── */
+    @keyframes q-pulse-sp  { 0%,100%{opacity:.4;} 4%,12%{opacity:1; filter:drop-shadow(0 0 5px rgba(167,139,250,0.7));} }
+    @keyframes q-travel-s1 { 0%,14%{opacity:0;offset-distance:100%;} 16%{opacity:1;} 30%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes q-travel-s2 { 0%,18%{opacity:0;offset-distance:100%;} 20%{opacity:1;} 34%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes q-pulse-a   { 0%,100%{opacity:.45;} 32%,42%{opacity:1; filter:drop-shadow(0 0 6px #a78bfa);} }
+    @keyframes q-travel-a1 { 0%,44%{opacity:0;offset-distance:100%;} 46%{opacity:1;} 60%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes q-travel-a2 { 0%,48%{opacity:0;offset-distance:100%;} 50%{opacity:1;} 64%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes q-glow-root { 0%,62%{filter:none;} 68%,80%{filter:drop-shadow(0 0 14px #a78bfa);} 86%,100%{filter:none;} }
+    @keyframes q-show-txt  { 0%,72%{opacity:0;} 78%,92%{opacity:1;} 98%,100%{opacity:0;} }
+
+    .q-sp1  { animation: q-pulse-sp  8s ease-in-out infinite; }
+    .q-sp2  { animation: q-pulse-sp  8s ease-in-out infinite; animation-delay:.2s; }
+    .q-a1   { animation: q-pulse-a   8s ease-in-out infinite; }
+    .q-a2   { animation: q-pulse-a   8s ease-in-out infinite; animation-delay:.15s; }
+    .q-a3   { animation: q-pulse-a   8s ease-in-out infinite; animation-delay:.3s; }
+    .q-a4   { animation: q-pulse-a   8s ease-in-out infinite; animation-delay:.45s; }
+    .q-root { animation: q-glow-root 8s ease-in-out infinite; }
+
+    .q-ds1  { offset-path: path("M 490,197 L 520,162"); animation: q-travel-s1 8s ease-in-out infinite; opacity:0; }
+    .q-ds2  { offset-path: path("M 680,197 L 710,162"); animation: q-travel-s2 8s ease-in-out infinite; opacity:0; }
+    .q-da1  { offset-path: path("M 535,122 L 598,96");  animation: q-travel-a1 8s ease-in-out infinite; opacity:0; }
+    .q-da2  { offset-path: path("M 725,122 L 622,96");  animation: q-travel-a2 8s ease-in-out infinite; opacity:0; }
+    .q-txt  { animation: q-show-txt  8s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="ah-v" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.4)" />
+    </marker>
+    <marker id="ah-q" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(167,139,250,0.4)" />
+    </marker>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- LEFT: V-function backup (cx=160)           -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <text class="lb" x="160" y="18" fill="#00d4ff" font-size="13" font-weight="700" letter-spacing="0.1em">V-FUNCTION</text>
+
+  <!-- Root node: v^π(s) at (160, 70) r=26 -->
+  <g class="v-root">
+    <circle class="nd-v" cx="160" cy="70" r="26" />
+    <text class="lb" x="160" y="70" fill="#00d4ff" font-size="14">v<tspan dy="-7" font-size="9">π</tspan><tspan dy="7">(s)</tspan></text>
+  </g>
+
+  <!-- Arrows: root → leaves -->
+  <line class="arr-v" x1="142" y1="92"  x2="68"  y2="178" />
+  <line class="arr-v" x1="160" y1="96"  x2="160" y2="178" />
+  <line class="arr-v" x1="178" y1="92"  x2="252" y2="178" />
+
+  <!-- Edge labels — offset to the side -->
+  <text class="lb-e" x="84"  y="128" text-anchor="start">P<tspan dy="-5" font-size="7">π</tspan><tspan dy="5">(s'₁|s)</tspan></text>
+  <text class="lb-e" x="168" y="140" text-anchor="start">P<tspan dy="-5" font-size="7">π</tspan><tspan dy="5">(s'₂|s)</tspan></text>
+  <text class="lb-e" x="228" y="128" text-anchor="start">P<tspan dy="-5" font-size="7">π</tspan><tspan dy="5">(s'₃|s)</tspan></text>
+
+  <!-- Leaf nodes at y=202 -->
+  <g class="v-sp1">
+    <circle class="nd-v" cx="50" cy="202" r="24" />
+    <text class="lb" x="50" y="202" fill="#00d4ff" font-size="11">v(s'₁)</text>
+  </g>
+  <g class="v-sp2">
+    <circle class="nd-v" cx="160" cy="202" r="24" />
+    <text class="lb" x="160" y="202" fill="#00d4ff" font-size="11">v(s'₂)</text>
+  </g>
+  <g class="v-sp3">
+    <circle class="nd-v" cx="270" cy="202" r="24" />
+    <text class="lb" x="270" y="202" fill="#00d4ff" font-size="11">v(s'₃)</text>
+  </g>
+
+  <!-- Signal dots (leaf → root) -->
+  <circle class="v-d1" r="4" fill="#00d4ff" />
+  <circle class="v-d2" r="4" fill="#00d4ff" />
+  <circle class="v-d3" r="4" fill="#00d4ff" />
+
+  <!-- Bottom annotation -->
+  <text class="lb v-txt" x="160" y="252" fill="rgba(0,212,255,0.7)" font-size="10" font-family="'JetBrains Mono', monospace">needs P<tspan dy="-5" font-size="7">π</tspan><tspan dy="5"> = Σ π(a|s) P(s'|s,a)</tspan></text>
+
+  <!-- ═══════════ DIVIDER ═══════════ -->
+  <line x1="400" y1="10" x2="400" y2="260" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="5,4" />
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- RIGHT: Q-function backup (cx=610)          -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <text class="lb" x="610" y="18" fill="#a78bfa" font-size="13" font-weight="700" letter-spacing="0.1em">Q-FUNCTION</text>
+
+  <!-- Root node: q^π(s,a) at (610, 70) r=26 -->
+  <g class="q-root">
+    <circle class="nd-q" cx="610" cy="70" r="26" />
+    <text class="lb" x="610" y="70" fill="#a78bfa" font-size="13">q<tspan dy="-7" font-size="9">π</tspan><tspan dy="7">(s,a)</tspan></text>
+  </g>
+
+  <!-- Arrows: root → s' intermediate -->
+  <line class="arr-q" x1="590" y1="92"  x2="550" y2="122" />
+  <line class="arr-q" x1="630" y1="92"  x2="710" y2="122" />
+
+  <!-- Edge labels root → s' -->
+  <text class="lb-e" x="552" y="100" text-anchor="end">P(s'₁|s,a)</text>
+  <text class="lb-e" x="668" y="100" text-anchor="start">P(s'₂|s,a)</text>
+
+  <!-- Intermediate s' nodes at y=140 -->
+  <g class="q-sp1">
+    <circle class="nd-sp" cx="535" cy="140" r="20" />
+    <text class="lb" x="535" y="140" fill="rgba(255,255,255,0.5)" font-size="12">s'₁</text>
+  </g>
+  <g class="q-sp2">
+    <circle class="nd-sp" cx="725" cy="140" r="20" />
+    <text class="lb" x="725" y="140" fill="rgba(255,255,255,0.5)" font-size="12">s'₂</text>
+  </g>
+
+  <!-- Arrows: s' → leaf q-nodes -->
+  <line class="arr-q" x1="520" y1="157" x2="497" y2="192" />
+  <line class="arr-q" x1="550" y1="157" x2="573" y2="192" />
+  <line class="arr-q" x1="710" y1="157" x2="687" y2="192" />
+  <line class="arr-q" x1="740" y1="157" x2="763" y2="192" />
+
+  <!-- Edge labels s' → a' -->
+  <text class="lb-e" x="496" y="176" text-anchor="end">π</text>
+  <text class="lb-e" x="574" y="176" text-anchor="start">π</text>
+  <text class="lb-e" x="686" y="176" text-anchor="end">π</text>
+  <text class="lb-e" x="764" y="176" text-anchor="start">π</text>
+
+  <!-- Leaf q-value nodes at y=212 -->
+  <g class="q-a1">
+    <circle class="nd-q" cx="485" cy="212" r="19" />
+    <text class="lb" x="485" y="212" fill="rgba(167,139,250,0.7)" font-size="9">q(s'₁,a'₁)</text>
+  </g>
+  <g class="q-a2">
+    <circle class="nd-q" cx="585" cy="212" r="19" />
+    <text class="lb" x="585" y="212" fill="rgba(167,139,250,0.7)" font-size="9">q(s'₁,a'₂)</text>
+  </g>
+  <g class="q-a3">
+    <circle class="nd-q" cx="675" cy="212" r="19" />
+    <text class="lb" x="675" y="212" fill="rgba(167,139,250,0.7)" font-size="9">q(s'₂,a'₁)</text>
+  </g>
+  <g class="q-a4">
+    <circle class="nd-q" cx="775" cy="212" r="19" />
+    <text class="lb" x="775" y="212" fill="rgba(167,139,250,0.7)" font-size="9">q(s'₂,a'₂)</text>
+  </g>
+
+  <!-- Signal dots -->
+  <circle class="q-ds1" r="4" fill="#a78bfa" />
+  <circle class="q-ds2" r="4" fill="#a78bfa" />
+  <circle class="q-da1" r="4" fill="#a78bfa" />
+  <circle class="q-da2" r="4" fill="#a78bfa" />
+
+  <!-- Bottom annotation -->
+  <text class="lb q-txt" x="610" y="255" fill="rgba(167,139,250,0.7)" font-size="10" font-family="'JetBrains Mono', monospace">greedy = argmax&#x2090; q(s,a) — no model needed</text>
+</svg>

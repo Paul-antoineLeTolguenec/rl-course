@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 260">
+  <style>
+    .nd-s  { fill: rgba(13,18,32,0.85); stroke: #00d4ff; stroke-width: 2; }
+    .nd-a  { fill: rgba(13,18,32,0.85); stroke: #a78bfa; stroke-width: 1.8; }
+    .nd-sp { fill: rgba(13,18,32,0.85); stroke: rgba(255,255,255,0.25); stroke-width: 1.5; }
+    .lb    { font-family: Inter, system-ui, sans-serif; text-anchor: middle; dominant-baseline: middle; }
+    .lb-e  { font-family: 'JetBrains Mono', monospace; font-size: 9px; dominant-baseline: middle; fill: rgba(255,255,255,0.3); }
+    .arr   { fill: none; stroke: rgba(167,139,250,0.25); stroke-width: 1.5; marker-end: url(#ah-bo); }
+    .arr-w { fill: none; stroke: rgba(0,212,255,0.25); stroke-width: 1.5; marker-end: url(#ah-bo2); }
+
+    /* ── Phase 1: s' nodes pulse (all branches) ── */
+    @keyframes p-sp {
+      0%,100% { opacity: .4; }
+      4%,12%  { opacity: 1; filter: drop-shadow(0 0 5px rgba(167,139,250,0.6)); }
+    }
+
+    /* ── Phase 2: signals s' → action nodes ── */
+    @keyframes t-sp1 { 0%,14%{opacity:0;offset-distance:100%;} 16%{opacity:1;} 26%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes t-sp2 { 0%,16%{opacity:0;offset-distance:100%;} 18%{opacity:1;} 28%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes t-sp3 { 0%,14%{opacity:0;offset-distance:100%;} 16%{opacity:1;} 26%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes t-sp4 { 0%,16%{opacity:0;offset-distance:100%;} 18%{opacity:1;} 28%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes t-sp5 { 0%,14%{opacity:0;offset-distance:100%;} 16%{opacity:1;} 26%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+    @keyframes t-sp6 { 0%,16%{opacity:0;offset-distance:100%;} 18%{opacity:1;} 28%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+
+    /* ── Phase 3: action nodes pulse (evaluate) ── */
+    @keyframes p-a1 { 0%,100%{opacity:.5;} 30%,38%{opacity:1; filter:drop-shadow(0 0 6px #a78bfa);} }
+    @keyframes p-a2 { 0%,100%{opacity:.5;} 33%,41%{opacity:1; filter:drop-shadow(0 0 6px #a78bfa);} }
+    @keyframes p-a3 { 0%,100%{opacity:.5;} 36%,44%{opacity:1; filter:drop-shadow(0 0 6px #a78bfa);} }
+
+    /* ── Phase 4: max selects best — a₂ wins, others fade ── */
+    @keyframes max-win  { 0%,46%{opacity:.5;} 50%,72%{opacity:1; filter:drop-shadow(0 0 10px #f59e0b);} 80%,100%{opacity:.5;} }
+    @keyframes max-lose  { 0%,46%{opacity:.5;} 50%,72%{opacity:.15;} 80%,100%{opacity:.5;} }
+
+    /* ── Phase 5: signal a₂ → root ── */
+    @keyframes t-win { 0%,54%{opacity:0;offset-distance:100%;} 56%{opacity:1;} 68%{opacity:0;offset-distance:0%;} 100%{opacity:0;} }
+
+    /* ── Phase 6: root glows ── */
+    @keyframes g-root { 0%,68%{filter:none;} 72%,84%{filter:drop-shadow(0 0 14px #00d4ff);} 90%,100%{filter:none;} }
+
+    /* ── Max label ── */
+    @keyframes show-max { 0%,48%{opacity:0;} 50%,72%{opacity:1;} 78%,100%{opacity:0;} }
+
+    /* ── Bottom text ── */
+    @keyframes show-txt { 0%,72%{opacity:0;} 76%,90%{opacity:1;} 96%,100%{opacity:0;} }
+
+    /* bindings */
+    .gsp1 { animation: p-sp 8s ease-in-out infinite; }
+    .gsp2 { animation: p-sp 8s ease-in-out infinite; animation-delay:.15s; }
+    .gsp3 { animation: p-sp 8s ease-in-out infinite; animation-delay:.3s; }
+    .gsp4 { animation: p-sp 8s ease-in-out infinite; animation-delay:.1s; }
+    .gsp5 { animation: p-sp 8s ease-in-out infinite; animation-delay:.25s; }
+    .gsp6 { animation: p-sp 8s ease-in-out infinite; animation-delay:.4s; }
+
+    .ga1 { animation: p-a1 8s ease-in-out infinite, max-lose 8s ease-in-out infinite; }
+    .ga2 { animation: p-a2 8s ease-in-out infinite, max-win  8s ease-in-out infinite; }
+    .ga3 { animation: p-a3 8s ease-in-out infinite, max-lose 8s ease-in-out infinite; }
+
+    .g-root { animation: g-root 8s ease-in-out infinite; }
+
+    /* signal dots s' → a */
+    .ds1 { offset-path: path("M 65,210  L 95,155");  animation: t-sp1 8s ease-in-out infinite; opacity:0; }
+    .ds2 { offset-path: path("M 165,210 L 135,155"); animation: t-sp2 8s ease-in-out infinite; opacity:0; }
+    .ds3 { offset-path: path("M 260,210 L 290,155"); animation: t-sp3 8s ease-in-out infinite; opacity:0; }
+    .ds4 { offset-path: path("M 370,210 L 340,155"); animation: t-sp4 8s ease-in-out infinite; opacity:0; }
+    .ds5 { offset-path: path("M 470,210 L 500,155"); animation: t-sp5 8s ease-in-out infinite; opacity:0; }
+    .ds6 { offset-path: path("M 580,210 L 550,155"); animation: t-sp6 8s ease-in-out infinite; opacity:0; }
+
+    /* signal dot winner a₂ → root */
+    .dw { offset-path: path("M 315,120 L 320,70"); animation: t-win 8s ease-in-out infinite; opacity:0; }
+
+    .max-lbl { animation: show-max 8s ease-in-out infinite; opacity:0; }
+    .bot-txt { animation: show-txt 8s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="ah-bo" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(167,139,250,0.35)" />
+    </marker>
+    <marker id="ah-bo2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.4)" />
+    </marker>
+  </defs>
+
+  <!-- ═══ LEVEL 0: Root V*(s) at (325, 45) ═══ -->
+  <g class="g-root">
+    <circle class="nd-s" cx="325" cy="45" r="26" />
+    <text class="lb" x="325" y="45" fill="#00d4ff" font-size="14">V<tspan dy="-7" font-size="9">*</tspan><tspan dy="7">(s)</tspan></text>
+  </g>
+
+  <!-- ═══ Arrows root → action nodes ═══ -->
+  <line class="arr-w" x1="305" y1="67" x2="118" y2="120" />
+  <line class="arr-w" x1="325" y1="71" x2="315" y2="120" />
+  <line class="arr-w" x1="345" y1="67" x2="522" y2="120" />
+
+  <!-- ═══ LEVEL 1: Action nodes ═══ -->
+  <!-- a₁ at (110, 135) -->
+  <g class="ga1">
+    <rect class="nd-a" x="70" y="122" width="80" height="28" rx="6" />
+    <text class="lb" x="110" y="136" fill="#a78bfa" font-size="11">a₁</text>
+  </g>
+  <!-- a₂ at (315, 135) — the winner -->
+  <g class="ga2">
+    <rect class="nd-a" x="275" y="122" width="80" height="28" rx="6" />
+    <text class="lb" x="315" y="136" fill="#a78bfa" font-size="11">a₂</text>
+  </g>
+  <!-- a₃ at (530, 135) -->
+  <g class="ga3">
+    <rect class="nd-a" x="490" y="122" width="80" height="28" rx="6" />
+    <text class="lb" x="530" y="136" fill="#a78bfa" font-size="11">a₃</text>
+  </g>
+
+  <!-- ═══ Arrows action → s' nodes ═══ -->
+  <!-- a₁ → s'₁, s'₂ -->
+  <line class="arr" x1="90"  y1="150" x2="70"  y2="198" />
+  <line class="arr" x1="130" y1="150" x2="160" y2="198" />
+  <!-- a₂ → s'₃, s'₄ -->
+  <line class="arr" x1="295" y1="150" x2="265" y2="198" />
+  <line class="arr" x1="335" y1="150" x2="365" y2="198" />
+  <!-- a₃ → s'₅, s'₆ -->
+  <line class="arr" x1="510" y1="150" x2="475" y2="198" />
+  <line class="arr" x1="550" y1="150" x2="575" y2="198" />
+
+  <!-- Edge labels a → s' -->
+  <text class="lb-e" x="68"  y="176" text-anchor="end">P</text>
+  <text class="lb-e" x="162" y="176" text-anchor="start">P</text>
+  <text class="lb-e" x="263" y="176" text-anchor="end">P</text>
+  <text class="lb-e" x="367" y="176" text-anchor="start">P</text>
+  <text class="lb-e" x="473" y="176" text-anchor="end">P</text>
+  <text class="lb-e" x="577" y="176" text-anchor="start">P</text>
+
+  <!-- ═══ LEVEL 2: s' leaf nodes ═══ -->
+  <g class="gsp1"><circle class="nd-sp" cx="60"  cy="218" r="18" />
+    <text class="lb" x="60"  y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₁</text></g>
+  <g class="gsp2"><circle class="nd-sp" cx="170" cy="218" r="18" />
+    <text class="lb" x="170" y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₂</text></g>
+  <g class="gsp3"><circle class="nd-sp" cx="255" cy="218" r="18" />
+    <text class="lb" x="255" y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₃</text></g>
+  <g class="gsp4"><circle class="nd-sp" cx="375" cy="218" r="18" />
+    <text class="lb" x="375" y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₄</text></g>
+  <g class="gsp5"><circle class="nd-sp" cx="465" cy="218" r="18" />
+    <text class="lb" x="465" y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₅</text></g>
+  <g class="gsp6"><circle class="nd-sp" cx="585" cy="218" r="18" />
+    <text class="lb" x="585" y="218" fill="rgba(255,255,255,0.45)" font-size="10">s'₆</text></g>
+
+  <!-- ═══ Signal dots s' → action ═══ -->
+  <circle class="ds1" r="4" fill="#a78bfa" />
+  <circle class="ds2" r="4" fill="#a78bfa" />
+  <circle class="ds3" r="4" fill="#a78bfa" />
+  <circle class="ds4" r="4" fill="#a78bfa" />
+  <circle class="ds5" r="4" fill="#a78bfa" />
+  <circle class="ds6" r="4" fill="#a78bfa" />
+
+  <!-- ═══ Signal dot winner → root ═══ -->
+  <circle class="dw" r="5" fill="#f59e0b" />
+
+  <!-- ═══ "max" label on winning branch ═══ -->
+  <text class="lb max-lbl" x="315" y="108" fill="#f59e0b" font-size="12" font-weight="700"
+        font-family="'JetBrains Mono', monospace">★ max</text>
+
+  <!-- ═══ Bottom annotation ═══ -->
+  <text class="lb bot-txt" x="325" y="256" fill="rgba(0,212,255,0.65)" font-size="10"
+        font-family="'JetBrains Mono', monospace">max over actions — no fixed policy</text>
+</svg>

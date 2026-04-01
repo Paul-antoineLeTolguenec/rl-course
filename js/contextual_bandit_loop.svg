@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220">
+  <style>
+    .node { fill: rgba(13,18,32,0.85); stroke-width: 2; }
+    .lbl  { font-family: Inter, system-ui, sans-serif; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+    .lbl-sm { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; }
+    .arrow { fill: none; stroke-width: 1.5; }
+
+    /* ── Phase 1: D emits context Xₜ ── */
+    @keyframes glow-d {
+      0%,100% { filter: none; }
+      2%,10%  { filter: drop-shadow(0 0 10px #f59e0b); }
+    }
+    @keyframes dot-ctx {
+      0%,5%   { opacity:0; offset-distance:0%; }
+      7%      { opacity:1; }
+      22%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+
+    /* ── Phase 2: Agent receives Xₜ, glows ── */
+    @keyframes glow-agent {
+      0%,100% { filter: none; }
+      24%,34% { filter: drop-shadow(0 0 10px #00d4ff); }
+    }
+
+    /* ── Phase 3: Agent sends Aₜ ── */
+    @keyframes dot-act {
+      0%,30%  { opacity:0; offset-distance:0%; }
+      32%     { opacity:1; }
+      48%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+
+    /* ── Phase 4: Env glows ── -->
+    @keyframes glow-env {
+      0%,100% { filter: none; }
+      50%,60% { filter: drop-shadow(0 0 10px #a78bfa); }
+    }
+
+    /* ── Phase 5: Env returns Rₜ ── */
+    @keyframes dot-rew {
+      0%,58%  { opacity:0; offset-distance:0%; }
+      60%     { opacity:1; }
+      76%     { opacity:0; offset-distance:100%; }
+      100%    { opacity:0; }
+    }
+
+    /* ── Phase 6: Agent glows again (update) ── */
+    @keyframes glow-agent2 {
+      0%,100% { filter: none; }
+      78%,90% { filter: drop-shadow(0 0 14px #00d4ff); }
+    }
+
+    /* ── Label flashes ── */
+    @keyframes flash-ctx {
+      0%,100% { opacity: 0.5; }
+      7%,22%  { opacity: 1; }
+    }
+    @keyframes flash-act {
+      0%,100% { opacity: 0.5; }
+      32%,48% { opacity: 1; }
+    }
+    @keyframes flash-rew {
+      0%,100% { opacity: 0.5; }
+      60%,76% { opacity: 1; }
+    }
+
+    .grp-d     { animation: glow-d      8s ease-in-out infinite; }
+    .grp-agent { animation: glow-agent  8s ease-in-out infinite, glow-agent2 8s ease-in-out infinite; }
+    .grp-env   { animation: glow-env    8s ease-in-out infinite; }
+
+    .sig-ctx { offset-path: path("M 140,107 L 220,107"); animation: dot-ctx 8s ease-in-out infinite; opacity:0; }
+    .sig-act { offset-path: path("M 390,85  Q 430,28  470,85");  animation: dot-act 8s ease-in-out infinite; opacity:0; }
+    .sig-rew { offset-path: path("M 470,130 Q 430,190 390,130"); animation: dot-rew 8s ease-in-out infinite; opacity:0; }
+
+    .lbl-ctx { animation: flash-ctx 8s ease-in-out infinite; }
+    .lbl-act { animation: flash-act 8s ease-in-out infinite; }
+    .lbl-rew { animation: flash-rew 8s ease-in-out infinite; }
+  </style>
+
+  <defs>
+    <marker id="arr-cyan" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="rgba(0,212,255,0.6)" />
+    </marker>
+    <marker id="arr-purple" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="rgba(167,139,250,0.6)" />
+    </marker>
+    <marker id="arr-amber" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="rgba(245,158,11,0.6)" />
+    </marker>
+  </defs>
+
+  <!-- ═══ NODES ═══ -->
+
+  <!-- Distribution D: x=30 w=110 → right edge 140, cy=107 -->
+  <g class="grp-d">
+    <rect class="node" x="30" y="75" width="110" height="64" rx="12"
+          stroke="#f59e0b" />
+    <text class="lbl" x="85" y="100" fill="#f59e0b" font-size="18">D</text>
+    <text class="lbl" x="85" y="122" fill="#f59e0b" font-size="10" opacity="0.7">context</text>
+  </g>
+
+  <!-- Agent: x=220 w=170 → left 220, right 390, cy=107 -->
+  <g class="grp-agent">
+    <rect class="node" x="220" y="60" width="170" height="94" rx="12"
+          stroke="#00d4ff" />
+    <text class="lbl" x="305" y="92" fill="#e2e8f0" font-size="16">Agent</text>
+    <text class="lbl" x="305" y="116" fill="#00d4ff" font-size="11" opacity="0.7">π(· | H<tspan font-size="8" baseline-shift="sub">t</tspan>, X<tspan font-size="8" baseline-shift="sub">t</tspan>)</text>
+  </g>
+
+  <!-- Environment: x=470 w=170 → left 470, right 640, cy=107 -->
+  <g class="grp-env">
+    <rect class="node" x="470" y="60" width="170" height="94" rx="12"
+          stroke="#a78bfa" />
+    <text class="lbl" x="555" y="92" fill="#e2e8f0" font-size="16">Environment</text>
+    <text class="lbl" x="555" y="116" fill="#a78bfa" font-size="11" opacity="0.7">R&#x209C; ~ ν&#x2090;&#x209C;&#x2C;&#x2093;&#x209C;</text>
+  </g>
+
+  <!-- ═══ ARROWS ═══ -->
+
+  <!-- D → Agent: straight, right edge of D (140) to left edge of Agent (220) -->
+  <line class="arrow" x1="140" y1="107" x2="215" y2="107"
+        stroke="#f59e0b" stroke-opacity="0.4" marker-end="url(#arr-amber)" />
+  <text class="lbl-sm lbl-ctx" x="178" y="96" fill="#f59e0b">X<tspan font-size="8" baseline-shift="sub">t</tspan></text>
+
+  <!-- Agent → Env: top arc, right edge of Agent (390) to left edge of Env (470) -->
+  <path class="arrow" d="M390,85 Q430,28 470,85"
+        stroke="#00d4ff" stroke-opacity="0.4" marker-end="url(#arr-cyan)" />
+  <text class="lbl-sm lbl-act" x="430" y="36" fill="#00d4ff">A<tspan font-size="8" baseline-shift="sub">t</tspan></text>
+
+  <!-- Env → Agent: bottom arc, left edge of Env (470) to right edge of Agent (390) -->
+  <path class="arrow" d="M470,130 Q430,190 390,130"
+        stroke="#a78bfa" stroke-opacity="0.4" marker-end="url(#arr-purple)" />
+  <text class="lbl-sm lbl-rew" x="430" y="196" fill="#a78bfa">R<tspan font-size="8" baseline-shift="sub">t</tspan></text>
+
+  <!-- ═══ SIGNAL DOTS ═══ -->
+  <circle class="sig-ctx" r="5" fill="#f59e0b" />
+  <circle class="sig-act" r="5" fill="#00d4ff" />
+  <circle class="sig-rew" r="5" fill="#a78bfa" />
+
+  <!-- ── Round label ── -->
+  <text class="lbl-sm" x="350" y="210" fill="rgba(226,232,240,0.3)" font-size="10">round t = 1, 2, …, T</text>
+</svg>

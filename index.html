@@ -537,33 +537,41 @@
 
         <!-- slide: contextual bandits formal setting -->
         <section>
-          <div class="slide-panel" style="max-width:680px;">
+          <div class="slide-panel" style="max-width:860px;">
             <h2>Contextual Bandits</h2>
 
-            <div style="display:flex;gap:1rem;align-items:baseline;margin-bottom:0.7rem;">
-              <span style="color:var(--accent);min-width:90px;font-size:0.8rem;text-transform:uppercase;letter-spacing:.05em;">Context</span>
-              <span>$X_t \sim \mathcal{D}$ on $\mathcal{X}$ — observed <em>before</em> acting at round $t$</span>
-            </div>
-            <div style="display:flex;gap:1rem;align-items:baseline;margin-bottom:0.7rem;">
-              <span style="color:var(--accent);min-width:90px;font-size:0.8rem;text-transform:uppercase;letter-spacing:.05em;">History</span>
-              <span>$H_t = (X_1, A_1, R_1,\, \ldots,\, X_{t-1}, A_{t-1}, R_{t-1})$</span>
-            </div>
-            <div style="display:flex;gap:1rem;align-items:baseline;margin-bottom:0.7rem;">
-              <span style="color:var(--accent);min-width:90px;font-size:0.8rem;text-transform:uppercase;letter-spacing:.05em;">Policy</span>
-              <span>$A_t \sim \pi(\cdot \mid H_t, X_t)$</span>
-            </div>
-            <div style="display:flex;gap:1rem;align-items:baseline;margin-bottom:0.7rem;">
-              <span style="color:var(--accent);min-width:90px;font-size:0.8rem;text-transform:uppercase;letter-spacing:.05em;">Reward</span>
-              <span>$R_t \sim \nu_{A_t,\, X_t}$</span>
-            </div>
-            <div style="display:flex;gap:1rem;align-items:baseline;margin-bottom:0.7rem;">
-              <span style="color:var(--accent);min-width:90px;font-size:0.8rem;text-transform:uppercase;letter-spacing:.05em;">Regret</span>
-              <span>$\displaystyle\mathrm{Reg}_T = \underset{X_t \sim \mathcal{D}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} \max_a \mu_{a,X_t}\right] - \underset{\substack{X_t \sim \mathcal{D} \\ A_t \sim \pi(\cdot \mid H_t, X_t) \\ R_t \sim \nu_{A_t,X_t}}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} R_t\right]$</span>
-            </div>
+            <div style="display:flex;gap:1.4rem;align-items:flex-start;">
 
-            <!-- <div style="margin-top:1rem;padding:0.6rem 1rem;border-left:2px solid var(--accent);color:var(--muted);font-size:0.82rem;">
-              The optimal policy <strong>adapts</strong> to each context — strictly richer than any fixed arm.
-            </div> -->
+              <!-- Left: animated loop SVG -->
+              <div style="flex-shrink:0;width:340px;">
+                <img src="js/contextual_bandit_loop.svg" style="width:100%;border-radius:6px;" />
+              </div>
+
+              <!-- Right: formal definitions -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:0.55rem;">
+                <div style="display:flex;gap:0.8rem;align-items:baseline;">
+                  <span style="color:#f59e0b;min-width:70px;font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">Context</span>
+                  <span style="font-size:0.88rem;">$X_t \sim \mathcal{D}$ — observed <em>before</em> acting</span>
+                </div>
+                <div style="display:flex;gap:0.8rem;align-items:baseline;">
+                  <span style="color:var(--muted);min-width:70px;font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">History</span>
+                  <span style="font-size:0.88rem;">$H_t = (X_1, A_1, R_1,\, \ldots,\, X_{t-1}, A_{t-1}, R_{t-1})$</span>
+                </div>
+                <div style="display:flex;gap:0.8rem;align-items:baseline;">
+                  <span style="color:var(--accent);min-width:70px;font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">Policy</span>
+                  <span style="font-size:0.88rem;">$A_t \sim \pi(\cdot \mid H_t, X_t)$</span>
+                </div>
+                <div style="display:flex;gap:0.8rem;align-items:baseline;">
+                  <span style="color:var(--accent2);min-width:70px;font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">Reward</span>
+                  <span style="font-size:0.88rem;">$R_t \sim \nu_{A_t,\, X_t}$</span>
+                </div>
+                <div style="display:flex;gap:0.8rem;align-items:baseline;">
+                  <span style="color:var(--muted);min-width:70px;font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">Regret</span>
+                  <span style="font-size:0.82rem;">$\displaystyle\mathrm{Reg}_T = \underset{X_t \sim \mathcal{D}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} \max_a \mu_{a,X_t}\right] - \underset{\substack{X_t \sim \mathcal{D} \\ A_t \sim \pi}}{\mathbb{E}}\!\left[\sum_{t=1}^{T} R_t\right]$</span>
+                </div>
+              </div>
+
+            </div>
           </div>
           <div class="slide-nav">← → navigate</div>
         </section>
@@ -840,6 +848,11 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Policy Evaluation <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+
+            <!-- Trajectory SVG -->
+            <div style="text-align:center;margin-bottom:0.5rem;">
+              <img src="js/policy_eval_trajectory.svg" style="width:100%;max-width:660px;" />
+            </div>
 
             <!-- Top row: objective + J definition -->
             <div style="display:flex;gap:0.7rem;margin-bottom:0.7rem;">
@@ -1121,8 +1134,17 @@
           <div class="slide-panel" style="max-width:860px;">
             <h2>Bellman Optimality Operator</h2>
 
-            <div style="text-align:center;margin:0.8rem 0 1rem;">
-              $$(\mathcal{T}^* V)(s) \;=\; \max_{a \in \mathcal{A}}\; \underset{S' \sim P(\cdot \mid s,\, a)}{\mathbb{E}}\!\left[r(s) + \gamma\, V(S')\right]$$
+            <div style="display:flex;gap:1.2rem;align-items:flex-start;margin-bottom:0.5rem;">
+              <!-- Left: backup diagram -->
+              <div style="flex-shrink:0;width:340px;">
+                <img src="js/bellman_optimality_backup.svg" style="width:100%;border-radius:6px;" />
+              </div>
+              <!-- Right: equation -->
+              <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0.6rem;padding-top:0.5rem;">
+                <div style="text-align:center;">
+                  $$(\mathcal{T}^* V)(s) \;=\; \max_{a \in \mathcal{A}}\; \underset{S' \sim P(\cdot \mid s,\, a)}{\mathbb{E}}\!\left[r(s) + \gamma\, V(S')\right]$$
+                </div>
+              </div>
             </div>
 
             <div style="display:flex;gap:0.7rem;">
@@ -1318,6 +1340,11 @@
           <div class="slide-panel" style="max-width:920px;">
             <h2>TD(0) — Policy Evaluation <span style="font-size:0.5em;color:var(--muted);">Q-function (SARSA)</span></h2>
 
+            <!-- SARSA chain diagram -->
+            <div style="text-align:center;margin-bottom:0.5rem;">
+              <img src="js/sarsa_loop.svg" style="width:100%;max-width:620px;" />
+            </div>
+
             <div id="tdq-wrap" style="display:flex;gap:1.2rem;align-items:flex-start;">
 
               <!-- pseudocode -->
@@ -1337,7 +1364,7 @@
               <!-- GIF -->
               <div style="flex:0 0 auto;text-align:center;">
                 <img id="tdq-gif" src="" data-src="assets/td_q.gif" data-last="assets/td_q_last.png"
-                     style="height:220px;border-radius:6px;border:1px solid rgba(167,139,250,0.15);" />
+                     style="height:200px;border-radius:6px;border:1px solid rgba(167,139,250,0.15);" />
               </div>
 
             </div>
@@ -1347,39 +1374,36 @@
 
         <!-- slide: V vs Q -->
         <section>
-          <div class="slide-panel" style="max-width:860px;">
+          <div class="slide-panel" style="max-width:900px;">
             <h2>V-function vs Q-function</h2>
 
-            <div style="display:flex;flex-direction:column;gap:0.55rem;">
+            <!-- Animated backup diagrams side by side -->
+            <div style="text-align:center;margin-bottom:0.5rem;">
+              <img src="js/v_vs_q_backup.svg" style="height:190px;width:100%;max-width:700px;" />
+            </div>
 
-              <!-- Column headers -->
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;padding:0 0.1rem;">
-                <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;">V-function</div>
-                <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;">Q-function</div>
-              </div>
+            <div style="display:flex;flex-direction:column;gap:0.45rem;">
 
               <!-- Row 1: greedy policy -->
               <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;">Greedy policy</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
-                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;overflow:hidden;">
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;overflow:hidden;">
                   <div style="font-size:0.78em;">$$\pi'(s) = \arg\max_a \Bigl[ r(s,a) + \gamma \sum_{s'} P(s'\!\mid\! s,a)\, v(s') \Bigr]$$</div>
                 </div>
-                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;display:flex;align-items:center;justify-content:center;">
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;display:flex;align-items:center;justify-content:center;">
                   <div style="font-size:0.78em;">$$\pi'(s) = \arg\max_a\; q(s,a)$$</div>
                 </div>
               </div>
 
-              <!-- Row 2: empirical update -->
-              <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;">Required sampling</div>
+              <!-- Row 2: TD target -->
+              <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;">TD target</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
-                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;">
-                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.3rem;">TD target</div>
-                  <div style="margin-bottom:0.4rem;">$r(s) + \gamma\, v(S')$</div>
+                <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                  <div style="margin-bottom:0.3rem;">$r(s) + \gamma\, v(S')$</div>
                   <div style="font-size:0.62rem;color:var(--muted);">requires $S' \sim P^{\pi}(\cdot \mid s)$ — must follow $\pi$</div>
                 </div>
-                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.6rem 0.8rem;text-align:center;">
-                  <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-bottom:0.3rem;">TD target</div>
-                  <div style="margin-bottom:0.4rem;">$r(s,a) + \gamma\, q(S',A')$</div>
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:0.5rem 0.8rem;text-align:center;">
+                  <div style="margin-bottom:0.3rem;">$r(s,a) + \gamma\, q(S',A')$</div>
                   <div style="font-size:0.62rem;color:var(--muted);">$(s,a,r,S')$ arbitrary &nbsp;·&nbsp; $A' \sim \pi(\cdot \mid S')$</div>
                 </div>
               </div>

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150">
+  <style>
+    .nd   { fill: rgba(13,18,32,0.85); stroke-width: 2; }
+    .nd-s { stroke: #00d4ff; }
+    .lb   { font-family: Inter, system-ui, sans-serif; text-anchor: middle; dominant-baseline: middle; }
+    .lb-e { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-anchor: middle; fill: rgba(255,255,255,0.3); }
+    .lb-r { font-family: 'JetBrains Mono', monospace; text-anchor: middle; }
+    .arr  { fill: none; stroke: rgba(0,212,255,0.25); stroke-width: 1.5; marker-end: url(#ah-pe); }
+    .dots { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 1.5; stroke-dasharray: 3,4; }
+
+    /* ── Sequential glow S₀ → S₁ → S₂ → S₃ ── */
+    @keyframes g0 { 0%,100%{filter:none;} 2%,10% {filter:drop-shadow(0 0 10px #00d4ff);} }
+    @keyframes g1 { 0%,100%{filter:none;} 14%,22%{filter:drop-shadow(0 0 10px #00d4ff);} }
+    @keyframes g2 { 0%,100%{filter:none;} 26%,34%{filter:drop-shadow(0 0 10px #00d4ff);} }
+    @keyframes g3 { 0%,100%{filter:none;} 38%,46%{filter:drop-shadow(0 0 10px #00d4ff);} }
+
+    /* ── Signal dots between nodes ── */
+    @keyframes d01 { 0%,6% {opacity:0;offset-distance:0%;} 8% {opacity:1;} 14%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+    @keyframes d12 { 0%,18%{opacity:0;offset-distance:0%;} 20%{opacity:1;} 26%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+    @keyframes d23 { 0%,30%{opacity:0;offset-distance:0%;} 32%{opacity:1;} 38%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+
+    /* ── Reward labels appear with their node ── */
+    @keyframes r0 { 0%,100%{opacity:0.2;} 2%,10% {opacity:1;} }
+    @keyframes r1 { 0%,100%{opacity:0.2;} 14%,22%{opacity:1;} }
+    @keyframes r2 { 0%,100%{opacity:0.2;} 26%,34%{opacity:1;} }
+    @keyframes r3 { 0%,100%{opacity:0.2;} 38%,46%{opacity:1;} }
+
+    /* ── Accumulator bar grows ── */
+    @keyframes bar-w {
+      0%,2%  { width: 0; }
+      10%    { width: 40px; }
+      22%    { width: 65px; }
+      34%    { width: 80px; }
+      46%,88%{ width: 95px; }
+      96%,100%{ width: 0; }
+    }
+    @keyframes bar-glow {
+      0%,46% { filter: none; }
+      50%,82%{ filter: drop-shadow(0 0 8px rgba(167,139,250,0.6)); }
+      90%,100%{ filter: none; }
+    }
+
+    /* ── Sum text ── */
+    @keyframes show-sum {
+      0%,48% { opacity: 0; }
+      54%,84%{ opacity: 1; }
+      92%,100%{ opacity: 0; }
+    }
+
+    .gs0 { animation: g0 8s ease-in-out infinite; }
+    .gs1 { animation: g1 8s ease-in-out infinite; }
+    .gs2 { animation: g2 8s ease-in-out infinite; }
+    .gs3 { animation: g3 8s ease-in-out infinite; }
+
+    .sd01 { offset-path: path("M 108,55 L 182,55"); animation: d01 8s ease-in-out infinite; opacity:0; }
+    .sd12 { offset-path: path("M 258,55 L 332,55"); animation: d12 8s ease-in-out infinite; opacity:0; }
+    .sd23 { offset-path: path("M 408,55 L 482,55"); animation: d23 8s ease-in-out infinite; opacity:0; }
+
+    .lr0 { animation: r0 8s ease-in-out infinite; }
+    .lr1 { animation: r1 8s ease-in-out infinite; }
+    .lr2 { animation: r2 8s ease-in-out infinite; }
+    .lr3 { animation: r3 8s ease-in-out infinite; }
+
+    .sum-txt { animation: show-sum 8s ease-in-out infinite; opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="ah-pe" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.4)" />
+    </marker>
+  </defs>
+
+  <!-- ═══ Arrows ═══ -->
+  <line class="arr" x1="108" y1="55" x2="182" y2="55" />
+  <line class="arr" x1="258" y1="55" x2="332" y2="55" />
+  <line class="arr" x1="408" y1="55" x2="482" y2="55" />
+  <line class="dots"  x1="558" y1="55" x2="610" y2="55" />
+
+  <!-- ═══ State nodes ═══ -->
+  <g class="gs0">
+    <circle class="nd nd-s" cx="80" cy="55" r="28" />
+    <text class="lb" x="80" y="55" fill="#00d4ff" font-size="14">S₀</text>
+  </g>
+  <g class="gs1">
+    <circle class="nd nd-s" cx="230" cy="55" r="28" />
+    <text class="lb" x="230" y="55" fill="#00d4ff" font-size="14">S₁</text>
+  </g>
+  <g class="gs2">
+    <circle class="nd nd-s" cx="380" cy="55" r="28" />
+    <text class="lb" x="380" y="55" fill="#00d4ff" font-size="14">S₂</text>
+  </g>
+  <g class="gs3">
+    <circle class="nd nd-s" cx="530" cy="55" r="28" />
+    <text class="lb" x="530" y="55" fill="#00d4ff" font-size="14">S₃</text>
+  </g>
+
+  <!-- ═══ Edge labels (action + transition) ═══ -->
+  <text class="lb-e" x="145" y="42">A₀~π</text>
+  <text class="lb-e" x="295" y="42">A₁~π</text>
+  <text class="lb-e" x="445" y="42">A₂~π</text>
+
+  <!-- ═══ Reward labels below nodes ═══ -->
+  <text class="lb-r lr0" x="80"  y="102" fill="#f59e0b" font-size="11" opacity="0.2">γ⁰r(S₀)</text>
+  <text class="lb-r lr1" x="230" y="102" fill="#f59e0b" font-size="11" opacity="0.2">γ¹r(S₁)</text>
+  <text class="lb-r lr2" x="380" y="102" fill="#f59e0b" font-size="11" opacity="0.2">γ²r(S₂)</text>
+  <text class="lb-r lr3" x="530" y="102" fill="#f59e0b" font-size="11" opacity="0.2">γ³r(S₃)</text>
+
+  <!-- ═══ Signal dots ═══ -->
+  <circle class="sd01" r="5" fill="#00d4ff" />
+  <circle class="sd12" r="5" fill="#00d4ff" />
+  <circle class="sd23" r="5" fill="#00d4ff" />
+
+  <!-- ═══ Accumulator bar ═══ -->
+  <rect x="620" y="46" width="0" height="18" rx="4"
+        fill="rgba(167,139,250,0.25)" stroke="rgba(167,139,250,0.5)" stroke-width="1"
+        style="animation: bar-w 8s ease-in-out infinite, bar-glow 8s ease-in-out infinite;" />
+
+  <!-- ═══ Sum label ═══ -->
+  <text class="lb sum-txt" x="680" y="37" fill="#a78bfa" font-size="10"
+        font-family="'JetBrains Mono', monospace">v<tspan dy="-5" font-size="7">π</tspan><tspan dy="5">(S₀)</tspan></text>
+  <text class="lb sum-txt" x="680" y="82" fill="rgba(167,139,250,0.6)" font-size="9"
+        font-family="'JetBrains Mono', monospace">= Σ γᵗr(Sₜ)</text>
+</svg>

@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 170">
+  <style>
+    .nd   { fill: rgba(13,18,32,0.85); stroke-width: 2; }
+    .nd-s { stroke: #00d4ff; }
+    .nd-a { stroke: #a78bfa; }
+    .nd-r { stroke: #f59e0b; }
+    .lb   { font-family: Inter, system-ui, sans-serif; text-anchor: middle; dominant-baseline: middle; }
+    .lb-e { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-anchor: middle; fill: rgba(255,255,255,0.3); }
+    .arr  { fill: none; stroke-width: 1.5; marker-end: url(#ah-s); }
+
+    /* ── Sequential glow: S → A → R → S' → A' ── */
+    @keyframes glow-s1 {
+      0%,100% { filter: none; }
+      2%,10%  { filter: drop-shadow(0 0 10px #00d4ff); }
+    }
+    @keyframes glow-a1 {
+      0%,100% { filter: none; }
+      12%,20% { filter: drop-shadow(0 0 10px #a78bfa); }
+    }
+    @keyframes glow-r {
+      0%,100% { filter: none; }
+      22%,30% { filter: drop-shadow(0 0 10px #f59e0b); }
+    }
+    @keyframes glow-s2 {
+      0%,100% { filter: none; }
+      32%,40% { filter: drop-shadow(0 0 10px #00d4ff); }
+    }
+    @keyframes glow-a2 {
+      0%,100% { filter: none; }
+      42%,50% { filter: drop-shadow(0 0 10px #a78bfa); }
+    }
+
+    /* ── Signal dots between nodes ── */
+    @keyframes dot-1 { 0%,4%{opacity:0;offset-distance:0%;} 6%{opacity:1;} 12%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+    @keyframes dot-2 { 0%,14%{opacity:0;offset-distance:0%;} 16%{opacity:1;} 22%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+    @keyframes dot-3 { 0%,24%{opacity:0;offset-distance:0%;} 26%{opacity:1;} 32%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+    @keyframes dot-4 { 0%,34%{opacity:0;offset-distance:0%;} 36%{opacity:1;} 42%{opacity:0;offset-distance:100%;} 100%{opacity:0;} }
+
+    /* ── Delta update: appears then fades ── */
+    @keyframes show-delta {
+      0%,52%  { opacity: 0; }
+      58%,80% { opacity: 1; }
+      88%,100%{ opacity: 0; }
+    }
+
+    /* ── Bootstrap arc pulse ── */
+    @keyframes arc-pulse {
+      0%,52%  { stroke-opacity: 0; }
+      58%,80% { stroke-opacity: 0.5; }
+      88%,100%{ stroke-opacity: 0; }
+    }
+
+    .g-s1 { animation: glow-s1 8s ease-in-out infinite; }
+    .g-a1 { animation: glow-a1 8s ease-in-out infinite; }
+    .g-r  { animation: glow-r  8s ease-in-out infinite; }
+    .g-s2 { animation: glow-s2 8s ease-in-out infinite; }
+    .g-a2 { animation: glow-a2 8s ease-in-out infinite; }
+
+    .d1 { offset-path: path("M 118,70 L 182,70"); animation: dot-1 8s ease-in-out infinite; opacity:0; }
+    .d2 { offset-path: path("M 248,70 L 312,70"); animation: dot-2 8s ease-in-out infinite; opacity:0; }
+    .d3 { offset-path: path("M 378,70 L 442,70"); animation: dot-3 8s ease-in-out infinite; opacity:0; }
+    .d4 { offset-path: path("M 508,70 L 572,70"); animation: dot-4 8s ease-in-out infinite; opacity:0; }
+
+    .delta-txt { animation: show-delta 8s ease-in-out infinite; opacity:0; }
+    .arc-bst   { animation: arc-pulse  8s ease-in-out infinite; stroke-opacity:0; }
+  </style>
+
+  <defs>
+    <marker id="ah-s" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(255,255,255,0.3)" />
+    </marker>
+    <marker id="ah-bst" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0,6 3,0 6" fill="rgba(0,212,255,0.5)" />
+    </marker>
+  </defs>
+
+  <!-- ═══ Title letters above each node ═══ -->
+  <text class="lb" x="90"  y="20" fill="#00d4ff" font-size="18" font-weight="700">S</text>
+  <text class="lb" x="220" y="20" fill="#a78bfa" font-size="18" font-weight="700">A</text>
+  <text class="lb" x="340" y="20" fill="#f59e0b" font-size="18" font-weight="700">R</text>
+  <text class="lb" x="470" y="20" fill="#00d4ff" font-size="18" font-weight="700">S</text>
+  <text class="lb" x="600" y="20" fill="#a78bfa" font-size="18" font-weight="700">A</text>
+
+  <!-- ═══ Arrows between nodes ═══ -->
+  <line class="arr" x1="118" y1="70" x2="190" y2="70" stroke="rgba(255,255,255,0.15)" />
+  <line class="arr" x1="248" y1="70" x2="310" y2="70" stroke="rgba(255,255,255,0.15)" />
+  <line class="arr" x1="378" y1="70" x2="440" y2="70" stroke="rgba(255,255,255,0.15)" />
+  <line class="arr" x1="508" y1="70" x2="570" y2="70" stroke="rgba(255,255,255,0.15)" />
+
+  <!-- ═══ Nodes ═══ -->
+  <g class="g-s1">
+    <circle class="nd nd-s" cx="90" cy="70" r="28" />
+    <text class="lb" x="90" y="70" fill="#00d4ff" font-size="14">S<tspan font-size="9" baseline-shift="sub">t</tspan></text>
+  </g>
+  <g class="g-a1">
+    <circle class="nd nd-a" cx="220" cy="70" r="28" />
+    <text class="lb" x="220" y="70" fill="#a78bfa" font-size="14">A<tspan font-size="9" baseline-shift="sub">t</tspan></text>
+  </g>
+  <g class="g-r">
+    <circle class="nd nd-r" cx="340" cy="70" r="28" />
+    <text class="lb" x="340" y="70" fill="#f59e0b" font-size="14">R<tspan font-size="9" baseline-shift="sub">t</tspan></text>
+  </g>
+  <g class="g-s2">
+    <circle class="nd nd-s" cx="470" cy="70" r="28" />
+    <text class="lb" x="470" y="70" fill="#00d4ff" font-size="14">S'<tspan font-size="9" baseline-shift="sub">t</tspan></text>
+  </g>
+  <g class="g-a2">
+    <circle class="nd nd-a" cx="600" cy="70" r="28" />
+    <text class="lb" x="600" y="70" fill="#a78bfa" font-size="14">A'<tspan font-size="9" baseline-shift="sub">t</tspan></text>
+  </g>
+
+  <!-- ═══ Edge labels ═══ -->
+  <text class="lb-e" x="155" y="58">π(·|S<tspan font-size="7" baseline-shift="sub">t</tspan>)</text>
+  <text class="lb-e" x="285" y="58">r(S<tspan font-size="7" baseline-shift="sub">t</tspan>,A<tspan font-size="7" baseline-shift="sub">t</tspan>)</text>
+  <text class="lb-e" x="410" y="58">P(·|S<tspan font-size="7" baseline-shift="sub">t</tspan>,A<tspan font-size="7" baseline-shift="sub">t</tspan>)</text>
+  <text class="lb-e" x="540" y="58">π(·|S'<tspan font-size="7" baseline-shift="sub">t</tspan>)</text>
+
+  <!-- ═══ Signal dots ═══ -->
+  <circle class="d1" r="5" fill="#a78bfa" />
+  <circle class="d2" r="5" fill="#f59e0b" />
+  <circle class="d3" r="5" fill="#00d4ff" />
+  <circle class="d4" r="5" fill="#a78bfa" />
+
+  <!-- ═══ Bootstrap arc: A'ₜ back to Sₜ ═══ -->
+  <path class="arc-bst" d="M 600,100 Q 340,175 90,100"
+        fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="5,3"
+        marker-end="url(#ah-bst)" />
+
+  <!-- ═══ Delta / update text ═══ -->
+  <text class="lb delta-txt" x="340" y="148" fill="rgba(0,212,255,0.8)" font-size="11"
+        font-family="'JetBrains Mono', monospace">δₜ = Rₜ + γ q(S'ₜ, A'ₜ) − q(Sₜ, Aₜ)</text>
+</svg>
