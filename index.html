@@ -179,21 +179,25 @@
                 <div class="tl-h-dot"></div>
                 <span class="tl-h-year">1933</span>
                 <span class="tl-h-label">Thompson</span>
+                <span class="tl-h-sub" style="font-size:0.55rem;color:var(--muted);display:block;">Posterior sampling</span>
               </div>
               <div class="tl-h-item">
                 <div class="tl-h-dot"></div>
                 <span class="tl-h-year">1952</span>
                 <span class="tl-h-label">Robbins</span>
+                <span class="tl-h-sub" style="font-size:0.55rem;color:var(--muted);display:block;">Sequential design</span>
               </div>
               <div class="tl-h-item">
                 <div class="tl-h-dot"></div>
                 <span class="tl-h-year">1985</span>
                 <span class="tl-h-label">Lai &amp; Robbins</span>
+                <span class="tl-h-sub" style="font-size:0.55rem;color:var(--muted);display:block;">Lower bound on regret</span>
               </div>
               <div class="tl-h-item">
                 <div class="tl-h-dot"></div>
                 <span class="tl-h-year">2002</span>
                 <span class="tl-h-label">Auer et al.</span>
+                <span class="tl-h-sub" style="font-size:0.55rem;color:var(--muted);display:block;">UCB algorithm</span>
               </div>
             </div>
           </div>
@@ -247,6 +251,7 @@
         <section>
           <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>&epsilon;-Greedy</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Flip a coin: explore at random with probability ε, exploit the best arm otherwise.</p>
             <!-- top row: decision tree (left) + gif (right) -->
             <div style="display:flex;align-items:flex-start;justify-content:center;gap:1.4rem;margin-top:1rem;">
               <!-- left: decision tree -->
@@ -312,6 +317,7 @@
         <section>
           <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>Upper Confidence Bound</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Pick the arm with the highest optimistic estimate — uncertainty is a bonus.</p>
             <!-- top row: figure left + gif right -->
             <div style="display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:1rem;margin-bottom:0.6rem;">
               <figure style="margin:0;flex:0 0 auto;">
@@ -344,6 +350,7 @@
         <section>
           <div class="slide-panel" style="max-width:780px;text-align:center;">
             <h2>Thompson Sampling</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Sample a belief for each arm, then act as if the sample were the truth.</p>
             <!-- top row: figure left + gif right -->
             <div style="display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:1rem;margin-bottom:0.6rem;">
               <figure style="margin:0;flex:0 0 auto;">
@@ -703,6 +710,7 @@
         <section>
           <div class="slide-panel" style="max-width:900px;">
             <h2>Discrete-Time Markov Chain</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">The future depends only on the present — not on how we got here.</p>
             <div style="display:flex;gap:1.4rem;align-items:flex-start;margin-top:0.6rem;">
 
               <!-- left: GIF -->
@@ -752,6 +760,7 @@
         <section>
           <div class="slide-panel" style="max-width:900px;">
             <h2>Controlled Markov Chain</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Introducing actions: the agent now shapes its own transition dynamics.</p>
             <div style="display:flex;gap:1.4rem;align-items:flex-start;margin-top:0.6rem;">
 
               <!-- left: GIF -->
@@ -810,6 +819,7 @@
         <section>
           <div class="slide-panel" style="max-width:900px;">
             <h2>Markov Decision Process</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">An MDP is a controlled Markov chain with a reward signal.</p>
             <div style="display:flex;gap:1.4rem;align-items:flex-start;margin-top:0.6rem;">
 
               <!-- left: GIF -->
@@ -894,6 +904,7 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Bellman Equation</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">The value of a state is the immediate reward plus the discounted value of what comes next.</p>
 
             <!-- Backup diagram -->
             <div style="text-align:center;margin-bottom:0.7rem;">
@@ -924,6 +935,7 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Bellman Operator</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Repeated application converges to the unique fixed point — guaranteed by contraction.</p>
 
             <!-- Basin of attraction -->
             <div style="text-align:center;margin-bottom:0.7rem;">
@@ -1033,6 +1045,7 @@
         <section>
           <div class="slide-panel" style="max-width:960px;">
             <h2>Policy Improvement <span style="font-size:0.5em;color:var(--muted);">(Model-Based)</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Greedy w.r.t. the value function yields a strictly better policy.</p>
             <img src="assets/policy_improvement.png" style="width:100%;border-radius:8px;border:1px solid rgba(0,212,255,0.15);" />
             <div style="display:flex;justify-content:space-around;margin-top:0.5rem;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;color:var(--muted);">
               <span>$\pi$ — Rightward &nbsp;·&nbsp; heatmap $v^\pi$</span>
@@ -1133,6 +1146,7 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Bellman Optimality Operator</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Replace the policy average with a max — directly targeting the optimal value.</p>
 
             <div style="display:flex;gap:1.2rem;align-items:flex-start;margin-bottom:0.5rem;">
               <!-- Left: backup diagram -->
@@ -1196,6 +1210,7 @@
         <section>
           <div class="slide-panel" style="max-width:960px;">
             <h2>PI vs VI </h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Two roads to the same destination: PI alternates eval/improve, VI fuses them.</p>
 
             <div id="cmp-wrap" style="display:flex;gap:1rem;margin-bottom:0.6rem;">
               <div style="flex:1;text-align:center;">
@@ -1376,6 +1391,7 @@
         <section>
           <div class="slide-panel" style="max-width:900px;">
             <h2>V-function vs Q-function</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Q removes the need for a model: the greedy policy reads directly from the table.</p>
 
             <!-- Animated backup diagrams side by side -->
             <div style="text-align:center;margin-bottom:0.5rem;">
@@ -1806,6 +1822,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>Tabular → Deep RL</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">When the state space grows, replace the table with a neural network.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
@@ -1950,6 +1967,7 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Why Policy Gradient?</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Instead of learning values and deriving a policy, optimize the policy directly.</p>
 
             <div style="text-align:center;margin-bottom:0.65rem;">
               <img src="js/why_policy_gradient.svg" style="width:100%;" />
@@ -1976,6 +1994,7 @@
         <section>
           <div class="slide-panel" style="max-width:860px;">
             <h2>Policy Gradient Theorem</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">The gradient of performance equals an expectation over log-policy times return.</p>
 
             <div style="text-align:center;margin-bottom:0.65rem;">
               <img src="js/pg_theorem.svg" style="width:100%;" />
@@ -2098,6 +2117,7 @@
         <section>
           <div class="slide-panel" style="max-width:900px;">
             <h2>Actor-Critic</h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">The critic estimates the advantage; the actor updates in the direction it points.</p>
 
             <div style="display:flex;gap:0.8rem;align-items:flex-start;">
 
@@ -2135,6 +2155,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>TRPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Trust Region Policy Optimization</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Maximize improvement while staying inside a KL trust region around the current policy.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
@@ -2174,6 +2195,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>PPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Proximal Policy Optimization</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Replace the KL constraint with a simple clip — same idea, much simpler to implement.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
@@ -2213,6 +2235,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>Evolutionary Strategies <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Black-box Policy Search</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Estimate the gradient by evaluating random perturbations — no backpropagation needed.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
@@ -2252,6 +2275,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>CMA-ES <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">Covariance Matrix Adaptation</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">Adapt both the mean and the covariance of the search distribution using elite samples.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
@@ -2292,6 +2316,7 @@
         <section>
           <div class="slide-panel" style="max-width:920px;">
             <h2>Deep PPO <span style="font-size:0.52em;color:rgba(255,255,255,0.35);font-weight:400;">actor-critic · shared trunk</span></h2>
+            <p style="color:var(--muted);font-size:0.72rem;margin:0.3rem 0 0;">A single network with shared features for both policy and value heads.</p>
 
             <div style="display:flex;gap:1rem;align-items:stretch;margin-top:0.6rem;">
 
